@@ -1,0 +1,3 @@
+[submodule "SPI_Interface"]
+	url = http://bitbucket.itelma.su:7990/scm/ehalmal/spi_interface.git
+	path = src/interface

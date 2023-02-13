@@ -1,0 +1,8 @@
+
+# 2023.02.13 14:24:38.315
+# EHALSubmoduleInt: submodule was SUCCESSFULLY integrated using these parameters:
+Commit: ''
+DstFolder: src\interface
+Name: SPI_Interface
+Tag: 'Latest: 2.1.2'
+URL: http://bitbucket.itelma.su:7990/scm/ehalmal/spi_interface.git
