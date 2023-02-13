@@ -1,0 +1,30 @@
+#ignore thumbnails created by Windows 
+Thumbs.db
+
+#Ignore build artifacts
+*.o
+*.obj
+*.exe
+*.pdb
+*.user
+*.aps
+*.pch
+*.vspscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.dll
+*.lib
+*.sbr
+*.stackdump
+*.elf
+*.src
+*.obj.*
+*.elf.*
