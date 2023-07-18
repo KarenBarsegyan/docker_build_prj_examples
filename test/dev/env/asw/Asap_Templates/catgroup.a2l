@@ -1,0 +1,345 @@
+/begin GROUP TestProject
+
+	ROOT
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP 3_Control_Software 5_Integration_Software_Layer
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP API
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT eCSWL_BlackBox_Odometer eCSWL_BlackBox_Overtemperature_Dur eCSWL_BlackBox_Overvoltage_Dur eCSWL_BlackBox_Worktime eCSWL_BlackBox_Fault_Dur
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP BlackBox_
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP API
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP _Tasks
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP BlackBox_
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP 3_Control_Software
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP _Tasks ECUID UDS_services___cTYP_UDS___0__ BRDC___cTYP_BRDC___0__ OS_Monitoring___cTYP_MonOS___any_
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP VMEOL_Configaration
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT eCSWL_ECUID_FD14_ConfigurationVersion pCSWL_ECUID_FD13_Configuration_CS eCSWL_ECUID_FD12_Configuration_CS_precalc eCSWL_ECUID_FD15_VMEOL_Ready pCSWL_ECUID_FD15_VMEOL_srvWrite
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP ECUID
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP VMEOL_Configaration SustemSupplierSpecific_ReadOnly FWChecker
+	/end SUB_GROUP
+	/begin REF_MEASUREMENT eCSWL_UDS_CDTCS_state pCSWL_UDS_CDTCS_state
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP SustemSupplierSpecific_ReadOnly
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pCSWL_ECUID_FD07_Application_CS pCSWL_ECUID_FD06_Application_CS_precalc pCSWL_ECUID_FD0B_Bootloader_CS pCSWL_ECUID_FD0A_Bootloader_CS_precalc pCSWL_ECUID_FD0F_Calibration_CS pCSWL_ECUID_FD0E_Calibration_CS_precalc
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP Write_Data_by_Identifier
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pCSWL_UDS_WDBI_Flag
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP RDBI_WDBI_IOC___Read___Write___Control_by_Identifier
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Write_Data_by_Identifier
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP Data
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP RDBI_WDBI_IOC___Read___Write___Control_by_Identifier
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP UDS_services___cTYP_UDS___0__
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Data
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP FWChecker
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			"Контроллёр целостности программы"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pCSWL_ECUID_ROM_CS pCSWL_ECUID_ROM_CS_precalc
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP DO_Protection
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pCSWL_DO_ShortsCnt pCSWL_DO_Protection_AfterSales_cnt pCSWL_DO_Protection_MissionRestarts_cnt
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP Data_ui1
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP DO_Protection
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP DO___Discrete_outputs___high____low___bridge__
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Data_ui1
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP BRDC___cTYP_BRDC___0__
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			"BoardControl Functions"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP DO___Discrete_outputs___high____low___bridge__ FO___Frequency___PWM___outputs _private_Data
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP faults___IOC_diag
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pCSWL_FO_ShortsCnt pCSWL_FO_Protection_MissionRestarts_cnt pCSWL_FO_Protection_AfterSales_cnt
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP Data_ui2
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP faults___IOC_diag
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP FO___Frequency___PWM___outputs
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Data_ui2
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP Time_Machine
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pRTOS_TimerTickPeriod pTimeM_1000msLv_Timer pTimeM_100msLv_Timer pTimeM_10msLv_Timer
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP 5_Parameters
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Time_Machine
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP OS_sheduler_and_Time_machine
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP 5_Parameters
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP 5_Integration_Software_Layer
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP OS_sheduler_and_Time_machine
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP MCU_ResetCause
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pCSWL_MonOS_MCU_ResetCnt
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP General
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP MCU_ResetCause
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP Data_ui3
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP General
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP OS_Monitoring___cTYP_MonOS___any_
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Data_ui3
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP Power_Diagnostic
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin REF_MEASUREMENT pCSWL_BRDC_Protection_AfterSalesClear_Write pCSWL_BRDC_Protection_ReplaceECU
+	/end REF_MEASUREMENT
+/end GROUP
+
+/begin GROUP Output_control
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Power_Diagnostic
+	/end SUB_GROUP
+/end GROUP
+
+/begin GROUP _private_Data
+
+	/begin ANNOTATION
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+	/begin SUB_GROUP Output_control
+	/end SUB_GROUP
+/end GROUP
+

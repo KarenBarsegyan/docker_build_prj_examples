@@ -1,0 +1,732 @@
+/begin RECORD_LAYOUT __UBYTE_Z
+	FNC_VALUES 1 UBYTE ROW_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __UWORD_Z
+	FNC_VALUES 1 UWORD ROW_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __ULONG_Z
+	FNC_VALUES 1 ULONG ROW_DIR DIRECT
+	ALIGNMENT_LONG 2
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __SBYTE_Z
+	FNC_VALUES 1 SBYTE ROW_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __SWORD_Z
+	FNC_VALUES 1 SWORD ROW_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __SLONG_Z
+	FNC_VALUES 1 SLONG ROW_DIR DIRECT
+	ALIGNMENT_LONG 2
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __FLOAT32_IEEE_Z
+	FNC_VALUES 1 FLOAT32_IEEE ROW_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __FLOAT64_IEEE_Z
+	FNC_VALUES 1 FLOAT64_IEEE ROW_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __UBYTE_S
+	FNC_VALUES 1 UBYTE COLUMN_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __UWORD_S
+	FNC_VALUES 1 UWORD COLUMN_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __ULONG_S
+	FNC_VALUES 1 ULONG COLUMN_DIR DIRECT
+	ALIGNMENT_LONG 2
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __SBYTE_S
+	FNC_VALUES 1 SBYTE COLUMN_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __SWORD_S
+	FNC_VALUES 1 SWORD COLUMN_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __SLONG_S
+	FNC_VALUES 1 SLONG COLUMN_DIR DIRECT
+	ALIGNMENT_LONG 2
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __FLOAT32_IEEE_S
+	FNC_VALUES 1 FLOAT32_IEEE COLUMN_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT __FLOAT64_IEEE_S
+	FNC_VALUES 1 FLOAT64_IEEE COLUMN_DIR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__UBYTE_S
+	AXIS_PTS_X 1 UBYTE INDEX_INCR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__UWORD_S
+	AXIS_PTS_X 1 UWORD INDEX_INCR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__ULONG_S
+	AXIS_PTS_X 1 ULONG INDEX_INCR DIRECT
+	ALIGNMENT_LONG 2
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__SBYTE_S
+	AXIS_PTS_X 1 SBYTE INDEX_INCR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__SWORD_S
+	AXIS_PTS_X 1 SWORD INDEX_INCR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__SLONG_S
+	AXIS_PTS_X 1 SLONG INDEX_INCR DIRECT
+	ALIGNMENT_LONG 2
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__FLOAT32_IEEE_S
+	AXIS_PTS_X 1 FLOAT32_IEEE INDEX_INCR DIRECT
+/end RECORD_LAYOUT
+
+/begin RECORD_LAYOUT SSV__FLOAT64_IEEE_S
+	AXIS_PTS_X 1 FLOAT64_IEEE INDEX_INCR DIRECT
+/end RECORD_LAYOUT
+
+/begin COMPU_METHOD
+	tarOne2One "Metrology 1/1"
+	RAT_FUNC "%8.1" "1/1"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCurrent_60A "Current 0..60A metrology"
+	RAT_FUNC "%6.3" "A"
+	COEFFS 0 512 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCoeff_u16 "Coefficient bit description in range 0.0001, 15.9999"
+	RAT_FUNC "%6.5" "1"
+	COEFFS 0 4096 0 0 0 1						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPercent ""
+	RAT_FUNC "%5.3" "%"
+	COEFFS 0 100 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mS16 "Signed 16 bit nondimentional metrology"
+	RAT_FUNC "%5.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mU16 "Unsigned 16 bit nondimentional metrology"
+	RAT_FUNC "%5.0" "-"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mU32 "Unsigned 32 bit nondimentional metrology"
+	RAT_FUNC "%10.0" "-"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mU8 "Unsigned 8 bit nondimentional metrology"
+	RAT_FUNC "%3.0" "-"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime10ms_U16 "10 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 10							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mVoltage "Voltage metrology"
+	RAT_FUNC "%5.3" "V"
+	COEFFS 0 1023 0 0 0 5						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCoeff_1_U8 "Coefficient bit description in range 0...2"
+	RAT_FUNC "%5.4" "1"
+	COEFFS 0 255 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mDiagStatus "Diagnostic Status metrology"
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mStdResult "Standard Result of Function"
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mVoltage_U16 "Voltage metrology with uint16 built-in type"
+	RAT_FUNC "%5.3" "V"
+	COEFFS 0 1023 0 0 0 5						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mConduct_15S "Electric conductance 0..16 S metrology"
+	RAT_FUNC "%5.3" "S"
+	COEFFS 0 16 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mBoolean "boolean type"
+	RAT_FUNC "%1.0" "boolean"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1ms_U16 "1 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1mks_U16 "1 mks time metrology"
+	RAT_FUNC "%5.0" "mks"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime10ms_U8 "10 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 10							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mFrequency "Frequency metrology"
+	RAT_FUNC "%3.2" "Hz"
+	COEFFS 0 100 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1ms_U32 "1 ms time metrology"
+	RAT_FUNC "%10.0" "ms"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1d10sec_U16 "0.1 second time metrology"
+	RAT_FUNC "%5.1" "sec"
+	COEFFS 0 10 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mS8 "Signed 8 bit nondimentional metrology"
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTemp_U8 "Unsigned 8 bit Temperature"
+	RAT_FUNC "%3.0" "Degree"
+	COEFFS 0 1 40 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mMonResult ""
+	RAT_FUNC "%1.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1sec_U32 "1 sec time metrology"
+	RAT_FUNC "%5.0" "s"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEOL_Current "Current 0..60A metrology"
+	RAT_FUNC "%6.5" "A"
+	COEFFS 0 512 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEOL_Frequency "Frequency metrology"
+	RAT_FUNC "%3.2" "Hz"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEOL_Percent ""
+	RAT_FUNC "%3.0" "%"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEOL_Position ""
+	RAT_FUNC "%3.0" "pos"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEOL_TickRes ""
+	RAT_FUNC "%3.2" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEOL_Voltage "Voltage metrology"
+	RAT_FUNC "%5.3" "V"
+	COEFFS 0 512 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1sec_U8 "1 sec time metrology"
+	RAT_FUNC "%5.0" "s"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mSpeed ""
+	RAT_FUNC "%3.2" "km/h"
+	COEFFS 0 100 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPercent_SAEpc03 "Percent metrology SAE J1939 SAEpc03 SLOT"
+	RAT_FUNC "%3.1" "%"
+	COEFFS 0 10 0 0 0 4							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mRPM_SAEvr01 "Rotation Metrology for SAE J1939 SLOT SAEvr01"
+	RAT_FUNC "%5.3" "1/min"
+	COEFFS 0 8 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mSpeed_SAEvl02 "Speed metrology for SAE J1939 SLOT SAEvl02"
+	RAT_FUNC "%5.3" "km/h"
+	COEFFS 0 256 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEHAL_IOMGR_DiagSt ""
+	RAT_FUNC "%3.0" "0 - NA / 1 - ok / 2+ - faults "
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPolarity ""
+	RAT_FUNC "%1.0" "off / VBAT / GND / both"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mRPM ""
+	RAT_FUNC "%5.1" "1/min"
+	COEFFS 0 8 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCurrent_4A ""
+	RAT_FUNC "%6.5" "A"
+	COEFFS 0 16384 0 0 0 1						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mConduct_4S "Electric conductance 0..4 S metrology"
+	RAT_FUNC "%5.3" "S"
+	COEFFS 0 64 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPower "Electric power metrology"
+	RAT_FUNC "%5.3" "W"
+	COEFFS 0 4 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEnergy "Energy metrology"
+	RAT_FUNC "%3.0" "J"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mBrightness_U16 ""
+	RAT_FUNC "%5.0" "Lux"
+	COEFFS 0 1022 0 0 0 6123						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mBrightness_U8 ""
+	RAT_FUNC "%7.0" "Lux"
+	COEFFS 0 254 0 0 0 101600					/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCoeff_8200 "Coefficient bit description in range 0...8200"
+	RAT_FUNC "%8.4" "1"
+	COEFFS 0 65536 0 0 0 1						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPercent_4bit ""
+	RAT_FUNC "%3.0" "%"
+	COEFFS 0 14 0 0 0 100						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mS32 "Signed 32 bit nondimentional metrology"
+	RAT_FUNC "%10.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mResist_250K "Resistance 0..250K metrology"
+	RAT_FUNC "%5.0" "Ohm"
+	COEFFS 0 1 0 0 0 4							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mResist_65K "Resistance 0..65K metrology"
+	RAT_FUNC "%5.0" "Ohm"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mResist_8K "Resistance 0..8K metrology"
+	RAT_FUNC "%5.3" "Ohm"
+	COEFFS 0 8 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime100ms_S16 "100 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 100							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime100ms_U16 "100 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 100							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime100ms_U8 "100 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 100							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime10ms_S16 "10 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 10							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1min_U8 "1 min time metrology"
+	RAT_FUNC "%5.0" "min"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1ms_S16 "1 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1ms_S32 "1 ms time metrology"
+	RAT_FUNC "%5.0" "ms"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1sec_S16 "1 sec time metrology"
+	RAT_FUNC "%5.0" "s"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1sec_U16 "1 sec time metrology"
+	RAT_FUNC "%5.0" "s"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mDistance_5m ""
+	RAT_FUNC "%3.2" "m"
+	COEFFS 0 1 0 0 0 5							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mDistance_1sm ""
+	RAT_FUNC "%3.2" "m"
+	COEFFS 0 100 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mUDS_Voltage "Voltage metrology"
+	RAT_FUNC "%5.3" "V"
+	COEFFS 0 512 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mUDS_Frequency "Frequency metrology"
+	RAT_FUNC "%3.2" "Hz"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mUDS_Percent ""
+	RAT_FUNC "%5.3" "%"
+	COEFFS 0 100 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mRequest ""
+	RAT_FUNC "%3.0" "-/ON/OFF/SW"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mResist "Resistance metrology"
+	RAT_FUNC "%5.3" "Ohm"
+	COEFFS 0 8 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEHAL_IOMGR_Time "Time bit description with engine synchronization timer resolution"
+	RAT_FUNC "%8.2" "mks"
+	COEFFS 0 4 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mVolt "Voltage metrology"
+	RAT_FUNC "%5.4" "V"
+	COEFFS 0 4092 0 0 0 5						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mVoltage_Knock "Voltage metrology"
+	RAT_FUNC "%5.3" "V"
+	COEFFS 0 8191 0 0 0 5						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTimeTmr "Time bit description with engine synchronization timer resolution"
+	RAT_FUNC "%8.2" "mks"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTimeTmr_W "Time bit description with engine synchronization timer resolution (wide)"
+	RAT_FUNC "%12.2" "mks"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCrkAng_HR_N "Cranckshaft angle bit description (half rough, narrow)"
+	RAT_FUNC "%3.0" "CrShDeg"
+	COEFFS 0 1 0 0 0 3							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCrkAng_PF "Cranckshaft angle bit description (non-negative)"
+	RAT_FUNC "%8.3" "CrkDeg"
+	COEFFS 0 8 0 0 0 3							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1ns_U32 "1 ns time metrology"
+	RAT_FUNC "%5.0" "ns"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTemp "Temperature bit descriptin (lower range)"
+	RAT_FUNC "%8.4" "DegC"
+	COEFFS 0 128 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1ns_U16 "1 ns time metrology"
+	RAT_FUNC "%5.0" "ns"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mEHAL_ADC "hardware specific Voltage metrology"
+	RAT_FUNC "%5.3" "V"
+	COEFFS 0 1023 0 0 0 5						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mBRDC_DI_Conv ""
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mBRDC_AI_Mode ""
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mDIAG_ObjectPack ""
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mDIAG_DR ""
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mAddress ""
+	RAT_FUNC "%10.0" "addr"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPercent_1p ""
+	RAT_FUNC "%3.2" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mMSE_Data_ID ""
+	RAT_FUNC "%3.0" "MSE_ID"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPIT_SZ ""
+	RAT_FUNC "%3.2" "tick"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mProcessStatus ""
+	RAT_FUNC "%1.0" "idle / pending / fail / success"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCSWL_UDS_RC_Command ""
+	RAT_FUNC "%3.0" "- / start / stop / get"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mPercent_J1939 ""
+	RAT_FUNC "%3.1" "%"
+	COEFFS 0 10 0 0 0 4							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mUDS_RWC_permissions ""
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mBool2 "False / True / fault / undef"
+	RAT_FUNC "%3.0" "-+fu"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mUDS_RWC_method ""
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	m4Lamps ""
+	RAT_FUNC "%1.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mDIAG_STD ""
+	RAT_FUNC "%3.2" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mDTCstatus "Unsigned 8 bit nondimentional metrology"
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1mks_U32 "1 mks time metrology"
+	RAT_FUNC "%5.0" "mks"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mWorkMode ""
+	RAT_FUNC "%2.0" "WorkMode enum"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mUDS_IOC_srv ""
+	RAT_FUNC "%3.2" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mUDS_Conditions "NRC detalils: 0x81+ instead of CNC"
+	RAT_FUNC "%3.0" ""
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mMonOS_Time ""
+	RAT_FUNC "%5.3" "mks"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCoeff_1d2048_u16 "Coefficient bit description in range 0.0001, 15.9999"
+	RAT_FUNC "%6.5" "1"
+	COEFFS 0 2048 0 0 0 1						/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1d10sec_U8 "0.1 second time metrology"
+	RAT_FUNC "%5.1" "sec"
+	COEFFS 0 10 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mCSWL_FI_TMR ""
+	RAT_FUNC "%5.3" "mks"
+	COEFFS 0 1 0 0 0 1							/*A B C D E F*/
+/end COMPU_METHOD
+
+/begin COMPU_METHOD
+	mTime1d1000ms_U32 "1 mks time metrology"
+	RAT_FUNC "%5.3" "ms"
+	COEFFS 0 1000 0 0 0 1						/*A B C D E F*/
+/end COMPU_METHOD
+

@@ -1,0 +1,66 @@
+//**************************************************************************************************
+// @Module      PIT driver
+//! \file       pit_drv_cfg.h.tmpl
+//! \brief      Configuration of the required functionality of the PIT module.
+//!
+//! \par        History
+//! Date           | Version | Author | Comment
+//! :-------------:|:-------:|:------:|--------------------------------
+//!   24.03.2022   |  1.0.0  |  YSY   | First release.
+//!   14.04.2023   |  1.0.1  |  KMM   | Doxygen formatted comments added.
+//**************************************************************************************************
+
+#ifndef PIT_DRV_CFG_H
+#define PIT_DRV_CFG_H
+
+
+
+//**************************************************************************************************
+// Definitions of global (public) constants
+//**************************************************************************************************
+
+//! Enable/disable the development error detection feature of the program module.
+//! Used only for debug purposes and should be disabled in the final release.
+//! Valid values: ON / OFF
+#define PIT_DEVELOPMENT_ERROR_DETECTION   (OFF)
+
+//! Enable/disable monitoring the function call of the program module.
+//! Used for increment diagnostic variable inside function.
+//! Valid values: ON / OFF
+#define PIT_MONITORING_FUNCTION           (OFF)
+
+//! PIT result value type
+//! Do not modify this constant!
+#define PIT_SZ                  U32
+
+//! \name PIT name definitions
+//! Do not modify this constants!
+//! @{
+#define PIT_FIRST               (PIT_T0)
+#define PIT_T0                  (0U)
+#define PIT_LAST                (PIT_T0)
+//! @}
+
+//! Software prescaler for bus frequency.
+//! Should be higher at high values of bus frequency for correct calculation of the tick period.
+//! Valid value: 1...255
+#define PIT_PRESCALER           (64U)
+
+//! PIT_T0 enable
+//! Valid values: ON / OFF
+#define PIT_T0_ENABLE           (ON)
+
+//! Interrupt handler enable
+//! The interrupt itself is enabled in the IRQ driver
+//! Valid values: ON / OFF
+#define PIT_T0_INT_EN           (ON)
+
+//! Channel using for OS
+//! Valid values: ON / OFF
+#define PIT_T0_USE_OS           (OFF)
+
+
+
+#endif // #ifndef PIT_DRV_CFG_H
+
+//****************************************** end of file *******************************************

@@ -28,3 +28,7 @@ Thumbs.db
 *.src
 *.obj.*
 *.elf.*
+
+# Additional files and filders
+build
+.vscode

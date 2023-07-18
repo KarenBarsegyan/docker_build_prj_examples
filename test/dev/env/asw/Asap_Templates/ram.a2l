@@ -1,0 +1,621 @@
+/begin MEASUREMENT
+	eCSWL_BlackBox_Odometer ""
+	ULONG
+	mDistance_5m									/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	21474836475									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("eCSWL_BlackBox_Odometer_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_BlackBox_Overtemperature_Dur "Black Box Board Overtemperature Duration"
+	ULONG
+	mTime1sec_U32								/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967200									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("eCSWL_BlackBox_Overtemperature_Dur_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Время работы при повышенной температуре"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_BlackBox_Overvoltage_Dur "Black Box Board Overvoltage Duration"
+	ULONG
+	mTime1sec_U32								/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967200									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("eCSWL_BlackBox_Overvoltage_Dur_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Время работы при повышенном напряжении"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_BlackBox_Worktime "Black Box Worktime"
+	ULONG
+	mTime1sec_U32								/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967200									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("eCSWL_BlackBox_Worktime_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Время работы ЭБУ"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD07_Application_CS ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	0											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD07_Application_CS_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD06_Application_CS_precalc ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD06_Application_CS_precalc_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD0B_Bootloader_CS ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD0B_Bootloader_CS_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD0A_Bootloader_CS_precalc ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD0A_Bootloader_CS_precalc_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD0F_Calibration_CS ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD0F_Calibration_CS_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD0E_Calibration_CS_precalc ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD0E_Calibration_CS_precalc_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD13_Configuration_CS ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD13_Configuration_CS_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_ECUID_FD12_Configuration_CS_precalc ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("eCSWL_ECUID_FD12_Configuration_CS_precalc_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_UDS_WDBI_Flag ""
+	UBYTE
+	mBoolean										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1											/*UpperLimit*/
+	ARRAY_SIZE 20
+	BIT_MASK 1
+	ECU_ADDRESS &%ItemAddr("pCSWL_UDS_WDBI_Flag_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_ECUID_FD15_VMEOL_Ready ""
+	UBYTE
+	mBoolean										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1											/*UpperLimit*/
+	BIT_MASK 1
+	ECU_ADDRESS &%ItemAddr("eCSWL_ECUID_FD15_VMEOL_Ready_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_FD15_VMEOL_srvWrite ""
+	UBYTE
+	mBoolean										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1											/*UpperLimit*/
+	BIT_MASK 1
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_FD15_VMEOL_srvWrite_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_ROM_CS ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	0											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_ROM_CS_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_ECUID_ROM_CS_precalc ""
+	ULONG
+	mU32											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_ECUID_ROM_CS_precalc_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_DO_ShortsCnt "Discrete Outputs shorts counters"
+	UBYTE
+	mU8											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	255											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_DO_ShortsCnt_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_FO_ShortsCnt "Frquency Outputs shorts counters"
+	UBYTE
+	mU8											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	255											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_FO_ShortsCnt_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pRTOS_TimerTickPeriod "RTOS Timer Tick Period"
+	ULONG
+	mPIT_SZ										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967295									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pRTOS_TimerTickPeriod_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Период тика таймера ОС"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pTimeM_1000msLv_Timer "Time Machine 1000 ms Level Timer"
+	UWORD
+	mTime1ms_U16									/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1000											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pTimeM_1000msLv_Timer_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Таймер для запуска уровня 1000 мс"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pTimeM_100msLv_Timer "Time Machine 100 ms Level Timer"
+	UWORD
+	mTime1ms_U16									/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	100											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pTimeM_100msLv_Timer_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Таймер для запуска уровня 100 мс"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pTimeM_10msLv_Timer "Time Machine 10 ms Level Timer"
+	UWORD
+	mTime1ms_U16									/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	10											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pTimeM_10msLv_Timer_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Таймер для запуска уровня 10 мс"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_MonOS_MCU_ResetCnt ""
+	UBYTE
+	mU8											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	250											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_MonOS_MCU_ResetCnt_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_BlackBox_Fault_Dur "Black Box - Duration with Faults"
+	ULONG
+	mTime1sec_U32								/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	4294967200									/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("eCSWL_BlackBox_Fault_Dur_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Время работы при начилии активных неисправностей "
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_FO_Protection_MissionRestarts_cnt ""
+	UBYTE
+	mU8											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	255											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_FO_Protection_MissionRestarts_cnt_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_FO_Protection_AfterSales_cnt ""
+	UBYTE
+	mU8											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	255											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_FO_Protection_AfterSales_cnt_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_BRDC_Protection_AfterSalesClear_Write ""
+	UBYTE
+	mBoolean										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1											/*UpperLimit*/
+	BIT_MASK 1
+	ECU_ADDRESS &%ItemAddr("pCSWL_BRDC_Protection_AfterSalesClear_Write_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_DO_Protection_AfterSales_cnt ""
+	UBYTE
+	mU8											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	255											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_DO_Protection_AfterSales_cnt_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_DO_Protection_MissionRestarts_cnt ""
+	UBYTE
+	mU8											/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	255											/*UpperLimit*/
+	ECU_ADDRESS &%ItemAddr("pCSWL_DO_Protection_MissionRestarts_cnt_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_BRDC_Protection_ReplaceECU ""
+	UBYTE
+	mBoolean										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1											/*UpperLimit*/
+	BIT_MASK 1
+	ECU_ADDRESS &%ItemAddr("pCSWL_BRDC_Protection_ReplaceECU_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_UDS_CDTCS_state ""
+	UBYTE
+	mBoolean										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1											/*UpperLimit*/
+	BIT_MASK 1
+	ECU_ADDRESS &%ItemAddr("eCSWL_UDS_CDTCS_state_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	pCSWL_UDS_CDTCS_state ""
+	UBYTE
+	mBoolean										/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	1											/*UpperLimit*/
+	BIT_MASK 1
+	ECU_ADDRESS &%ItemAddr("pCSWL_UDS_CDTCS_state_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			""
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
+/begin MEASUREMENT
+	eCSWL_ECUID_FD14_ConfigurationVersion "ECU Configuration Version"
+	UBYTE
+	tarOne2One									/*Conversion*/
+	0											/*Resolution*/
+	0											/*Accuracy*/
+	0											/*LowerLimit*/
+	255											/*UpperLimit*/
+	ARRAY_SIZE 15
+	ECU_ADDRESS &%ItemAddr("eCSWL_ECUID_FD14_ConfigurationVersion_data")
+	BYTE_ORDER MSB_LAST
+	/begin ANNOTATION
+		ANNOTATION_LABEL "Comment"
+		/begin ANNOTATION_TEXT
+			"Версия Configuration"
+		/end ANNOTATION_TEXT
+	/end ANNOTATION
+/end MEASUREMENT
+
