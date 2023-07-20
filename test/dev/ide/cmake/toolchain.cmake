@@ -27,3 +27,5 @@ set(GCC_SIZE           ${GCC_ROOT_PATH}/${GCC_PREFIX}-size.exe)
 # Cross-compilation - do not try check compiler
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 #SET (CMAKE_C_COMPILER_WORKS 1)
+
+set(DOXYGEN_PATH "C:/Program Files/doxygen/bin.doxygen.exe")

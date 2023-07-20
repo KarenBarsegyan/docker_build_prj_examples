@@ -32,3 +32,4 @@ Thumbs.db
 # Additional files and filders
 build
 .vscode
+doxy_docs

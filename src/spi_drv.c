@@ -40,17 +40,8 @@
 // Native header
 #include "spi_drv.h"
 
-// Get program module specific types
-#include "spi_drv_types.h"
-
-// Family dependent interface
-#include "spi_drv_hw.h"
-
 // MCU driver header
 #include "mcu_drv.h"
-
-// HC32F4A registers
-#include "derivative_cfg.h"
 
 #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
 // Get error tracer functions
