@@ -22,9 +22,13 @@
 //**************************************************************************************************
 
 // Get data types
-#include "error_tracer_cfg.h"
 #include "compiler.h"
+
+// Get generic definitions
 #include "general.h"
+
+// Get configuration of the program module
+#include "error_tracer_cfg.h"
 
 
 

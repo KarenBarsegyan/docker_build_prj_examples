@@ -1,0 +1,6 @@
+add_subdirectory(asw)
+add_subdirectory(inc)
+add_subdirectory(irq_drv)
+add_subdirectory(os)
+add_subdirectory(pit)
+add_subdirectory(startup/cstart)

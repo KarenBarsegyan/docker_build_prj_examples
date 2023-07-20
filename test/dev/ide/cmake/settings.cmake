@@ -11,9 +11,6 @@
 # 23.01.2023     1.0.0    DRV         First release.
 #***************************************************************************************************
 
-# # Project root
-set(CURRENT_PROJ_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../../..) 
-
 # Set C standard
 set(CMAKE_C_STANDARD 99)
 # Set target processor
