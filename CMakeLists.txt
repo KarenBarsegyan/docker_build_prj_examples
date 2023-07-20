@@ -19,6 +19,9 @@ set(LINKER_SCRIPT ${DEV_ROOT}/bsw/linker/gnu_linker/linker_cfg.ld)
 # Setup compiller and linker options
 include(${DEV_ROOT}/ide/cmake/compiler.cmake)
 
+# Initialize test driver
+add_subdirectory(src)
+
 # Initialize all modules
 add_subdirectory(${DEV_ROOT}/cfg)
 add_subdirectory(${DEV_ROOT}/asw)
