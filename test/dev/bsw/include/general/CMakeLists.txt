@@ -1,5 +1,5 @@
 # Set library name
-set(LIB_NAME irq_drv)
+set(LIB_NAME gen)
 
 # Create library and add source files
 file(GLOB_RECURSE SRC_FILES *.c *.h)
@@ -10,5 +10,5 @@ target_include_directories(${LIB_NAME} PUBLIC
                            ${CMAKE_CURRENT_SOURCE_DIR})
 
 # Add Dependencies
-target_link_libraries(${LIB_NAME} PRIVATE cfg)
-target_link_libraries(${LIB_NAME} PRIVATE os)
+target_link_libraries(${LIB_NAME} PRIVATE platform)
+target_link_libraries(${LIB_NAME} PRIVATE compiler)

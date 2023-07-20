@@ -1,0 +1,8 @@
+add_subdirectory(services)
+add_subdirectory(include)
+add_subdirectory(mal)
+add_subdirectory(linker)
+add_subdirectory(os)
+add_subdirectory(pit)
+add_subdirectory(sfr)
+add_subdirectory(startup/cstart)

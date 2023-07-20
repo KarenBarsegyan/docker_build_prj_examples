@@ -1,5 +1,5 @@
 # Set library name
-set(LIB_NAME gen)
+set(LIB_NAME cstart)
 
 # Create library and add source files
 file(GLOB_RECURSE SRC_FILES *.c *.h)
@@ -11,3 +11,4 @@ target_include_directories(${LIB_NAME} PUBLIC
 
 # Add Dependencies
 target_link_libraries(${LIB_NAME} PRIVATE cfg)
+target_link_libraries(${LIB_NAME} PRIVATE compiler)

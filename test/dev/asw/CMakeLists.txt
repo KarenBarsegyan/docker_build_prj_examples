@@ -13,7 +13,7 @@ target_include_directories(${LIB_NAME} PUBLIC
                            ${CMAKE_CURRENT_SOURCE_DIR}/Models)
 
 # Add Dependencies
-target_link_libraries(${LIB_NAME} PRIVATE cfg)
+target_link_libraries(${LIB_NAME} PRIVATE compiler)
 target_link_libraries(${LIB_NAME} PRIVATE os)
 target_link_libraries(${LIB_NAME} PRIVATE inc)
 target_link_libraries(${LIB_NAME} PRIVATE tests)

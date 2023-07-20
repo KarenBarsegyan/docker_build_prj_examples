@@ -15,18 +15,18 @@ include(${DEV_ROOT}/ide/cmake/toolchain.cmake)
 include(${DEV_ROOT}/ide/cmake/settings.cmake)
 
 # Set linker script path (it's needed in compiller.cmake)
-set(LINKER_SCRIPT ${DEV_ROOT}/cfg/linker/gnu_linker/linker_cfg.ld)
+set(LINKER_SCRIPT ${DEV_ROOT}/bsw/linker/gnu_linker/linker_cfg.ld)
 # Setup compiller and linker options
 include(${DEV_ROOT}/ide/cmake/compiler.cmake)
 
 # Initialize all modules
 add_subdirectory(${DEV_ROOT}/cfg)
-add_subdirectory(${DEV_ROOT}/dep)
-add_subdirectory(${DEV_ROOT}/env)
+add_subdirectory(${DEV_ROOT}/asw)
+add_subdirectory(${DEV_ROOT}/bsw)
 add_subdirectory(${DEV_ROOT}/tests)
 
 # Make main executable
-add_executable(${PROJECT_NAME} ${DEV_ROOT}/env/startup/main/main.c)
+add_executable(${PROJECT_NAME} ${DEV_ROOT}/bsw/startup/main/main.c)
 
 # Link all libraries on which executable depends 
 target_link_libraries(${PROJECT_NAME} PRIVATE  
