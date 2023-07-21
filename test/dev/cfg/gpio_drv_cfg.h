@@ -1,0 +1,1883 @@
+//**************************************************************************************************
+// @Module  GPIO driver
+//! \file   gpio_drv_cfg.h
+//! \brief  Configuration of the required functionality of the GPIO module.
+//!
+//! \par    History
+//! | Date       | Version | Author  | Comment
+//! |:----------:|:-------:|:-------:|--------------------------------------------------------------
+//! | 18.05.2023 |  1.0.0  |   CAV   | First release.
+//**************************************************************************************************
+
+#ifndef GPIO_DRV_CFG_H
+#define GPIO_DRV_CFG_H
+
+#include "gpio_drv_types.h"
+
+
+
+//**************************************************************************************************
+// Definitions of global (public) constants
+//**************************************************************************************************
+
+// Enable/disable the development error detection feature of the program module.
+// Used only for debug purposes and should be disabled in the final release.
+// Valid values: ON / OFF
+#define GPIO_DEVELOPMENT_ERROR_DETECTION            (OFF)
+
+//! \name GPIO ports name definitions
+//! @{
+#define GPIO_PORT_FIRST                             (GPIO_PORT_A)
+#define GPIO_PORT_A                                 (0U)
+#define GPIO_PORT_B                                 (1U)
+#define GPIO_PORT_C                                 (2U)
+#define GPIO_PORT_D                                 (3U)
+#define GPIO_PORT_E                                 (4U)
+#define GPIO_PORT_LAST                              (GPIO_PORT_E)
+//! Quantity of ports
+#define GPIO_PORTS_QTY                              (GPIO_PORT_LAST + 1U)
+// @}
+
+
+
+//**************************************************************************************************
+// PORT A settings
+//**************************************************************************************************
+
+// Port A pin 0
+// Pin enable/ disable
+// Valid value: ON / OFF
+#define GPIO_PORT_A_PIN_0_ENABLE           (OFF)
+// Set corresponding bit to the inverse of its existing logic state.
+// Valid value: ON / OFF
+#define GPIO_PORT_A_PIN_0_TOGGLE           (OFF)
+// Set multiplexor to desired pin function
+// Valid value: GPIO_MUX_ALT_0 ... GPIO_MUX_ALT_7
+#define GPIO_PORT_A_PIN_0_MUX              (GPIO_MUX_ALT_1)
+// Set signal direction
+// Valid value: GPIO_PIN_INPUT / GPIO_PIN_OUTPUT
+#define GPIO_PORT_A_PIN_0_DIRECTION        (GPIO_PIN_OUTPUT)
+// Pin power level
+// Valid value: GPIO_STRENGTH_LOW / GPIO_STRENGTH_HIGH
+#define GPIO_PORT_A_PIN_0_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+// Pull enable
+// Valid value: GPIO_PULL_ENABLE / GPIO_PULL_DISABLE
+#define GPIO_PORT_A_PIN_0_PULL_ENABLE      (GPIO_PULL_ENABLE)
+// Pull mode direction if pull enable
+// Valid value: GPIO_PULL_DOWN / GPIO_PULL_UP
+#define GPIO_PORT_A_PIN_0_PULL_MODE        (GPIO_PULL_DOWN)
+// Pin logical state
+// Valid value: GPIO_PIN_LOW / GPIO_PIN_HIGH
+#define GPIO_PORT_A_PIN_0_VALUE            (GPIO_PIN_LOW)
+// Pin interrupt event
+// Valid value: GPIO_IT_DISABLE, GPIO_IT_DMA_RISING, GPIO_IT_DMA_FALLING, GPIO_IT_DMA_EITHER,
+//  GPIO_IT_LOW, GPIO_IT_RISING, GPIO_IT_FALLING, GPIO_IT_EITHER, GPIO_IT_HIGH
+#define GPIO_PORT_A_PIN_0_IT_TRIGGER       (GPIO_IT_HIGH)
+
+// Port A pin 1
+#define GPIO_PORT_A_PIN_1_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_1_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_1_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_1_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_1_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_1_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_1_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_1_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_1_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 2
+#define GPIO_PORT_A_PIN_2_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_2_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_2_MUX              (GPIO_MUX_ALT_6)
+#define GPIO_PORT_A_PIN_2_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_A_PIN_2_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_2_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_2_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_2_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_2_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_A_PIN_2_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port A pin 3
+#define GPIO_PORT_A_PIN_3_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_3_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_3_MUX              (GPIO_MUX_ALT_6)
+#define GPIO_PORT_A_PIN_3_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_3_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_3_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_3_PULL_MODE        (GPIO_PULL_UP)
+#define GPIO_PORT_A_PIN_3_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_3_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_A_PIN_3_WAKEUP           (GPIO_WKU_DISABLE)
+
+// JTAG_TMS_SWD_IO A4 MUX_ALT_7
+// Port A pin 4
+#define GPIO_PORT_A_PIN_4_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_4_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_4_MUX              (GPIO_MUX_ALT_7)
+#define GPIO_PORT_A_PIN_4_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_A_PIN_4_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_4_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_4_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_4_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_4_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// RESET_b A5 MUX_ALT_7
+// Port A pin 5
+#define GPIO_PORT_A_PIN_5_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_5_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_5_MUX              (GPIO_MUX_ALT_7)
+#define GPIO_PORT_A_PIN_5_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_A_PIN_5_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_5_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_5_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_5_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_5_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 6
+#define GPIO_PORT_A_PIN_6_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_6_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_6_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_6_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_6_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_6_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_6_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_6_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_6_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_A_PIN_6_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port A pin 7
+#define GPIO_PORT_A_PIN_7_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_7_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_7_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_7_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_7_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_7_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_7_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_7_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_7_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_A_PIN_7_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port A pin 8
+#define GPIO_PORT_A_PIN_8_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_8_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_8_MUX              (GPIO_MUX_ALT_2)
+#define GPIO_PORT_A_PIN_8_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_A_PIN_8_STRENGTH_LEVEL   (GPIO_STRENGTH_LOW)
+#define GPIO_PORT_A_PIN_8_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_8_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_8_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_8_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 9
+#define GPIO_PORT_A_PIN_9_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_9_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_9_MUX              (GPIO_MUX_ALT_2)
+#define GPIO_PORT_A_PIN_9_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_9_STRENGTH_LEVEL   (GPIO_STRENGTH_LOW)
+#define GPIO_PORT_A_PIN_9_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_9_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_9_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_9_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// JTAG_TDO_SWD_SWO A10 MUX_ALT_7
+// Port A pin 10
+#define GPIO_PORT_A_PIN_10_ENABLE          (ON)
+#define GPIO_PORT_A_PIN_10_TOGGLE          (OFF)
+#define GPIO_PORT_A_PIN_10_MUX             (GPIO_MUX_ALT_7)
+#define GPIO_PORT_A_PIN_10_DIRECTION       (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_10_STRENGTH_LEVEL  (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_10_PULL_ENABLE     (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_10_PULL_MODE       (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_10_VALUE           (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_10_IT_TRIGGER      (GPIO_IT_DISABLE)
+
+// Port A pin 11
+#define GPIO_PORT_A_PIN_11_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_11_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_11_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_11_DIRECTION       (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_11_STRENGTH_LEVEL  (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_11_PULL_ENABLE     (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_11_PULL_MODE       (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_11_VALUE           (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_11_IT_TRIGGER      (GPIO_IT_DISABLE)
+
+// Port A pin 12
+#define GPIO_PORT_A_PIN_12_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_12_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_12_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_12_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_12_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_12_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_12_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_12_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_12_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_A_PIN_12_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port A pin 13
+#define GPIO_PORT_A_PIN_13_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_13_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_13_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_13_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_13_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_13_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_13_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_13_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_13_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_A_PIN_13_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port A pin 14
+#define GPIO_PORT_A_PIN_14_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_14_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_14_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_14_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_14_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_14_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_14_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_14_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_14_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 15
+#define GPIO_PORT_A_PIN_15_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_15_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_15_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_15_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_15_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_15_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_15_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_15_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_15_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 16
+#define GPIO_PORT_A_PIN_16_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_16_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_16_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_16_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_16_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_16_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_16_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_16_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_16_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 17
+#define GPIO_PORT_A_PIN_17_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_17_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_17_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_17_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_17_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_17_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_17_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_17_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_17_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 18
+#define GPIO_PORT_A_PIN_18_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_18_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_18_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_18_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_18_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_18_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_18_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_18_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_18_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 19
+#define GPIO_PORT_A_PIN_19_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_19_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_19_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_19_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_19_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_19_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_19_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_19_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_19_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 20
+#define GPIO_PORT_A_PIN_20_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_20_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_20_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_20_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_20_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_20_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_20_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_20_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_20_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 21
+#define GPIO_PORT_A_PIN_21_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_21_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_21_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_21_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_21_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_21_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_21_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_21_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_21_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 22
+#define GPIO_PORT_A_PIN_22_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_22_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_22_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_22_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_22_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_22_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_22_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_22_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_22_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 23
+#define GPIO_PORT_A_PIN_23_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_23_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_23_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_23_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_23_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_23_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_23_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_23_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_23_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 24
+#define GPIO_PORT_A_PIN_24_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_24_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_24_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_24_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_24_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_24_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_24_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_24_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_24_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 25
+#define GPIO_PORT_A_PIN_25_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_25_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_25_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_25_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_25_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_25_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_25_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_25_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_25_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 26
+#define GPIO_PORT_A_PIN_26_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_26_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_26_MUX              (GPIO_MUX_ALT_4)
+#define GPIO_PORT_A_PIN_26_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_26_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_26_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_26_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_26_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_26_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 27
+#define GPIO_PORT_A_PIN_27_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_27_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_27_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_27_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_27_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_27_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_27_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_27_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_27_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 28
+#define GPIO_PORT_A_PIN_28_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_28_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_28_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_28_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_28_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_28_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_28_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_28_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_28_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 29
+#define GPIO_PORT_A_PIN_29_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_29_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_29_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_29_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_29_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_29_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_29_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_29_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_29_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 30
+#define GPIO_PORT_A_PIN_30_ENABLE           (ON)
+#define GPIO_PORT_A_PIN_30_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_30_MUX              (GPIO_MUX_ALT_4)
+#define GPIO_PORT_A_PIN_30_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_30_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_30_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_30_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_30_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_30_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port A pin 31
+#define GPIO_PORT_A_PIN_31_ENABLE           (OFF)
+#define GPIO_PORT_A_PIN_31_TOGGLE           (OFF)
+#define GPIO_PORT_A_PIN_31_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_A_PIN_31_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_A_PIN_31_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_A_PIN_31_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_A_PIN_31_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_A_PIN_31_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_A_PIN_31_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+//**************************************************************************************************
+//  PORT B settings
+//**************************************************************************************************
+
+// Port B pin 0
+#define GPIO_PORT_B_PIN_0_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_0_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_0_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_0_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_B_PIN_0_STRENGTH_LEVEL   (GPIO_STRENGTH_LOW)
+#define GPIO_PORT_B_PIN_0_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_0_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_0_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_0_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_B_PIN_0_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port B pin 1
+#define GPIO_PORT_B_PIN_1_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_1_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_1_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_1_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_1_STRENGTH_LEVEL   (GPIO_STRENGTH_LOW)
+#define GPIO_PORT_B_PIN_1_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_1_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_1_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_1_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_B_PIN_1_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port B pin 2
+#define GPIO_PORT_B_PIN_2_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_2_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_2_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_2_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_2_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_2_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_2_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_2_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_2_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 3
+#define GPIO_PORT_B_PIN_3_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_3_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_3_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_3_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_3_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_3_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_3_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_3_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_3_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 4
+#define GPIO_PORT_B_PIN_4_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_4_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_4_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_4_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_4_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_4_PULL_ENABLE      (GPIO_PULL_ENABLE)
+#define GPIO_PORT_B_PIN_4_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_4_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_4_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 5
+#define GPIO_PORT_B_PIN_5_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_5_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_5_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_5_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_5_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_5_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_5_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_5_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_5_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 6
+#define GPIO_PORT_B_PIN_6_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_6_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_6_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_6_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_6_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_6_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_6_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_6_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_6_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 7
+#define GPIO_PORT_B_PIN_7_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_7_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_7_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_7_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_7_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_7_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_7_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_7_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_7_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 8
+#define GPIO_PORT_B_PIN_8_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_8_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_8_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_8_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_8_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_8_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_8_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_8_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_8_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 9
+#define GPIO_PORT_B_PIN_9_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_9_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_9_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_9_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_9_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_9_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_9_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_9_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_9_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 10
+#define GPIO_PORT_B_PIN_10_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_10_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_10_MUX              (GPIO_MUX_ALT_3)
+#define GPIO_PORT_B_PIN_10_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_B_PIN_10_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_10_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_10_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_10_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_10_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 11
+#define GPIO_PORT_B_PIN_11_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_11_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_11_MUX              (GPIO_MUX_ALT_3)
+#define GPIO_PORT_B_PIN_11_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_11_STRENGTH_LEVEL   (GPIO_STRENGTH_LOW)
+#define GPIO_PORT_B_PIN_11_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_11_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_11_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_11_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 12
+#define GPIO_PORT_B_PIN_12_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_12_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_12_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_12_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_12_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_12_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_12_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_12_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_12_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_B_PIN_12_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port B pin 13
+#define GPIO_PORT_B_PIN_13_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_13_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_13_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_13_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_13_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_13_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_13_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_13_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_13_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_B_PIN_13_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port B pin 14
+#define GPIO_PORT_B_PIN_14_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_14_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_14_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_14_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_14_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_14_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_14_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_14_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_14_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 15
+#define GPIO_PORT_B_PIN_15_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_15_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_15_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_15_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_15_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_15_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_15_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_15_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_15_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 16
+#define GPIO_PORT_B_PIN_16_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_16_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_16_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_16_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_16_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_16_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_16_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_16_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_16_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 17
+#define GPIO_PORT_B_PIN_17_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_17_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_17_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_17_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_17_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_17_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_17_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_17_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_17_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 18
+#define GPIO_PORT_B_PIN_18_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_18_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_18_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_18_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_18_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_18_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_18_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_18_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_18_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 19
+#define GPIO_PORT_B_PIN_19_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_19_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_19_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_19_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_19_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_19_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_19_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_19_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_19_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 20
+#define GPIO_PORT_B_PIN_20_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_20_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_20_MUX              (GPIO_MUX_ALT_2)
+#define GPIO_PORT_B_PIN_20_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_20_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_20_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_20_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_20_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_20_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 21
+#define GPIO_PORT_B_PIN_21_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_21_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_21_MUX              (GPIO_MUX_ALT_2)
+#define GPIO_PORT_B_PIN_21_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_B_PIN_21_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_21_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_21_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_21_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_21_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 22
+#define GPIO_PORT_B_PIN_22_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_22_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_22_MUX              (GPIO_MUX_ALT_5)
+#define GPIO_PORT_B_PIN_22_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_22_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_22_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_22_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_22_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_22_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 23
+#define GPIO_PORT_B_PIN_23_ENABLE           (ON)
+#define GPIO_PORT_B_PIN_23_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_23_MUX              (GPIO_MUX_ALT_5)
+#define GPIO_PORT_B_PIN_23_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_B_PIN_23_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_23_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_23_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_23_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_23_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 24
+#define GPIO_PORT_B_PIN_24_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_24_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_24_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_24_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_24_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_24_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_24_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_24_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_24_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 25
+#define GPIO_PORT_B_PIN_25_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_25_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_25_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_25_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_25_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_25_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_25_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_25_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_25_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 26
+#define GPIO_PORT_B_PIN_26_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_26_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_26_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_26_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_26_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_26_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_26_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_26_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_26_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 27
+#define GPIO_PORT_B_PIN_27_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_27_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_27_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_27_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_27_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_27_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_27_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_27_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_27_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 28
+#define GPIO_PORT_B_PIN_28_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_28_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_28_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_28_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_28_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_28_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_28_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_28_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_28_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 29
+#define GPIO_PORT_B_PIN_29_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_29_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_29_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_29_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_29_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_29_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_29_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_29_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_29_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 30
+#define GPIO_PORT_B_PIN_30_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_30_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_30_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_30_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_30_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_30_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_30_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_30_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_30_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port B pin 31
+#define GPIO_PORT_B_PIN_31_ENABLE           (OFF)
+#define GPIO_PORT_B_PIN_31_TOGGLE           (OFF)
+#define GPIO_PORT_B_PIN_31_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_31_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_B_PIN_31_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_B_PIN_31_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_B_PIN_31_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_B_PIN_31_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_B_PIN_31_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+//**************************************************************************************************
+//  PORT C settings
+//**************************************************************************************************
+
+// Port C pin 0
+#define GPIO_PORT_C_PIN_0_ENABLE           (ON)
+#define GPIO_PORT_C_PIN_0_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_0_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_0_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_0_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_0_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_0_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_0_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_0_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_0_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port C pin 1
+#define GPIO_PORT_C_PIN_1_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_1_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_1_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_1_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_1_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_1_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_1_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_1_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_1_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_1_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port C pin 2
+#define GPIO_PORT_C_PIN_2_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_2_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_2_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_2_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_2_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_2_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_2_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_2_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_2_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_2_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port C pin 3
+#define GPIO_PORT_C_PIN_3_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_3_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_3_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_3_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_3_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_3_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_3_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_3_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_3_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_3_WAKEUP           (GPIO_WKU_DISABLE)
+
+// JTAG_TCK_SWD_CLK C4 MUX_ALT_7
+// Port C pin 4
+#define GPIO_PORT_C_PIN_4_ENABLE           (ON)
+#define GPIO_PORT_C_PIN_4_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_4_MUX              (GPIO_MUX_ALT_7)
+#define GPIO_PORT_C_PIN_4_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_C_PIN_4_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_4_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_4_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_4_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_4_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// JTAG_TDI C5 MUX_ALT_7
+// Port C pin 5
+#define GPIO_PORT_C_PIN_5_ENABLE           (ON)
+#define GPIO_PORT_C_PIN_5_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_5_MUX              (GPIO_MUX_ALT_7)
+#define GPIO_PORT_C_PIN_5_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_5_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_5_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_5_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_5_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_5_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 6
+#define GPIO_PORT_C_PIN_6_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_6_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_6_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_6_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_6_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_6_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_6_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_6_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_6_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_6_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port C pin 7
+#define GPIO_PORT_C_PIN_7_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_7_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_7_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_7_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_7_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_7_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_7_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_7_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_7_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_7_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port C pin 8
+#define GPIO_PORT_C_PIN_8_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_8_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_8_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_8_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_8_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_8_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_8_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_8_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_8_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 9
+#define GPIO_PORT_C_PIN_9_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_9_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_9_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_9_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_9_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_9_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_9_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_9_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_9_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 10
+#define GPIO_PORT_C_PIN_10_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_10_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_10_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_10_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_10_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_10_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_10_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_10_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_10_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 11
+#define GPIO_PORT_C_PIN_11_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_11_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_11_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_11_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_11_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_11_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_11_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_11_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_11_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 12
+#define GPIO_PORT_C_PIN_12_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_12_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_12_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_12_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_12_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_12_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_12_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_12_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_12_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 13
+#define GPIO_PORT_C_PIN_13_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_13_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_13_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_13_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_13_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_13_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_13_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_13_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_13_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 14
+#define GPIO_PORT_C_PIN_14_ENABLE           (ON)
+#define GPIO_PORT_C_PIN_14_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_14_MUX              (GPIO_MUX_ALT_5)
+#define GPIO_PORT_C_PIN_14_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_C_PIN_14_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_14_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_14_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_14_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_14_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_14_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port C pin 15
+#define GPIO_PORT_C_PIN_15_ENABLE           (ON)
+#define GPIO_PORT_C_PIN_15_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_15_MUX              (GPIO_MUX_ALT_5)
+#define GPIO_PORT_C_PIN_15_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_15_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_15_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_15_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_15_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_15_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_C_PIN_15_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port C pin 16
+#define GPIO_PORT_C_PIN_16_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_16_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_16_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_16_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_16_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_16_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_16_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_16_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_16_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 17
+#define GPIO_PORT_C_PIN_17_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_17_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_17_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_17_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_17_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_17_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_17_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_17_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_17_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 18
+#define GPIO_PORT_C_PIN_18_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_18_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_18_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_18_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_18_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_18_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_18_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_18_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_18_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 19
+#define GPIO_PORT_C_PIN_19_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_19_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_19_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_19_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_19_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_19_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_19_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_19_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_19_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 20
+#define GPIO_PORT_C_PIN_20_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_20_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_20_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_20_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_20_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_20_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_20_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_20_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_20_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 21
+#define GPIO_PORT_C_PIN_21_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_21_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_21_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_21_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_21_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_21_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_21_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_21_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_21_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 22
+#define GPIO_PORT_C_PIN_22_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_22_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_22_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_22_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_22_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_22_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_22_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_22_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_22_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 23
+#define GPIO_PORT_C_PIN_23_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_23_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_23_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_23_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_23_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_23_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_23_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_23_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_23_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 24
+#define GPIO_PORT_C_PIN_24_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_24_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_24_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_24_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_24_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_24_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_24_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_24_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_24_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 25
+#define GPIO_PORT_C_PIN_25_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_25_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_25_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_25_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_25_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_25_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_25_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_25_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_25_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 26
+#define GPIO_PORT_C_PIN_26_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_26_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_26_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_26_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_26_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_26_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_26_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_26_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_26_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 27
+#define GPIO_PORT_C_PIN_27_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_27_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_27_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_27_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_27_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_27_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_27_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_27_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_27_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 28
+#define GPIO_PORT_C_PIN_28_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_28_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_28_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_28_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_28_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_28_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_28_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_28_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_28_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 29
+#define GPIO_PORT_C_PIN_29_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_29_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_29_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_29_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_29_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_29_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_29_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_29_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_29_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 30
+#define GPIO_PORT_C_PIN_30_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_30_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_30_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_30_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_30_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_30_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_30_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_30_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_30_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port C pin 31
+#define GPIO_PORT_C_PIN_31_ENABLE           (OFF)
+#define GPIO_PORT_C_PIN_31_TOGGLE           (OFF)
+#define GPIO_PORT_C_PIN_31_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_C_PIN_31_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_C_PIN_31_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_C_PIN_31_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_C_PIN_31_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_C_PIN_31_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_C_PIN_31_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+//**************************************************************************************************
+//  PORT D settings
+//**************************************************************************************************
+
+// Port D pin 0
+#define GPIO_PORT_D_PIN_0_ENABLE           (ON)
+#define GPIO_PORT_D_PIN_0_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_0_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_0_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_0_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_0_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_0_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_0_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_0_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 1
+#define GPIO_PORT_D_PIN_1_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_1_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_1_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_1_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_1_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_1_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_1_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_1_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_1_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 2
+#define GPIO_PORT_D_PIN_2_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_2_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_2_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_2_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_2_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_2_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_2_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_2_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_2_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_D_PIN_2_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port D pin 3
+#define GPIO_PORT_D_PIN_3_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_3_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_3_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_3_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_3_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_3_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_3_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_3_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_3_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_D_PIN_3_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port D pin 4
+#define GPIO_PORT_D_PIN_4_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_4_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_4_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_4_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_4_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_4_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_4_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_4_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_4_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 5
+#define GPIO_PORT_D_PIN_5_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_5_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_5_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_5_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_5_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_5_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_5_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_5_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_5_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_D_PIN_5_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port D pin 6
+#define GPIO_PORT_D_PIN_6_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_6_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_6_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_6_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_6_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_6_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_6_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_6_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_6_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 7
+#define GPIO_PORT_D_PIN_7_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_7_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_7_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_7_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_7_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_7_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_7_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_7_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_7_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 8
+#define GPIO_PORT_D_PIN_8_ENABLE           (ON)
+#define GPIO_PORT_D_PIN_8_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_8_MUX              (GPIO_MUX_ALT_2)
+#define GPIO_PORT_D_PIN_8_DIRECTION        (GPIO_PIN_INPUT)
+#define GPIO_PORT_D_PIN_8_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_8_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_8_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_8_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_8_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 9
+#define GPIO_PORT_D_PIN_9_ENABLE           (ON)
+#define GPIO_PORT_D_PIN_9_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_9_MUX              (GPIO_MUX_ALT_2)
+#define GPIO_PORT_D_PIN_9_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_9_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_9_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_9_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_9_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_9_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 10
+#define GPIO_PORT_D_PIN_10_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_10_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_10_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_10_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_10_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_10_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_10_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_10_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_10_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 11
+#define GPIO_PORT_D_PIN_11_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_11_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_11_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_11_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_11_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_11_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_11_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_11_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_11_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 12
+#define GPIO_PORT_D_PIN_12_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_12_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_12_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_12_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_12_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_12_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_12_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_12_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_12_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 13
+#define GPIO_PORT_D_PIN_13_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_13_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_13_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_13_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_13_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_13_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_13_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_13_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_13_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 14
+#define GPIO_PORT_D_PIN_14_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_14_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_14_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_14_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_14_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_14_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_14_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_14_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_14_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 15
+#define GPIO_PORT_D_PIN_15_ENABLE           (ON)
+#define GPIO_PORT_D_PIN_15_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_15_MUX              (GPIO_MUX_ALT_4)
+#define GPIO_PORT_D_PIN_15_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_15_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_15_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_15_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_15_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_15_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 16
+#define GPIO_PORT_D_PIN_16_ENABLE           (ON)
+#define GPIO_PORT_D_PIN_16_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_16_MUX              (GPIO_MUX_ALT_4)
+#define GPIO_PORT_D_PIN_16_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_16_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_16_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_16_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_16_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_16_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 17
+#define GPIO_PORT_D_PIN_17_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_17_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_17_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_17_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_17_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_17_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_17_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_17_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_17_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 18
+#define GPIO_PORT_D_PIN_18_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_18_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_18_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_18_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_18_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_18_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_18_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_18_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_18_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 19
+#define GPIO_PORT_D_PIN_19_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_19_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_19_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_19_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_19_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_19_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_19_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_19_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_19_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 20
+#define GPIO_PORT_D_PIN_20_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_20_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_20_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_20_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_20_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_20_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_20_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_20_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_20_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 21
+#define GPIO_PORT_D_PIN_21_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_21_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_21_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_21_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_21_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_21_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_21_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_21_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_21_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 22
+#define GPIO_PORT_D_PIN_22_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_22_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_22_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_22_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_22_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_22_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_22_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_22_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_22_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 23
+#define GPIO_PORT_D_PIN_23_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_23_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_23_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_23_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_23_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_23_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_23_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_23_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_23_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 24
+#define GPIO_PORT_D_PIN_24_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_24_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_24_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_24_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_24_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_24_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_24_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_24_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_24_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 25
+#define GPIO_PORT_D_PIN_25_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_25_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_25_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_25_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_25_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_25_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_25_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_25_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_25_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 26
+#define GPIO_PORT_D_PIN_26_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_26_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_26_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_26_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_26_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_26_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_26_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_26_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_26_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 27
+#define GPIO_PORT_D_PIN_27_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_27_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_27_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_27_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_27_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_27_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_27_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_27_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_27_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 28
+#define GPIO_PORT_D_PIN_28_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_28_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_28_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_28_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_28_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_28_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_28_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_28_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_28_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 29
+#define GPIO_PORT_D_PIN_29_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_29_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_29_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_29_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_29_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_29_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_29_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_29_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_29_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 30
+#define GPIO_PORT_D_PIN_30_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_30_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_30_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_30_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_30_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_30_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_30_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_30_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_30_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port D pin 31
+#define GPIO_PORT_D_PIN_31_ENABLE           (OFF)
+#define GPIO_PORT_D_PIN_31_TOGGLE           (OFF)
+#define GPIO_PORT_D_PIN_31_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_D_PIN_31_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_D_PIN_31_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_D_PIN_31_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_D_PIN_31_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_D_PIN_31_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_D_PIN_31_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+//**************************************************************************************************
+//  PORT E settings
+//**************************************************************************************************
+
+// Port E pin 0
+#define GPIO_PORT_E_PIN_0_ENABLE           (ON)
+#define GPIO_PORT_E_PIN_0_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_0_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_0_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_0_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_0_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_0_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_0_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_0_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_0_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 1
+#define GPIO_PORT_E_PIN_1_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_1_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_1_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_1_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_1_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_1_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_1_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_1_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_1_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_1_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 2
+#define GPIO_PORT_E_PIN_2_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_2_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_2_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_2_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_2_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_2_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_2_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_2_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_2_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_2_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 3
+#define GPIO_PORT_E_PIN_3_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_3_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_3_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_3_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_3_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_3_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_3_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_3_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_3_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_3_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 4
+#define GPIO_PORT_E_PIN_4_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_4_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_4_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_4_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_4_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_4_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_4_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_4_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_4_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_4_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 5
+#define GPIO_PORT_E_PIN_5_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_5_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_5_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_5_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_5_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_5_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_5_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_5_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_5_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_5_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 6
+#define GPIO_PORT_E_PIN_6_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_6_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_6_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_6_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_6_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_6_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_6_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_6_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_6_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_6_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 7
+#define GPIO_PORT_E_PIN_7_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_7_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_7_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_7_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_7_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_7_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_7_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_7_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_7_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 8
+#define GPIO_PORT_E_PIN_8_ENABLE           (ON)
+#define GPIO_PORT_E_PIN_8_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_8_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_8_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_8_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_8_PULL_ENABLE      (GPIO_PULL_ENABLE)
+#define GPIO_PORT_E_PIN_8_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_8_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_8_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_8_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 9
+#define GPIO_PORT_E_PIN_9_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_9_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_9_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_9_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_9_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_9_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_9_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_9_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_9_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_9_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 10
+#define GPIO_PORT_E_PIN_10_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_10_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_10_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_10_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_10_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_10_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_10_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_10_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_10_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_10_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 11
+#define GPIO_PORT_E_PIN_11_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_11_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_11_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_11_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_11_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_11_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_11_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_11_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_11_IT_TRIGGER       (GPIO_IT_DISABLE)
+#define GPIO_PORT_E_PIN_11_WAKEUP           (GPIO_WKU_DISABLE)
+
+// Port E pin 12
+#define GPIO_PORT_E_PIN_12_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_12_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_12_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_12_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_12_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_12_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_12_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_12_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_12_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 13
+#define GPIO_PORT_E_PIN_13_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_13_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_13_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_13_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_13_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_13_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_13_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_13_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_13_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 14
+#define GPIO_PORT_E_PIN_14_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_14_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_14_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_14_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_14_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_14_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_14_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_14_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_14_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 15
+#define GPIO_PORT_E_PIN_15_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_15_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_15_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_15_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_15_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_15_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_15_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_15_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_15_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 16
+#define GPIO_PORT_E_PIN_16_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_16_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_16_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_16_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_16_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_16_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_16_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_16_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_16_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 17
+#define GPIO_PORT_E_PIN_17_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_17_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_17_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_17_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_17_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_17_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_17_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_17_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_17_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 18
+#define GPIO_PORT_E_PIN_18_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_18_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_18_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_18_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_18_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_18_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_18_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_18_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_18_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 19
+#define GPIO_PORT_E_PIN_19_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_19_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_19_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_19_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_19_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_19_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_19_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_19_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_19_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 20
+#define GPIO_PORT_E_PIN_20_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_20_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_20_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_20_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_20_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_20_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_20_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_20_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_20_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 21
+#define GPIO_PORT_E_PIN_21_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_21_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_21_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_21_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_21_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_21_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_21_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_21_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_21_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 22
+#define GPIO_PORT_E_PIN_22_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_22_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_22_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_22_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_22_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_22_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_22_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_22_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_22_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 23
+#define GPIO_PORT_E_PIN_23_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_23_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_23_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_23_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_23_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_23_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_23_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_23_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_23_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 24
+#define GPIO_PORT_E_PIN_24_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_24_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_24_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_24_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_24_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_24_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_24_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_24_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_24_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 25
+#define GPIO_PORT_E_PIN_25_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_25_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_25_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_25_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_25_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_25_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_25_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_25_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_25_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 26
+#define GPIO_PORT_E_PIN_26_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_26_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_26_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_26_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_26_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_26_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_26_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_26_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_26_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 27
+#define GPIO_PORT_E_PIN_27_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_27_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_27_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_27_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_27_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_27_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_27_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_27_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_27_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 28
+#define GPIO_PORT_E_PIN_28_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_28_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_28_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_28_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_28_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_28_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_28_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_28_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_28_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 29
+#define GPIO_PORT_E_PIN_29_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_29_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_29_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_29_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_29_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_29_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_29_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_29_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_29_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 30
+#define GPIO_PORT_E_PIN_30_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_30_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_30_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_30_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_30_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_30_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_30_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_30_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_30_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+// Port E pin 31
+#define GPIO_PORT_E_PIN_31_ENABLE           (OFF)
+#define GPIO_PORT_E_PIN_31_TOGGLE           (OFF)
+#define GPIO_PORT_E_PIN_31_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_31_DIRECTION        (GPIO_PIN_OUTPUT)
+#define GPIO_PORT_E_PIN_31_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
+#define GPIO_PORT_E_PIN_31_PULL_ENABLE      (GPIO_PULL_DISABLE)
+#define GPIO_PORT_E_PIN_31_PULL_MODE        (GPIO_PULL_DOWN)
+#define GPIO_PORT_E_PIN_31_VALUE            (GPIO_PIN_LOW)
+#define GPIO_PORT_E_PIN_31_IT_TRIGGER       (GPIO_IT_DISABLE)
+
+
+
+#endif // end of #ifndef GPIO_DRV_CFG_H
+
+//****************************************** end of file *******************************************

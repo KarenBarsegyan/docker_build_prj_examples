@@ -5,7 +5,7 @@
 **********************************************************************
 
 File          : D:/Projects/PKE/Driver_Repositories/spi_ytm32b1m/test/dev/ide/ozone/spi_test.jdebug
-Created       : 20 Jul 2023 12:26
+Created       : 21 Jul 2023 16:59
 Ozone Version : V3.26
 */
 
@@ -25,10 +25,11 @@ void OnProjectLoad (void) {
   Project.AddPathSubstitute ("D:/Projects/PKE/Driver_Repositories/spi_ytm32b1m/test/dev/ide/ozone", "$(ProjectDir)");
   Project.AddPathSubstitute ("d:/projects/pke/driver_repositories/spi_ytm32b1m/test/dev/ide/ozone", "$(ProjectDir)");
   Project.SetDevice ("YTM32B1ME05G0MLQT");
-  Project.SetHostIF ("USB", "");
+  Project.SetHostIF ("USB", "69660608");
   Project.SetTargetIF ("SWD");
   Project.SetTIFSpeed ("4 MHz");
   Project.AddSvdFile ("$(InstallDir)/Config/CPU/Cortex-M33F.svd");
+  Project.AddSvdFile ("D:/JLink_Settings/SVD/YTM32B1ME0.svd");
   //
   // User settings
   //

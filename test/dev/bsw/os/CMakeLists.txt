@@ -15,3 +15,4 @@ target_include_directories(${LIB_NAME} PUBLIC
 target_link_libraries(${LIB_NAME} PRIVATE error_tracer)
 target_link_libraries(${LIB_NAME} PRIVATE asw)
 target_link_libraries(${LIB_NAME} PRIVATE cfg)
+target_link_libraries(${LIB_NAME} PRIVATE compiler)

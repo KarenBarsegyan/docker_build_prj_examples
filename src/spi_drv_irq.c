@@ -8,6 +8,7 @@
 //! \brief  Low-level interrupt service routines for SPI driver.
 //!
 //! \par    Abbreviations
+//!             MCU - MicroController Unit
 //!             SPI - Serial Peripheral Interface
 //! \par    History
 //! | Date       | Version | Author  | Comment

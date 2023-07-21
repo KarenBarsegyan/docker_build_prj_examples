@@ -37,11 +37,17 @@
 // Project Includes
 //**************************************************************************************************
 
-// Native header
+// Get Native header
 #include "spi_drv.h"
 
-// MCU driver header
+// Get MCU driver header
 #include "mcu_drv.h"
+
+// Get SFR registers header
+#include "ytm32b1m_sfr.h"
+
+// Get generic definitions
+#include "general.h"
 
 #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
 // Get error tracer functions
@@ -83,7 +89,15 @@
 static const U8 SPI_moduleID[] = "SPI_DRV";
 #endif
 
-
+//! \name IPC pin control indexes
+//! @{
+#define IPC_SPI0_INDEX         (42U)
+#define IPC_SPI1_INDEX         (43U)
+#define IPC_SPI2_INDEX         (44U)
+#define IPC_SPI3_INDEX         (45U)
+#define IPC_SPI4_INDEX         (46U)
+#define IPC_SPI5_INDEX         (47U)
+//! @}
 
 //**************************************************************************************************
 // Definitions of static global (private) variables
@@ -122,8 +136,23 @@ static const U8 SPI_moduleID[] = "SPI_DRV";
 STD_RESULT SPI_Init(void)
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
-    
-    // TODO
+
+    if (OFF == IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN)
+    {
+        IPC.CTRL[IPC_SPI0_INDEX].B.DIV = 0b1001;
+        IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = 0b101;
+        IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN = ON;
+    }
+
+
+    SPI0.TXCFG.B.PRESCALE = 0b100;
+
+    SPI0.CLK.B.DIV = 4U;
+
+    SPI0.CTRL.B.MODE = ON;
+    SPI0.CTRL.B.EN = ON;
+
+    while(ON != SPI0.CTRL.B.EN){}
 
     return nFuncResult;
 } // end of SPI_Init()
@@ -194,7 +223,11 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
     
-    // TODO
+    if (OFF == SPI0.STS.B.BUSY)
+    {
+        SPI0.DATA.B.DATA = (U32) 0xBCU;
+        SPI0.DATA.B.DATA;
+    }
 
     return nFuncResult;
 } // end of SPI_Write()

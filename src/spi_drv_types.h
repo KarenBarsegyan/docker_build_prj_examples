@@ -1,11 +1,11 @@
 //**************************************************************************************************
 // @Module  SPI driver
-//! \file   spi_drv.h
+//! \file   spi_drv.c
 //! \par    Platform
 //!             YTM32
 //! \par    Compatible
 //!             YTM32B1M families
-//! \brief  Interface of the SPI IRQ module.
+//! \brief  Constants for SPI driver configuration
 //!
 //! \par    Abbreviations
 //!             MCU - MicroController Unit
@@ -16,8 +16,9 @@
 //! | 00.00.2023 |  1.0.0  |   BKR   | First release.
 //**************************************************************************************************
 
-#ifndef SPI_DRV_IRQ_H
-#define SPI_DRV_IRQ_H
+
+#ifndef SPI_DRV_TYPES_H
+#define SPI_DRV_TYPES_H
 
 
 
@@ -25,8 +26,14 @@
 // Project Includes
 //**************************************************************************************************
 
-// Get SPI_HighLevel_ISR()
-#include "spi_drv.h"
+// Get data types
+#include "compiler.h"
+
+// Get generic definitions
+#include "general.h"
+
+// Get configuration of the program module
+#include "gpio_drv.h"
 
 
 
@@ -34,7 +41,6 @@
 // Declarations of global (public) data types
 //**************************************************************************************************
 
-// None.
 
 
 
@@ -42,7 +48,6 @@
 // Definitions of global (public) constants
 //**************************************************************************************************
 
-// None.
 
 
 
@@ -50,7 +55,7 @@
 // Declarations of global (public) variables
 //**************************************************************************************************
 
-// None.
+// None
 
 
 
@@ -58,40 +63,10 @@
 // Declarations of global (public) functions
 //**************************************************************************************************
 
-// None.
+// None
 
 
 
-//**************************************************************************************************
-// Declarations of interrupt service routines
-//**************************************************************************************************
-
-#if(ON == SPI_CHANNEL_1_IN_USE)
-extern INTERRUPT void SPI_LowLevel_1_Interrupt(void);
-#endif
-
-#if(ON == SPI_CHANNEL_2_IN_USE)
-extern INTERRUPT void SPI_LowLevel_2_Interrupt(void);
-#endif
-
-#if(ON == SPI_CHANNEL_3_IN_USE)
-extern INTERRUPT void SPI_LowLevel_3_Interrupt(void);
-#endif
-
-#if(ON == SPI_CHANNEL_4_IN_USE)
-extern INTERRUPT void SPI_LowLevel_4_Interrupt(void);
-#endif
-
-#if(ON == SPI_CHANNEL_5_IN_USE)
-extern INTERRUPT void SPI_LowLevel_5_Interrupt(void);
-#endif
-
-#if(ON == SPI_CHANNEL_6_IN_USE)
-extern INTERRUPT void SPI_LowLevel_6_Interrupt(void);
-#endif
-
-
-
-#endif  // SPI_DRV_IRQ_H
+#endif // #ifndef SPI_DRV_TYPES_H
 
 //****************************************** end of file *******************************************
