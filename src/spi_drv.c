@@ -40,6 +40,15 @@
 // Get Native header
 #include "spi_drv.h"
 
+// Get irq header
+#include "spi_drv_irq.h"
+
+// Get config header
+#include "spi_drv_cfg.h"
+
+// Get program module specific types
+#include "spi_drv_types.h"
+
 // Get MCU driver header
 #include "mcu_drv.h"
 
@@ -87,7 +96,27 @@
 #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
 //! Program module ID ( = program module prefix)
 static const U8 SPI_moduleID[] = "SPI_DRV";
+//! Program module ID size
+static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
+
+//! Dev error function
+#define SPI_REPORT_DEV_ERROR(SPI_nAPIID, nErrorID)         \
+    ET_ReportDevelopmentError(SPI_pModuleID,               \
+                              SPI_nModuleIDSize,           \
+                              0U,                          \
+                              SPI_nAPIID,                  \
+                              nErrorID);
+//! Runtime error function
+#define SPI_REPORT_RT_ERROR(SPI_nAPIID, nErrorID)          \
+    ET_ReportRuntimeError(SPI_pModuleID,                   \
+                          SPI_nModuleIDSize,               \
+                          0U,                              \
+                          SPI_nAPIID,                      \
+                          nErrorID);
 #endif
+
+
+
 
 //! \name IPC pin control indexes
 //! @{
@@ -103,8 +132,14 @@ static const U8 SPI_moduleID[] = "SPI_DRV";
 // Definitions of static global (private) variables
 //**************************************************************************************************
 
-// None
+//! All channels configurations
+extern const SPI_CHANNEL_CONFIG* const SPI_pAllChannelsConfigs[SPI_CHANNEL_QNT];
 
+//! All channels parameters
+static SPI_CHANNEL_PARAMS SPI_stAllChannelsParams[SPI_CHANNEL_QNT];
+
+//! Initialization flag
+static BOOLEAN SPI_bInitialized;
 
 
 //**************************************************************************************************
@@ -137,22 +172,31 @@ STD_RESULT SPI_Init(void)
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
 
-    if (OFF == IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN)
+    #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
+    if (TRUE == SPI_bInitialized)
     {
-        IPC.CTRL[IPC_SPI0_INDEX].B.DIV = 0b1001;
-        IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = 0b101;
-        IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN = ON;
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_INIT, DEV_ERROR_ALREADY_INIT);
     }
+    else
+    #endif
+    {
+        if (OFF == IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN)
+        {
+            IPC.CTRL[IPC_SPI0_INDEX].B.DIV = 0b0001;
+            IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = 0b101;
+            IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN = ON;
+        }
 
 
-    SPI0.TXCFG.B.PRESCALE = 0b100;
+        SPI0.TXCFG.B.PRESCALE = 0b001;
 
-    SPI0.CLK.B.DIV = 4U;
+        SPI0.CLK.B.DIV = 1U;
 
-    SPI0.CTRL.B.MODE = ON;
-    SPI0.CTRL.B.EN = ON;
+        SPI0.CTRL.B.MODE = ON;
+        SPI0.CTRL.B.EN = ON;
 
-    while(ON != SPI0.CTRL.B.EN){}
+        while(ON != SPI0.CTRL.B.EN){}
+    }
 
     return nFuncResult;
 } // end of SPI_Init()
@@ -225,7 +269,7 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
     
     if (OFF == SPI0.STS.B.BUSY)
     {
-        SPI0.DATA.B.DATA = (U32) 0xBCU;
+        SPI0.DATA.B.DATA = (U32) 0x6789ABCDU;
         SPI0.DATA.B.DATA;
     }
 
