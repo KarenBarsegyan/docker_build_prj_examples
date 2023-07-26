@@ -29,6 +29,9 @@
 // Native header
 #include "spi_drv.h" 
 
+// Get config header
+#include "spi_drv_cfg.h"
+
 // Get FIFO buffer functions
 #include "circ_buffer.h"
 
@@ -36,101 +39,6 @@
 // Declarations of global (public) data types
 //**************************************************************************************************
 
-
-//! SPI channel configuration
-typedef struct
-{
-    //! Channel enable flag
-    BOOLEAN bChannelEnable;
-} SPI_CHANNEL_CONFIG;
-
-//! Buffer structure
-typedef struct
-{
-    //! RX FIFO structure
-    stCIRCBUF stRXfifo;
-    //! TX FIFO structure
-    stCIRCBUF stTXfifo;
-    //! RX buffer
-    U32       pRXbuffer[SPI_CHANNEL_RX_FIFO_SIZE];
-    //! TX buffer
-    U32       pTXbuffer[SPI_CHANNEL_TX_FIFO_SIZE];
-} SPI_CHANNEL_FIFO_BUF;
-
-//! Parameters for the SPI channel
-typedef struct
-{
-    //! SPI Callback
-    SPI_CALLBACK pCallback;
-    //! SPI current state
-    U8 nSpiState;
-    //! RX and TX FIFO
-    SPI_CHANNEL_FIFO_BUF stFIFO;
-    //! Frame size
-    U8 nFrameSize;
-} SPI_CHANNEL_PARAMS;
-
-//! SPI low-level channel configuration
-typedef struct
-{
-    //! SPI mode
-    U8 nSPImode;
-    //! SPI data baudrate
-    U32 nBaudrate;
-    //! RX FIFO size
-    U8 nRxFifoSize;
-    //! TX FIFO size
-    U8 nTxFifoSize;
-    //! MOSI port
-    U8 nMOSIport;
-    //! MOSI pin
-    U8 nMOSIpin;
-    //! MOSI pin output mode
-    U8 nMOSIoutMode;
-    //! MOSI pin pull mode
-    U8 nMOSIpullMode;
-    //! MISO port
-    U8 nMISOport;
-    //! MISO pin
-    U8 nMISOpin;
-    //! MISO pin output mode
-    U8 nMISOoutMode;
-    //! MISO pin pull mode
-    U8 nMISOpullMode;
-    //! SCLK port
-    U8 nSCLKport;
-    //! SCLK pin
-    U8 nSCLKpin;
-    //! SCLK pin output mode
-    U8 nSCLKoutMode;
-    //! SCLK pin pull mode
-    U8 nSCLKpullMode;
-    //! CS pin output mode
-    U8 nCSoutMode;
-    //! CS pin pull mode
-    U8 nCSpullMode;
-} SPI_HW_CHANNEL_CONFIG;
-
-//! Low-level parameters for the SPI channel
-typedef struct
-{
-    //! Function number of the MOSI pin
-    U8 nMOSIfunc;
-    //! Function number of the MISO pin
-    U8 nMISOfunc;
-    //! Function number of the SCLK pin
-    U8 nSCLKfunc;
-    //! Function number of the CS pin
-    U8 nCSfunc;
-    //! CS sequence number in one channel
-    U8 nCSseqNum;
-    //! CS port
-    U8 nCSport;
-    //! CS pin
-    U8 nCSpin;
-    //! CS number
-    U8 nCSnum;
-} SPI_HW_CHANNEL_PARAMS;
 
 
 
@@ -203,8 +111,8 @@ typedef struct
 
 //! \name Pin output modes
 //! @{
-#define SPI_OUTPUT_MODE_PUSH_PULL           (0U)
-#define SPI_OUTPUT_MODE_OPEN_DRAIN          (1U)
+#define SPI_OUTPUT_MODE_OPEN_DRAIN          (0U)
+#define SPI_OUTPUT_MODE_PUSH_PULL           (1U)
 //! @}
 
 //! \name SPI channels definitions
@@ -232,6 +140,25 @@ typedef struct
 //! @{
 #define SPI_BIT_SET                         (1U)
 #define SPI_BIT_CLR                         (0U)
+//! @}
+
+//! \name IPC spi control indexes
+//! @{
+#define IPC_SPI0_INDEX         (42U)
+#define IPC_SPI1_INDEX         (43U)
+#define IPC_SPI2_INDEX         (44U)
+#define IPC_SPI3_INDEX         (45U)
+#define IPC_SPI4_INDEX         (46U)
+#define IPC_SPI5_INDEX         (47U)
+//! @}
+
+//! \name IPC gpio port control indexes
+//! @{
+#define IPC_PCTRLA_INDEX       (18U)
+#define IPC_PCTRLB_INDEX       (19U)
+#define IPC_PCTRLC_INDEX       (20U)
+#define IPC_PCTRLD_INDEX       (21U)
+#define IPC_PCTRLE_INDEX       (22U)
 //! @}
 
 //! MAX BAUDRATE value
@@ -267,12 +194,12 @@ typedef struct
 #define SPI_DATA_SIZE_20                    (20U)
 #define SPI_DATA_SIZE_24                    (24U)
 #define SPI_DATA_SIZE_32                    (32U)
-//! @}
 
 //! Minimal data size
 #define SPI_DATA_SIZE_MIN                   (SPI_DATA_SIZE_4)
 //! Maximal data size
 #define SPI_DATA_SIZE_MAX                   (SPI_DATA_SIZE_32)
+//! @}
 
 
 

@@ -177,29 +177,30 @@
 // Hardware SPI CS 1 Port and Pin settings
 // Valid Ports and Pins:
 // PTA_31, PTB_5
-#define SPI_CHANNEL_0_CS_1_IN_USE               (OFF)
+#define SPI_CHANNEL_0_CS_1_IN_USE               (ON)
 #define SPI_CHANNEL_0_CS_1_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_0_CS_1_PIN                  (0U)
+#define SPI_CHANNEL_0_CS_1_PIN                  (31U)
 #define SPI_CHANNEL_0_CS_1_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_0_CS_1_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // Hardware SPI CS 2 Port and Pin settings
 // Valid Ports and Pins:
 // PTE_6
-#define SPI_CHANNEL_0_CS_2_IN_USE               (OFF)
-#define SPI_CHANNEL_0_CS_2_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_0_CS_2_PIN                  (0U)
+#define SPI_CHANNEL_0_CS_2_IN_USE               (ON)
+#define SPI_CHANNEL_0_CS_2_PORT                 (SPI_PORT_E)
+#define SPI_CHANNEL_0_CS_2_PIN                  (6U)
 #define SPI_CHANNEL_0_CS_2_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_0_CS_2_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // Hardware SPI CS 3 Port and Pin settings
 // Valid Ports and Pins:
 // PTA_15
-#define SPI_CHANNEL_0_CS_3_IN_USE               (OFF)
+#define SPI_CHANNEL_0_CS_3_IN_USE               (ON)
 #define SPI_CHANNEL_0_CS_3_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_0_CS_3_PIN                  (0U)
+#define SPI_CHANNEL_0_CS_3_PIN                  (15U)
 #define SPI_CHANNEL_0_CS_3_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_0_CS_3_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
+
 
 
 //--------------------------------------------------------------------------------------------------
@@ -270,6 +271,7 @@
 #define SPI_CHANNEL_1_CS_3_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 
+
 //--------------------------------------------------------------------------------------------------
 //-------------------------------------------- SPI2 ------------------------------------------------
 //--------------------------------------------------------------------------------------------------
@@ -336,6 +338,7 @@
 #define SPI_CHANNEL_2_CS_3_PIN                  (0U)
 #define SPI_CHANNEL_2_CS_3_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_2_CS_3_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
+
 
 
 //--------------------------------------------------------------------------------------------------

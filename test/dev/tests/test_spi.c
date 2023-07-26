@@ -39,14 +39,14 @@ void TEST_1ms(void)
 
 void TEST_10ms(void) 
 {
-
+    U8 aData[8U];
+    SPI_Write(1U, aData, 1U);
 }
 
 
 void TEST_100ms(void) 
 {
-    U8 aData[8U];
-    SPI_Write(1U, aData, 1U);
+
 }
 
 

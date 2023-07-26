@@ -46,6 +46,9 @@
 // Get config header
 #include "spi_drv_cfg.h"
 
+// Get config verification header
+#include "spi_drv_cfg_verif.h"
+
 // Get program module specific types
 #include "spi_drv_types.h"
 
@@ -85,7 +88,25 @@
 // Declarations of local (private) data types
 //**************************************************************************************************
 
-// None.
+//! \name Program module API IDs
+//! @{
+typedef enum
+{
+    SPI_API_ID_INNER_FUNC           = (U8)0U,
+    SPI_API_ID_INIT                 = (U8)1U,
+    SPI_API_ID_DEINIT               = (U8)2U,
+    SPI_API_ID_READ                 = (U8)3U,
+    SPI_API_ID_WRITE                = (U8)4U,
+    SPI_API_ID_PURGE                = (U8)5U,
+    SPI_API_ID_GETRXITEMSCOUNT      = (U8)6U,
+    SPI_API_ID_SETMODE              = (U8)7U,
+    SPI_API_ID_SETBAUDRATE          = (U8)8U,
+    SPI_API_ID_SETTRANSFERFORMAT    = (U8)9U,
+    SPI_API_ID_SETCALLBACKFUNCTION  = (U8)10U,
+    SPI_API_ID_RX_ISR               = (U8)11U,
+    SPI_API_ID_TX_ISR               = (U8)12U,
+} SPI_API_ID;
+//! @}
 
  
 
@@ -117,30 +138,111 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 
 
 
-
-//! \name IPC pin control indexes
+//! \name Is GPIO port used
 //! @{
-#define IPC_SPI0_INDEX         (42U)
-#define IPC_SPI1_INDEX         (43U)
-#define IPC_SPI2_INDEX         (44U)
-#define IPC_SPI3_INDEX         (45U)
-#define IPC_SPI4_INDEX         (46U)
-#define IPC_SPI5_INDEX         (47U)
+#define SPI_CHANNEL_GPIO_PORT_IN_USE(Channel, Port) ( \
+    SPI_##Channel##_IN_USE == ON && (      \
+    SPI_##Channel##_MOSI_PORT == Port ||   \
+    SPI_##Channel##_MISO_PORT == Port ||   \
+    SPI_##Channel##_SCLK_PORT == Port ||   \
+    SPI_##Channel##_CS_0_PORT == Port ||   \
+    SPI_##Channel##_CS_1_PORT == Port ||   \
+    SPI_##Channel##_CS_2_PORT == Port ||   \
+    SPI_##Channel##_CS_3_PORT == Port) )
+
+#define SPI_GPIO_PORT_IN_USE(Port) (                     \
+    SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_0, Port) || \
+    SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_1, Port) || \
+    SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_2, Port) || \
+    SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_3, Port) || \
+    SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_4, Port) || \
+    SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_5, Port))
 //! @}
+
+//! \name PCR register macro
+//! @{
+#define SPI_CHANNEL_PCTRL_FILL(Channel)                                     \
+{                                                                           \
+    PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.PE  =      \
+                                       SPI_CHANNEL_0_MOSI_OUTPUT_MODE;      \
+    PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.MUX =      \
+                                       SPI_CHANNEL_0_MOSI_ALT_FUNK;         \
+    PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.PS  =      \
+                                       SPI_CHANNEL_0_MOSI_PULLUP_MODE;      \
+                                                                            \
+    PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.PE  =      \
+                                       SPI_CHANNEL_0_MISO_OUTPUT_MODE;      \
+    PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.MUX =      \
+                                       SPI_CHANNEL_0_MISO_ALT_FUNK;         \
+    PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.PS  =      \
+                                       SPI_CHANNEL_0_MISO_PULLUP_MODE;      \
+                                                                            \
+    PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.PE  =      \
+                                       SPI_CHANNEL_0_SCLK_OUTPUT_MODE;      \
+    PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.MUX =      \
+                                       SPI_CHANNEL_0_SCLK_ALT_FUNK;         \
+    PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.PS  =      \
+                                       SPI_CHANNEL_0_SCLK_PULLUP_MODE;      \
+                                                                            \
+    if (ON == SPI_CHANNEL_0_CS_0_IN_USE)                                    \
+    {                                                                       \
+        PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.PE  =  \
+                                           SPI_CHANNEL_0_CS_0_OUTPUT_MODE;  \
+        PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.MUX =  \
+                                           SPI_CHANNEL_0_CS_0_ALT_FUNK;     \
+        PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.PS  =  \
+                                           SPI_CHANNEL_0_CS_0_PULLUP_MODE;  \
+                                                                            \
+    }                                                                       \
+                                                                            \
+    if (ON == SPI_CHANNEL_0_CS_1_IN_USE)                                    \
+    {                                                                       \
+        PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.PE  =  \
+                                           SPI_CHANNEL_0_CS_1_OUTPUT_MODE;  \
+        PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.MUX =  \
+                                           SPI_CHANNEL_0_CS_1_ALT_FUNK;     \
+        PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.PS  =  \
+                                           SPI_CHANNEL_0_CS_1_PULLUP_MODE;  \
+    }                                                                       \
+                                                                            \
+    if (ON == SPI_CHANNEL_0_CS_2_IN_USE)                                    \
+    {                                                                       \
+        PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.PE  =  \
+                                           SPI_CHANNEL_0_CS_2_OUTPUT_MODE;  \
+        PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.MUX =  \
+                                           SPI_CHANNEL_0_CS_2_ALT_FUNK;     \
+        PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.PS  =  \
+                                           SPI_CHANNEL_0_CS_2_PULLUP_MODE;  \
+    }                                                                       \
+}
+//! @}
+
+//! \name Take clock on special port ON
+//! @{ 
+#define SPI_GPIO_PORT_TAKE_ON_CLK(Port) \
+    if (ON != IPC.CTRL[IPC_PCTRL##Port##_INDEX].B.CLKEN) \
+    {                                             \
+        IPC.CTRL[IPC_PCTRL##Port##_INDEX].B.CLKEN = ON;  \
+    }                                             \
+//! @}   
+
 
 //**************************************************************************************************
 // Definitions of static global (private) variables
 //**************************************************************************************************
 
-//! All channels configurations
-extern const SPI_CHANNEL_CONFIG* const SPI_pAllChannelsConfigs[SPI_CHANNEL_QNT];
-
-//! All channels parameters
-static SPI_CHANNEL_PARAMS SPI_stAllChannelsParams[SPI_CHANNEL_QNT];
-
 //! Initialization flag
 static BOOLEAN SPI_bInitialized;
 
+//! Port control registers array
+static PCTRL_tag* PCTRL_pPorts[SPI_PORT_MAX + 1U] =
+{
+    &PCTRLA,
+    &PCTRLB,
+    &PCTRLC,
+    &PCTRLD,
+    &PCTRLE,
+};
 
 //**************************************************************************************************
 // Declarations of local (private) functions
@@ -180,22 +282,73 @@ STD_RESULT SPI_Init(void)
     else
     #endif
     {
+        // GPIO clock enable
+        #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_A) )
+            SPI_GPIO_PORT_TAKE_ON_CLK(A)
+        #endif
+
+        #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_B) )
+            SPI_GPIO_PORT_TAKE_ON_CLK(B)
+        #endif
+
+        #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_C) )
+            SPI_GPIO_PORT_TAKE_ON_CLK(C)
+        #endif
+
+        #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_D) )
+            SPI_GPIO_PORT_TAKE_ON_CLK(D)
+        #endif
+
+        #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_E) )
+            SPI_GPIO_PORT_TAKE_ON_CLK(E)
+        #endif
+        
+        // Setup GPIO MUX and pull
+        #if (ON == SPI_CHANNEL_0_IN_USE)
+            SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_0);
+        #endif
+
+        #if (ON == SPI_CHANNEL_1_IN_USE)
+            SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_1);
+        #endif
+
+        #if (ON == SPI_CHANNEL_2_IN_USE)
+            SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_2);
+        #endif
+
+        #if (ON == SPI_CHANNEL_3_IN_USE)
+            SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_3);
+        #endif
+
+        #if (ON == SPI_CHANNEL_4_IN_USE)
+            SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_4);
+        #endif
+
+        #if (ON == SPI_CHANNEL_5_IN_USE)
+            SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_5);
+        #endif
+        
+
         if (OFF == IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN)
         {
-            IPC.CTRL[IPC_SPI0_INDEX].B.DIV = 0b0001;
-            IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = 0b101;
+            U32 nBusFrequency = MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS3); // SLOW BUS clock
+            
+            IPC.CTRL[IPC_SPI0_INDEX].B.DIV = 0b1001;
+            IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = 0b101; 
             IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN = ON;
         }
 
 
-        SPI0.TXCFG.B.PRESCALE = 0b001;
+        SPI0.TXCFG.B.PRESCALE = 0b000;
 
-        SPI0.CLK.B.DIV = 1U;
+        SPI0.CLK.B.DIV = 0b00U;
 
         SPI0.CTRL.B.MODE = ON;
         SPI0.CTRL.B.EN = ON;
 
         while(ON != SPI0.CTRL.B.EN){}
+
+        SPI_bInitialized = TRUE;
     }
 
     return nFuncResult;

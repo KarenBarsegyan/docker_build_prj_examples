@@ -23,7 +23,7 @@
 //**************************************************************************************************
 
 // Native header
-#include "spi_drv.h"
+#include "spi_drv_cfg.h"
 
 // Get program module specific types
 #include "spi_drv_types.h"
@@ -59,7 +59,7 @@
     #define SPI_CHANNEL_0_MOSI_ALT_FUNK (3U)
 #elif (SPI_CHANNEL_0_MOSI_PORT == SPI_PORT_E && SPI_CHANNEL_0_MOSI_PIN == SPI_PIN_2 )
     #define SPI_CHANNEL_0_MOSI_ALT_FUNK (2U)
-#elif
+#else
     #error "SPI_CHANNEL_0_MOSI_PORT configuration value is not valid!"
 #endif
 
@@ -162,6 +162,8 @@
             SPI_CHANNEL_0_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_0_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_0_CS_0_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS1 ------------------------------------------------
@@ -189,6 +191,8 @@
             SPI_CHANNEL_0_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_0_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_0_CS_1_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS2 ------------------------------------------------
@@ -214,6 +218,8 @@
             SPI_CHANNEL_0_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_0_CS_2_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_0_CS_2_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS3 ------------------------------------------------
@@ -239,6 +245,8 @@
             SPI_CHANNEL_0_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_0_CS_3_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_0_CS_3_ALT_FUNK (0U)
 #endif
 
 #endif // end of SPI_CHANNEL_0_IN_USE
@@ -371,6 +379,8 @@
             SPI_CHANNEL_1_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_1_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_1_CS_0_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS1 ------------------------------------------------
@@ -398,6 +408,8 @@
             SPI_CHANNEL_1_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_1_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_1_CS_1_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS2 ------------------------------------------------
@@ -423,6 +435,8 @@
             SPI_CHANNEL_1_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_1_CS_2_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_1_CS_2_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS3 ------------------------------------------------
@@ -448,6 +462,8 @@
             SPI_CHANNEL_1_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_1_CS_3_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_1_CS_3_ALT_FUNK (0U)
 #endif
 
 #endif // end of SPI_CHANNEL_1_IN_USE
@@ -580,6 +596,8 @@
             SPI_CHANNEL_2_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_2_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_2_CS_0_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS1 ------------------------------------------------
@@ -607,6 +625,8 @@
             SPI_CHANNEL_2_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_2_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_2_CS_1_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS2 ------------------------------------------------
@@ -632,6 +652,8 @@
             SPI_CHANNEL_2_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_2_CS_2_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_2_CS_2_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS3 ------------------------------------------------
@@ -657,6 +679,8 @@
             SPI_CHANNEL_2_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_2_CS_3_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_2_CS_3_ALT_FUNK (0U)
 #endif
 
 #endif // end of SPI_CHANNEL_2_IN_USE
@@ -779,6 +803,8 @@
             SPI_CHANNEL_3_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_3_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_3_CS_0_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS1 ------------------------------------------------
@@ -806,6 +832,8 @@
             SPI_CHANNEL_3_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_3_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_3_CS_1_ALT_FUNK (0U)
 #endif
 
 #endif // end of SPI_CHANNEL_3_IN_USE
@@ -928,6 +956,8 @@
             SPI_CHANNEL_4_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_4_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_4_CS_0_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS1 ------------------------------------------------
@@ -955,6 +985,8 @@
             SPI_CHANNEL_4_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_4_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_4_CS_1_ALT_FUNK (0U)
 #endif
 
 #endif // end of SPI_CHANNEL_4_IN_USE
@@ -1075,6 +1107,8 @@
             SPI_CHANNEL_5_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_5_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_5_CS_0_ALT_FUNK (0U)
 #endif
 
 //-------------------------------------------- CS1 ------------------------------------------------
@@ -1100,6 +1134,8 @@
             SPI_CHANNEL_5_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
         #error "SPI_CHANNEL_5_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
+#else
+    #define SPI_CHANNEL_5_CS_1_ALT_FUNK (0U)
 #endif
 
 #endif // end of SPI_CHANNEL_5_IN_USE
@@ -1126,101 +1162,7 @@
 // Definitions of local (private) constants
 //**************************************************************************************************
 
-//! Macro for filling of the low-level parameters of the channel structure
-/* #define SPI_HW_GET_PIN_FUNC(nChannel) \
-    .nMOSIfunc = SPI_HW_CHANNEL_##nChannel##_MOSI_FUNC, \
-    .nMISOfunc = SPI_HW_CHANNEL_##nChannel##_MISO_FUNC, \
-    .nSCLKfunc = SPI_HW_CHANNEL_##nChannel##_SCLK_FUNC, \
-    .nCSfunc   = SPI_HW_CHANNEL_##nChannel##_CS_FUNC*/
-
-//! SPI low-level parameters for channel 0
-#if (ON == SPI_CHANNEL_0_IN_USE)
-static SPI_HW_CHANNEL_PARAMS SPI_HW_stParamsChannel_0 = 
-{
-    // SPI_HW_GET_PIN_FUNC(0)
-};
-#endif
-
-//! SPI low-level parameters for channel 1
-#if (ON == SPI_CHANNEL_1_IN_USE)
-static SPI_HW_CHANNEL_PARAMS SPI_HW_stParamsChannel_1 = 
-{
-    SPI_HW_GET_PIN_FUNC(1)
-};
-#endif
-
-//! SPI low-level parameters for channel 2
-#if (ON == SPI_CHANNEL_2_IN_USE)
-static SPI_HW_CHANNEL_PARAMS SPI_HW_stParamsChannel_2 = 
-{
-    SPI_HW_GET_PIN_FUNC(2)
-};
-#endif
-
-//! SPI low-level parameters for channel 3
-#if (ON == SPI_CHANNEL_3_IN_USE)
-static SPI_HW_CHANNEL_PARAMS SPI_HW_stParamsChannel_3 = 
-{
-    SPI_HW_GET_PIN_FUNC(3)
-};
-#endif
-
-//! SPI low-level parameters for channel 4
-#if (ON == SPI_CHANNEL_4_IN_USE)
-static SPI_HW_CHANNEL_PARAMS SPI_HW_stParamsChannel_4 = 
-{
-    SPI_HW_GET_PIN_FUNC(4)
-};
-#endif
-
-//! SPI low-level parameters for channel 5
-#if (ON == SPI_CHANNEL_5_IN_USE)
-static SPI_HW_CHANNEL_PARAMS SPI_HW_stParamsChannel_5 = 
-{
-    SPI_HW_GET_PIN_FUNC(5)
-};
-#endif
-
-//! SPI low-level parameters for all channels
-SPI_HW_CHANNEL_PARAMS* const SPI_HW_AllChannelsParams[SPI_CHANNEL_QNT] =
-{
-    // Channel 0
-    #if (ON == SPI_CHANNEL_0_IN_USE)
-        (SPI_HW_CHANNEL_PARAMS*)(&SPI_HW_stParamsChannel_0),
-    #else
-        (SPI_HW_CHANNEL_PARAMS*)(NULL_PTR),
-    #endif
-    // Channel 1
-    #if (ON == SPI_CHANNEL_1_IN_USE)
-        (SPI_HW_CHANNEL_PARAMS*)(&SPI_HW_stParamsChannel_1),
-    #else
-        (SPI_HW_CHANNEL_PARAMS*)(NULL_PTR),
-    #endif
-    // Channel 2
-    #if (ON == SPI_CHANNEL_2_IN_USE)
-        (SPI_HW_CHANNEL_PARAMS*)(&SPI_HW_stParamsChannel_2),
-    #else
-        (SPI_HW_CHANNEL_PARAMS*)(NULL_PTR),
-    #endif
-    // Channel 3
-    #if (ON == SPI_CHANNEL_3_IN_USE)
-        (SPI_HW_CHANNEL_PARAMS*)(&SPI_HW_stParamsChannel_3),
-    #else
-        (SPI_HW_CHANNEL_PARAMS*)(NULL_PTR),
-    #endif
-    // Channel 4
-    #if (ON == SPI_CHANNEL_4_IN_USE)
-        (SPI_HW_CHANNEL_PARAMS*)(&SPI_HW_stParamsChannel_4),
-    #else
-        (SPI_HW_CHANNEL_PARAMS*)(NULL_PTR),
-    #endif
-    // Channel 5
-    #if (ON == SPI_CHANNEL_5_IN_USE)
-        (SPI_HW_CHANNEL_PARAMS*)(&SPI_HW_stParamsChannel_5),
-    #else
-        (SPI_HW_CHANNEL_PARAMS*)(NULL_PTR),
-    #endif
-};
+// None.
 
 
 
