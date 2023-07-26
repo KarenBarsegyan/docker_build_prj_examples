@@ -160,7 +160,7 @@
 // SCLK - Port and Pin settings
 // Valid Ports and Pins:
 // PTB_2, PTC_23, PTD_15, PTE_0
-#define SPI_CHANNEL_0_SCLK_PORT                 (SPI_PORT_A)
+#define SPI_CHANNEL_0_SCLK_PORT                 (SPI_PORT_D)
 #define SPI_CHANNEL_0_SCLK_PIN                  (15U)
 #define SPI_CHANNEL_0_SCLK_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_0_SCLK_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
@@ -388,6 +388,7 @@
 #define SPI_CHANNEL_3_CS_1_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 
+
 //--------------------------------------------------------------------------------------------------
 //-------------------------------------------- SPI4 ------------------------------------------------
 //--------------------------------------------------------------------------------------------------
@@ -396,54 +397,24 @@
 #define SPI_CHANNEL_4_BAUDRATE                  (500000UL)
 
 // MOSI - Port and Pin settings
-// Symbol "+" is mean that certain Port and Pin are valid.
-//   Pin: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |  10 |  11 |  12 |  13 |  14 |  15 |
-// PORT_A | + | + | + | + |   |   |   |   | + | + |  +  |  +  |  +  |  +  |     |     |
-// PORT_B |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-// PORT_C |   |   |   |   |   |   |   |   | + | + |     |     |     |     |     |     |
-// PORT_D |   |   |   |   | + | + | + | + |   |   |     |     |     |     |     |     |
-// PORT_E |   |   | + | + | + | + | + | + | + | + |     |     |     |     |     |     |
-// PORT_F |   |   |   |   |   |   |   |   |   | + |     |  +  |     |  +  |  +  |  +  |
-// PORT_G | + | + |   |   |   |   |   |   |   | + |  +  |  +  |  +  |  +  |  +  |     |
-// PORT_H |   |   | + | + | + | + | + | + | + | + |  +  |  +  |  +  |     |     |     |
-// PORT_I |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-//        |---------------------------------------------------------------------------|
+// Valid Ports and Pins:
+// PTC_14, PTD_6
 #define SPI_CHANNEL_4_MOSI_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_4_MOSI_PIN                  (0U)
 #define SPI_CHANNEL_4_MOSI_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_4_MOSI_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // MISO - Port and Pin settings
-// Symbol "+" is mean that certain Port and Pin are valid.
-//   Pin: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |  10 |  11 |  12 |  13 |  14 |  15 |
-// PORT_A | + | + | + | + |   |   |   |   | + | + |  +  |  +  |  +  |  +  |     |     |
-// PORT_B |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-// PORT_C |   |   |   |   |   |   |   |   | + | + |     |     |     |     |     |     |
-// PORT_D |   |   |   |   | + | + | + | + |   |   |     |     |     |     |     |     |
-// PORT_E |   |   | + | + | + | + | + | + | + | + |     |     |     |     |     |     |
-// PORT_F |   |   |   |   |   |   |   |   | + |   |     |     |     |  +  |  +  |  +  |
-// PORT_G | + | + |   |   |   |   |   |   |   | + |  +  |  +  |  +  |  +  |  +  |     |
-// PORT_H |   |   | + | + | + | + | + | + | + | + |  +  |  +  |  +  |     |     |     |
-// PORT_I |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-//        |---------------------------------------------------------------------------|
+// Valid Ports and Pins:
+// PTC_15, PTD_7
 #define SPI_CHANNEL_4_MISO_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_4_MISO_PIN                  (0U)
 #define SPI_CHANNEL_4_MISO_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_4_MISO_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // SCLK - Port and Pin settings
-// Symbol "+" is mean that certain Port and Pin are valid.
-//   Pin: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |  10 |  11 |  12 |  13 |  14 |  15 |
-// PORT_A | + | + | + | + |   |   |   |   | + | + |  +  |  +  |  +  |  +  |     |     |
-// PORT_B |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-// PORT_C |   |   |   |   |   |   |   |   | + | + |     |     |     |     |     |     |
-// PORT_D |   |   |   |   | + | + | + | + |   |   |     |     |     |     |     |     |
-// PORT_E |   |   | + | + | + | + | + | + | + | + |     |     |     |     |     |     |
-// PORT_F |   |   |   |   |   |   |   | + |   |   |     |     |     |  +  |  +  |  +  |
-// PORT_G | + | + |   |   |   |   |   |   |   | + |  +  |  +  |  +  |  +  |  +  |     |
-// PORT_H |   |   | + | + | + | + | + | + | + | + |  +  |  +  |  +  |     |     |     |
-// PORT_I |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-//        |---------------------------------------------------------------------------|
+// Valid Ports and Pins:
+// PTC_2, PTC_16
 #define SPI_CHANNEL_4_SCLK_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_4_SCLK_PIN                  (0U)
 #define SPI_CHANNEL_4_SCLK_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
@@ -451,35 +422,20 @@
 
 // Hardware SPI CS 0 Port and Pin settings
 // Valid Ports and Pins:
-// 
-#define SPI_CHANNEL_3_CS_0_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_0_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_0_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_0_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
+// PTC_3, PTC_17
+#define SPI_CHANNEL_4_CS_0_PORT                 (SPI_PORT_A)
+#define SPI_CHANNEL_4_CS_0_PIN                  (0U)
+#define SPI_CHANNEL_4_CS_0_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
+#define SPI_CHANNEL_4_CS_0_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // Hardware SPI CS 1 Port and Pin settings
 // Valid Ports and Pins:
-// 
-#define SPI_CHANNEL_3_CS_1_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_1_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_1_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_1_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
+// PTB_25, PTD_5
+#define SPI_CHANNEL_4_CS_1_PORT                 (SPI_PORT_A)
+#define SPI_CHANNEL_4_CS_1_PIN                  (0U)
+#define SPI_CHANNEL_4_CS_1_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
+#define SPI_CHANNEL_4_CS_1_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
-// Hardware SPI CS 2 Port and Pin settings
-// Valid Ports and Pins:
-// 
-#define SPI_CHANNEL_3_CS_2_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_2_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_2_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_2_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
-
-// Hardware SPI CS 3 Port and Pin settings
-// Valid Ports and Pins:
-// 
-#define SPI_CHANNEL_3_CS_3_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_3_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_3_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_3_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 
 //--------------------------------------------------------------------------------------------------
@@ -490,54 +446,24 @@
 #define SPI_CHANNEL_5_BAUDRATE                  (500000UL)
 
 // MOSI - Port and Pin settings
-// Symbol "+" is mean that certain Port and Pin are valid.
-//   Pin: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |  10 |  11 |  12 |  13 |  14 |  15 |
-// PORT_A | + | + | + | + |   |   |   |   | + | + |  +  |  +  |  +  |  +  |     |     |
-// PORT_B |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-// PORT_C |   |   |   |   |   |   |   |   | + | + |     |     |     |     |     |     |
-// PORT_D |   |   |   |   | + | + | + | + |   |   |     |     |     |     |     |     |
-// PORT_E |   |   | + | + | + | + | + | + | + | + |     |     |     |     |     |     |
-// PORT_F |   |   |   |   |   |   |   |   |   |   |     |     |     |  +  |  +  |  +  |
-// PORT_G | + | + |   |   |   |   |   |   |   | + |  +  |  +  |  +  |  +  |  +  |     |
-// PORT_H |   |   | + | + | + | + | + | + | + | + |  +  |  +  |  +  |     |     |     |
-// PORT_I |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-//        |---------------------------------------------------------------------------|
+// Valid Ports and Pins:
+// PTD_11, PTE_7
 #define SPI_CHANNEL_5_MOSI_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_5_MOSI_PIN                  (0U)
 #define SPI_CHANNEL_5_MOSI_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_5_MOSI_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // MISO - Port and Pin settings
-// Symbol "+" is mean that certain Port and Pin are valid.
-//   Pin: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |  10 |  11 |  12 |  13 |  14 |  15 |
-// PORT_A | + | + | + | + |   |   |   |   | + | + |  +  |  +  |  +  |  +  |     |     |
-// PORT_B |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-// PORT_C |   |   |   |   |   |   |   |   | + | + |     |     |     |     |     |     |
-// PORT_D |   |   |   |   | + | + | + | + |   |   |     |     |     |     |     |     |
-// PORT_E |   |   | + | + | + | + | + | + | + | + |     |     |     |     |     |     |
-// PORT_F |   |   |   |   |   |   |   |   |   |   |     |     |     |  +  |  +  |  +  |
-// PORT_G | + | + |   |   |   |   |   |   |   | + |  +  |  +  |  +  |  +  |  +  |     |
-// PORT_H |   |   | + | + | + | + | + | + | + | + |  +  |  +  |  +  |     |     |     |
-// PORT_I |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-//        |---------------------------------------------------------------------------|
+// Valid Ports and Pins:
+// PTA_6, PTD_12
 #define SPI_CHANNEL_5_MISO_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_5_MISO_PIN                  (0U)
 #define SPI_CHANNEL_5_MISO_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_5_MISO_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // SCLK - Port and Pin settings
-// Symbol "+" is mean that certain Port and Pin are valid.
-//   Pin: | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |  10 |  11 |  12 |  13 |  14 |  15 |
-// PORT_A | + | + | + | + |   |   |   |   | + | + |  +  |  +  |  +  |  +  |     |     |
-// PORT_B |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-// PORT_C |   |   |   |   |   |   |   |   | + | + |     |     |     |     |     |     |
-// PORT_D |   |   |   |   | + | + | + | + |   |   |     |     |     |     |     |     |
-// PORT_E |   |   | + | + | + | + | + | + | + | + |     |     |     |     |     |     |
-// PORT_F |   |   |   |   |   |   |   |   |   |   |     |     |     |  +  |  +  |  +  |
-// PORT_G | + | + |   |   |   |   |   |   |   | + |  +  |  +  |  +  |  +  |  +  |     |
-// PORT_H |   |   | + | + | + | + | + | + | + | + |  +  |  +  |  +  |     |     |     |
-// PORT_I |   |   |   |   |   |   |   |   |   |   |     |     |     |     |     |     |
-//        |---------------------------------------------------------------------------|
+// Valid Ports and Pins:
+// PTA_7, PTD_10
 #define SPI_CHANNEL_5_SCLK_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_5_SCLK_PIN                  (0U)
 #define SPI_CHANNEL_5_SCLK_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
@@ -545,7 +471,7 @@
 
 // Hardware SPI CS 0 Port and Pin settings
 // Valid Ports and Pins:
-// 
+// PTC_8
 #define SPI_CHANNEL_3_CS_0_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_3_CS_0_PIN                  (0U)
 #define SPI_CHANNEL_3_CS_0_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
@@ -553,27 +479,11 @@
 
 // Hardware SPI CS 1 Port and Pin settings
 // Valid Ports and Pins:
-// 
+// PTC_9
 #define SPI_CHANNEL_3_CS_1_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_3_CS_1_PIN                  (0U)
 #define SPI_CHANNEL_3_CS_1_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
 #define SPI_CHANNEL_3_CS_1_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
-
-// Hardware SPI CS 2 Port and Pin settings
-// Valid Ports and Pins:
-// 
-#define SPI_CHANNEL_3_CS_2_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_2_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_2_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_2_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
-
-// Hardware SPI CS 3 Port and Pin settings
-// Valid Ports and Pins:
-// 
-#define SPI_CHANNEL_3_CS_3_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_3_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_3_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_3_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 
 
