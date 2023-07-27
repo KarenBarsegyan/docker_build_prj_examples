@@ -620,12 +620,12 @@ typedef enum GPIO_API_ID_enum
 
 //! \name IPC pin control indexes
 //! @{
-#define IPC_GPIO_INDEX         ( 17U)
-#define IPC_PCTRLA_INDEX       ( 18U)
-#define IPC_PCTRLB_INDEX       ( 19U)
-#define IPC_PCTRLC_INDEX       ( 20U)
-#define IPC_PCTRLD_INDEX       ( 21U)
-#define IPC_PCTRLE_INDEX       ( 22U)
+#define IPC_GPIO_INDEX         (17U)
+#define IPC_PCTRLA_INDEX       (18U)
+#define IPC_PCTRLB_INDEX       (19U)
+#define IPC_PCTRLC_INDEX       (20U)
+#define IPC_PCTRLD_INDEX       (21U)
+#define IPC_PCTRLE_INDEX       (22U)
 //! @}
 
 //! \name GPIO registers reset value

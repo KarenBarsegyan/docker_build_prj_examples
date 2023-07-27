@@ -220,9 +220,9 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 //! \name Take clock on special port ON
 //! @{ 
 #define SPI_GPIO_PORT_TAKE_ON_CLK(Port) \
-    if (ON != IPC.CTRL[IPC_PCTRL##Port##_INDEX].B.CLKEN) \
+    if (ON != IPC.CTRL[Port##_INDEX].B.CLKEN) \
     {                                             \
-        IPC.CTRL[IPC_PCTRL##Port##_INDEX].B.CLKEN = ON;  \
+        IPC.CTRL[Port##_INDEX].B.CLKEN = ON;  \
     }                                             \
 //! @}   
 
@@ -282,28 +282,36 @@ STD_RESULT SPI_Init(void)
     else
     #endif
     {
-        // GPIO clock enable
+        // If GPIO clk is not taken on
+        if (OFF == IPC.CTRL[IPC_PCTRL_GPIO_INDEX].B.CLKEN)
+		{
+            // Take on GPIO clk
+			IPC.CTRL[IPC_PCTRL_GPIO_INDEX].B.CLKEN = ON;
+		}
+
+        // If port X is used, take it's clk on
         #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_A) )
-            SPI_GPIO_PORT_TAKE_ON_CLK(A)
+            SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLA)
         #endif
 
         #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_B) )
-            SPI_GPIO_PORT_TAKE_ON_CLK(B)
+            SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLB)
         #endif
 
         #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_C) )
-            SPI_GPIO_PORT_TAKE_ON_CLK(C)
+            SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLC)
         #endif
 
         #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_D) )
-            SPI_GPIO_PORT_TAKE_ON_CLK(D)
+            SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLD)
         #endif
 
         #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_E) )
-            SPI_GPIO_PORT_TAKE_ON_CLK(E)
+            SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLE)
         #endif
         
-        // Setup GPIO MUX and pull
+        // If channel X is used, setup GPIO MUX and 
+        // pullup\pulldown for it
         #if (ON == SPI_CHANNEL_0_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_0);
         #endif
@@ -328,20 +336,43 @@ STD_RESULT SPI_Init(void)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_5);
         #endif
         
+        // Set div
+        IPC.CTRL[IPC_SPI0_INDEX].B.DIV = IPC_CTRL_DIV_5;
 
+        // Set clock source to PLL
+        IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = IPC_SRCSEL_PLL; 
+
+        // If SPI clk is not taken on
         if (OFF == IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN)
         {
-            U32 nBusFrequency = MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS3); // SLOW BUS clock
-            
-            IPC.CTRL[IPC_SPI0_INDEX].B.DIV = 0b1001;
-            IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = 0b101; 
+            // Take ON SPI clk 
             IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN = ON;
         }
 
+        // Start freq = clock source / 2 
+        U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / // PLL freq
+                       (IPC_CTRL_DIV_5 + 1U)    /                         // IPC Div
+                       TXCFG_DIV_VALUE_2        /                         // SPI Div 1
+                       SPI_CHANNEL_0_BAUDRATE;
 
-        SPI0.TXCFG.B.PRESCALE = 0b000;
+        U8 nTXCFG_Prescaller = TXCFG_DIV_2;
 
-        SPI0.CLK.B.DIV = 0b00U;
+        if (nDivider > 128U) 
+        {
+            nDivider = nDivider/8;
+            nTXCFG_Prescaller = TXCFG_DIV_16;
+        }  
+        if (nDivider > 128U) 
+        {
+            nDivider = nDivider/8;
+            nTXCFG_Prescaller = TXCFG_DIV_128;
+        }  
+
+        // SPI prescaler 1
+        SPI0.TXCFG.B.PRESCALE = nTXCFG_Prescaller;
+
+        // SPI prescaler 2
+        SPI0.CLK.B.DIV = (U8)(nDivider*2U-2U);
 
         SPI0.CTRL.B.MODE = ON;
         SPI0.CTRL.B.EN = ON;

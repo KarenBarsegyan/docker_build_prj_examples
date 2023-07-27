@@ -27,7 +27,7 @@
 #define MCU_HXTAL_ENB           (ON)
 
 //! Set HXTAL bypass mode enable (external input clocking)
-//! Valid values: MCU_XTAL_BYPASS, MCU_XTAL_CRYSTAL
+//! Valid values: MCU_XTAL_BYPASS / MCU_XTAL_CRYSTAL
 #define MCU_HXTAL_BYPASS        MCU_XTAL_CRYSTAL
 //! Specify crystal or external input(bypass mode) frequency
 //! Valid values: [4000000; 40000000] Hz
@@ -93,84 +93,14 @@
 //! @{
 //! LXTAL enable
 //! Valid values: ON / OFF
-#define MCU_LXTAL_ENB           (OFF)
+#define MCU_LXTAL_ENB           (ON)
 //! LXTAL bypass mode enable
-//! Valid values: ON / OFF
+//! Valid values: MCU_XTAL_BYPASS / MCU_XTAL_CRYSTAL
 #define MCU_LXTAL_BYPASS        MCU_XTAL_CRYSTAL
 //! Specify LXTAL amplifier power
 //! Valid values: ON / OFF
-#define MCU_LXTAL_GAIN_SEL      (OFF)
+#define MCU_LXTAL_GAIN_SEL      (ON)
 //! @}
-
-//--------------------------------------------------------------------------------------------------
-// Setup MCU CMU
-//--------------------------------------------------------------------------------------------------
-
-//! Enable CMU (clock control unit) working
-#define MCU_CMU_ENABLE              (OFF)
-
-//! CMU0: check Slow Bus Clock
-#define MCU_CMU_SLOW_BUS_CHECK_ENABLE       (OFF)
-//! Reset due to SLOW bus malfunction
-#define MCU_CMU_SLOW_BUS_RESET              (OFF)
-//! CMU clock reference clock source
-//! Valid selections MCU_CMU_REF_SIRC_CLOCK or MCU_CMU_REF_FXOSC_CLOCK
-#define MCU_CMU_SLOW_BUS_REF           MCU_CMU_REF_SIRC_CLOCK
-//! High bound frequency deviation
-//! \brief High bound acceptable frequency deviation from MCU_SLOWCLK for project. Usually 110%.
-//! Valid value: (MCU_SLOWCLK * 110) / 100    
-#define MCU_CMU_SLOW_HIGH_BOUND             (44000000UL)
-//! Low bound frequency deviation
-//! \brief Low bound acceptable frequency deviation from MCU_FIRC for project. Usually 90%.
-//! Valid value: (MCU_SLOWCLK * 90) / 100    
-#define MCU_CMU_SLOW_LOW_BOUND              (36000000UL)
-
-//! CMU1: check FIRC Clock
-#define MCU_CMU_FIRC_CHECK_ENABLE       (OFF)
-//! Reset due to FIRC malfunction
-#define MCU_CMU_FIRC_RESET              (OFF)
-//! CMU clock reference clock source
-//! Valid selections MCU_CMU_REF_SIRC_CLOCK or MCU_CMU_REF_FXOSC_CLOCK
-#define MCU_CMU_FIRC_REF           MCU_CMU_REF_SIRC_CLOCK
-//! High bound frequency deviation
-//! \brief High bound acceptable frequency deviation from MCU_FIRC for project. Usually 110%.
-//! Valid value: (MCU_FIRC * 110) / 100    
-#define MCU_CMU_FIRC_HIGH_BOUND             (100000000UL)
-//! Low bound frequency deviation
-//! \brief Low bound acceptable frequency deviation from MCU_FIRC for project. Usually 90%.
-//! Valid value: (MCU_FIRC * 90) / 100    
-#define MCU_CMU_FIRC_LOW_BOUND              (90000000UL)
-
-//! CMU2: check PLL Clock
-#define MCU_CMU_PLL_CHECK_ENABLE        (OFF)
-//! Reset due to PLL malfunction
-#define MCU_CMU_PLL_RESET               (OFF)
-//! CMU clock reference clock source
-//! Valid selections MCU_CMU_REF_SIRC_CLOCK or MCU_CMU_REF_FXOSC_CLOCK
-#define MCU_CMU_PLL_REF            MCU_CMU_REF_SIRC_CLOCK
-//! High bound frequency deviation
-//! \brief High bound acceptable frequency deviation from MCU_PLL for project. Usually 110%.
-//! Valid value: (MCU_PLL * 110) / 100    
-#define MCU_CMU_PLL_HIGH_BOUND              (130000000UL)
-//! Low bound frequency deviation
-//! \brief Low bound acceptable frequency deviation from MCU_PLL for project. Usually 90%.
-//! Valid value: (MCU_PLL * 90) / 100    
-#define MCU_CMU_PLL_LOW_BOUND               (95000000UL)
-
-//! CMU3: check HXTAL Clock.
-#define MCU_CMU_HXTAL_CHECK_ENABLE      (OFF)
-//! Reset due to HXTAL malfunction
-#define MCU_CMU_HXTAL_RESET             (OFF)
-//! Valid selections MCU_CMU_REF_SIRC_CLOCK
-#define MCU_CMU_HXTAL_REF          MCU_CMU_REF_SIRC_CLOCK
-//! High bound frequency deviation
-//! \brief High bound acceptable frequency deviation from MCU_HXTAL for project. Usually 105%.
-//! Valid value: (MCU_HXTAL * 105) / 100    
-#define MCU_CMU_HXTAL_HIGH_BOUND            (40000000UL)
-//! Low bound frequency deviation
-//! \brief Low bound acceptable frequency deviation from MCU_HXTAL for project. Usually 95%.
-//! Valid value: (MCU_HXTAL * 95) / 100    
-#define MCU_CMU_HXTAL_LOW_BOUND             (4000000UL)
 
 //--------------------------------------------------------------------------------------------------
 // Setup MCU ClockOut
@@ -183,21 +113,21 @@
 //!
 //! CLOCKOUT enable
 //! Valid values: ON / OFF
-#define MCU_CLKOUT_ENABLE   (OFF)
+#define MCU_CLKOUT_ENABLE   (ON)
 //! CLOCKOUT clock source
 //! Valid values: MCU_CLKOUT_SEL_DISABLE, MCU_CLKOUT_SEL_FIRC_CLK, MCU_CLKOUT_SEL_SIRC_CLK, \n
 //! MCU_CLKOUT_SEL_FXOSC_CLK, MCU_CLKOUT_SEL_LXTAL_CLK, MCU_CLKOUT_SEL_PLL_CLK, \n
 //!	MCU_CLKOUT_SEL_TRNG_CLK, MCU_CLKOUT_SEL_SYSCLK
-#define MCU_CLKOUT_SOURCE   MCU_CLKOUT_SEL_FIRC_CLK
+#define MCU_CLKOUT_SOURCE   MCU_CLKOUT_SEL_SYSCLK
 //! CLKOUT divider
 //! It implements only an even divisor. The odd one works as reduced by 1.
 //! Valid values: [2; 255]
-#define MCU_CLKOUT_DIVIDER  (2U)
+#define MCU_CLKOUT_DIVIDER  (12U)
 //! \name CLKOUT pin setup
 //! @{
 //! Valid values are: (PE10 ALT2), (PD14 ALT7), (PB5 ALT5), (PD10 ALT6)
 #define MCU_CLKOUT_PORT     MCU_PORT_D
-#define MCU_CLKOUT_PIN      MCU_PIN_10
+#define MCU_CLKOUT_PIN      MCU_PIN_14
 //! @}
 //! @}
 

@@ -24,7 +24,7 @@
 
 void TEST_Init(void) 
 {
-    GPIO_Init();
+    // GPIO_Init();
     SPI_Init();
 }
 

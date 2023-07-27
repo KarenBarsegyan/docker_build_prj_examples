@@ -139,7 +139,7 @@
 //--------------------------------------------------------------------------------------------------
 #define SPI_CHANNEL_0_IN_USE                    (ON)
 #define SPI_CHANNEL_0_MODE                      (SPI_MODE_MASTER)
-#define SPI_CHANNEL_0_BAUDRATE                  (500000UL)
+#define SPI_CHANNEL_0_BAUDRATE                  (100000UL)
 
 // MOSI - Port and Pin settings
 // Valid Ports and Pins:

@@ -174,7 +174,7 @@
 #else
     #define MCU_CLKOUT_GPIO     (&GPIOB)
     #define MCU_CLKOUT_PCTRL    (&PCTRLB)
-    #define MCU_CLKOUT_MUX      (0U)
+    #define MCU_CLKOUT_MUX      (1U)
 #endif
 
 
@@ -198,9 +198,9 @@ typedef void (*MCU_JUMP_ADDRESS)(void);
 typedef struct
 {
     U32     frequency;      //!< HXTAL frequency
+    U8      gainSelection;  //!< HXTAL gain selection
     BOOLEAN enable;         //!< HXTAL enable
     BOOLEAN bypassMode;     //!< HXTAL bypass mode
-    U8 		gainSelection;  //!< HXTAL gain selection
 } MCU_HXTAL_CONFIG;
 
 //! \brief Implements LXTAL configuration
@@ -235,28 +235,13 @@ typedef struct
     U8 mux;         //!< SCU ClockOut GPIO mux  select
 } MCU_CLOCK_OUT_CONFIG;
 
-//! \brief Implements frequency control parameters for CMU
-typedef struct
-{
-    U16 compareHigh;    //!< CMU counter compare high threshold
-    U16 compareLow;     //!< CMU counter compare low threshold
-    BOOLEAN enable;     //!< Specifies whether the channel is enabled or disabled
-    BOOLEAN resetEnable;//!< Specifies whether the channel clock error reset enable
-    BOOLEAN refClock;   //!< CMU reference clock selection
-} MCU_CLK_CHECK;
-
-//! \brief MCU CMU setup description type
-typedef struct
-{
-    MCU_CLK_CHECK slowBusMonitor;      //!< Clock monitor for slow bus clock
-    MCU_CLK_CHECK fircClockMonitor;    //!< Clock monitor for FIRC clock
-    MCU_CLK_CHECK pllClockMonitor;     //!< Clock monitor for PLL clock
-    MCU_CLK_CHECK hxtalClockMonitor;   //!< Clock monitor for HXTAL clock
-} MCU_CMU_CONFIG;
-
 //! \brief MCU clocks configure structure
 typedef struct
 {
+    MCU_PLL_CONFIG pllConfig;            //!< PLL configuration.
+    MCU_HXTAL_CONFIG hxtalConfig;        //!< External fast oscillator configuration.
+    MCU_LXTAL_CONFIG lxtalConfig;        //!< External slow oscillator configuration.
+    MCU_CLOCK_OUT_CONFIG clockOutConfig; //!< Clock Out configuration.
     BOOLEAN sircDeepSleepEnable;         //!< SIRC deep sleep enable
     BOOLEAN sircStandbyEnable;           //!< SIRC standby enable
     BOOLEAN sircPowerDownEnable;         //!< SIRC power down enable
@@ -266,11 +251,6 @@ typedef struct
     U8 sysDiv;                           //!< system clock divider
     U8 fastBusDiv;                       //!< IPS Fast Bus clock divider
     U8 slowBusDiv;                       //!< IPS Slow Bus clock divider
-    MCU_PLL_CONFIG pllConfig;            //!< PLL configuration.
-    MCU_LXTAL_CONFIG lxtalConfig;        //!< External slow oscillator configuration.
-    MCU_HXTAL_CONFIG hxtalConfig;        //!< External fast oscillator configuration.
-    MCU_CLOCK_OUT_CONFIG clockOutConfig; //!< Clock Out configuration.
-    MCU_CMU_CONFIG clockCheckConfig;     //!< CMU parameters
     U8 flashDiv;                         //!< Flash Clock divider
     U8 flashPrs;                         //!< Flash clock prescaler
 } MCU_CLOCK_CONFIG;
@@ -285,7 +265,7 @@ typedef struct
 #define MCU_FLASH_WAIT_STATE_BOUND  (50000000UL)
 
 //! Timeout of stabilized lock timeout loop count
-#define MCU_CLOCK_TIMEOUT_LOOP_CNT                    (0x1FFFFUL)
+#define MCU_CLOCK_TIMEOUT_LOOP_CNT  (0x1FFFFUL)
 
 //! \name MCU pins setup values
 //! @{
@@ -394,42 +374,6 @@ static MCU_CLOCK_CONFIG MCU_Config = {
         .port = MCU_CLKOUT_PORT,
         .pin = MCU_CLKOUT_PIN,
         .mux = MCU_CLKOUT_MUX,
-    },
-    .clockCheckConfig =
-    {
-        // Check Slow Bus Clock
-        .slowBusMonitor = {
-            .enable = MCU_CMU_SLOW_BUS_CHECK_ENABLE,
-            .resetEnable = MCU_CMU_SLOW_BUS_RESET,
-            .refClock = MCU_CMU_SLOW_BUS_REF,
-            .compareHigh = MCU_CMU_SLOW_BUS_COMPAREHIGH,
-            .compareLow = MCU_CMU_SLOW_BUS_COMPARELOW,
-        },
-        // Check FIRC Clock
-        .fircClockMonitor = {
-            .enable = MCU_CMU_FIRC_CHECK_ENABLE,
-            .resetEnable = MCU_CMU_FIRC_RESET,
-            .refClock = MCU_CMU_FIRC_REF,
-            .compareHigh = MCU_CMU_FIRC_COMPAREHIGH,
-            .compareLow = MCU_CMU_FIRC_COMPARELOW,
-        },
-        // Check PLL Clock
-        .pllClockMonitor = {
-            .enable = MCU_CMU_PLL_CHECK_ENABLE,
-            .resetEnable = MCU_CMU_PLL_RESET,
-            .refClock = MCU_CMU_PLL_REF,
-            .compareHigh = MCU_CMU_PLL_COMPAREHIGH,
-            .compareLow = MCU_CMU_PLL_COMPARELOW,
-        },
-        // Check HXTAL Clock.
-        .hxtalClockMonitor = {
-            .enable = MCU_CMU_HXTAL_CHECK_ENABLE,
-            .resetEnable = MCU_CMU_HXTAL_RESET,
-            .refClock = MCU_CMU_HXTAL_REF,
-            .compareHigh = MCU_CMU_HXTAL_COMPAREHIGH,
-            .compareLow = MCU_CMU_HXTAL_COMPARELOW,
-        },
-
     },
 }; // end MCU_Config setup
 
@@ -706,67 +650,6 @@ void MCU_Init(void)
         // Clock out disabled
         SCU.CLKO.B.CLKOSEL = MCU_CLKOUT_SEL_DISABLE;
     }
-    // Configure the SCU CMU blocks
-    if (ON == MCU_CMU_ENABLE)
-    {
-        // Configure SLOW Bus CMU block
-        if (TRUE == MCU_Config.clockCheckConfig.slowBusMonitor.enable)
-        {
-            SCU.CMU_CTRL.B.CMU0_RE =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.slowBusMonitor.resetEnable);
-            SCU.CMU_CTRL.B.CMU0_REF =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.slowBusMonitor.refClock);
-            SCU.CMUCMP[0].HIGH.B.VAL =
-                    MCU_Config.clockCheckConfig.slowBusMonitor.compareHigh;
-            SCU.CMUCMP[0].LOW.B.VAL =
-                    MCU_Config.clockCheckConfig.slowBusMonitor.compareLow;
-            SCU.CMU_CTRL.B.CMU0_EN =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.slowBusMonitor.enable);
-        }
-        // Configure FIRC CMU block
-        if (TRUE == MCU_Config.clockCheckConfig.fircClockMonitor.enable)
-        {
-            SCU.CMU_CTRL.B.CMU1_RE =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.fircClockMonitor.resetEnable);
-            SCU.CMU_CTRL.B.CMU1_REF =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.fircClockMonitor.refClock);
-            SCU.CMUCMP[1].HIGH.B.VAL =
-                    MCU_Config.clockCheckConfig.fircClockMonitor.compareHigh;
-            SCU.CMUCMP[1].LOW.B.VAL =
-                    MCU_Config.clockCheckConfig.fircClockMonitor.compareLow;
-            SCU.CMU_CTRL.B.CMU1_EN =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.fircClockMonitor.enable);
-        }
-        // Configure PLL CMU block
-        if ((TRUE == MCU_Config.clockCheckConfig.pllClockMonitor.enable) &&
-            (TRUE == MCU_Config.pllConfig.enable))
-        {
-            SCU.CMU_CTRL.B.CMU2_RE =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.pllClockMonitor.resetEnable);
-            SCU.CMU_CTRL.B.CMU2_REF =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.pllClockMonitor.refClock);
-            SCU.CMUCMP[2].HIGH.B.VAL =
-                    MCU_Config.clockCheckConfig.pllClockMonitor.compareHigh;
-            SCU.CMUCMP[2].LOW.B.VAL =
-                    MCU_Config.clockCheckConfig.pllClockMonitor.compareLow;
-            SCU.CMU_CTRL.B.CMU2_EN =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.pllClockMonitor.enable);
-        }
-        // Configure HXTAL CMU block
-        if ((TRUE == MCU_Config.clockCheckConfig.hxtalClockMonitor.enable) &&
-            (TRUE == MCU_Config.hxtalConfig.enable))
-        {
-            SCU.CMU_CTRL.B.CMU3_RE =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.hxtalClockMonitor.resetEnable);
-            SCU.CMUCMP[3].HIGH.B.VAL =
-                    MCU_Config.clockCheckConfig.hxtalClockMonitor.compareHigh;
-            SCU.CMUCMP[3].LOW.B.VAL =
-                    MCU_Config.clockCheckConfig.hxtalClockMonitor.compareLow;
-            SCU.CMU_CTRL.B.CMU3_EN =
-                MCU_Set1Bit(MCU_Config.clockCheckConfig.hxtalClockMonitor.enable);
-        }
-    }
-
     // Enable Interrupts Global
     MCU_EnableInterrupts();
 } // end of MCU_Init()
@@ -1048,6 +931,117 @@ void MCU_JumpToVector(const U32 nAddress)
 
 
 //**************************************************************************************************
+//! HardFault is an exception that occurs because of an error during exception processing, or
+//! because an exception cannot be managed by any other exception mechanism.
+//!
+//! \note None
+//!
+//! \param None
+//!
+//! \return None
+//**************************************************************************************************
+INTERRUPT void MCU_HardFaultHandler(void)
+{
+    while (TRUE)
+    {
+        DoNothing();
+    }
+} // end of MCU_HardFaultHandler()
+
+
+
+//**************************************************************************************************
+//! MemManage fault is an exception that occurs because of a memory protection related fault.
+//! The the fixed memory protection constraints determines this fault, for both instruction and data
+//! memory transactions.
+//!
+//! \note None
+//!
+//! \param None
+//!
+//! \return None
+//**************************************************************************************************
+INTERRUPT void MCU_MemManageHandler(void)
+{
+    while (TRUE)
+    {
+        DoNothing();
+    }
+} // end of MCU_MemManageHandler()
+
+
+
+//**************************************************************************************************
+//! BusFault is an exception that occurs because of a memory related fault for an instruction or
+//! data memory transaction. This might be from an error detected on a bus in the memory system
+//!
+//! \note None
+//!
+//! \param None
+//!
+//! \return None
+//**************************************************************************************************
+INTERRUPT void MCU_BusFaultHandler(void)
+{
+    while (TRUE)
+    {
+        DoNothing();
+    }
+} // end of MCU_BusFaultHandler()
+
+
+
+//**************************************************************************************************
+//! UsageFault is an exception that occurs because of a fault related to instruction execution. This
+//! includes:
+//!     - an undefined instruction
+//!     - an illegal unaligned access
+//!     - invalid state on instruction execution
+//!     - an error on exception return.
+//!The following can cause a UsageFault when the core is configured to report them:
+//!     - an unaligned address on word and halfword memory access
+//!     - division by zero.
+//!
+//! \note None
+//!
+//! \param None
+//!
+//! \return None
+//**************************************************************************************************
+INTERRUPT void MCU_UsageFaultHandler(void)
+{
+    while (TRUE)
+    {
+        DoNothing();
+    }
+} // end of MCU_UsageFaultHandler()
+
+
+
+//**************************************************************************************************
+//! Non Maskable Interrupt (NMI) can be signalled by a peripheral or triggered by software. This is
+//! the highest priority exception other than reset. It is permanently enabled and has a fixed
+//! priority of -2. NMIs cannot be:
+//!     - masked or prevented from activation by any other exception
+//!     - preempted by any exception other than Reset.
+//!
+//! \note None
+//!
+//! \param None
+//!
+//! \return None
+//**************************************************************************************************
+INTERRUPT void MCU_NMIHandler(void)
+{
+    while (TRUE)
+    {
+        DoNothing();
+    }
+} // end of MCU_NMIHandler()
+
+
+
+//**************************************************************************************************
 //==================================================================================================
 // Definitions of local (private) functions
 //==================================================================================================
@@ -1099,7 +1093,8 @@ static U32 MCU_GetPllFreq(void)
             nBusFrequency = MCU_HXTAL;
         }
         // Calculate PLL frequency
-        nBusFrequency *= (SCU.PLL_CTRL.B.FBDIV + 1UL) / (2UL * (SCU.PLL_CTRL.B.REFDIV + 1UL));
+        nBusFrequency = (nBusFrequency * (SCU.PLL_CTRL.B.FBDIV + 1UL)) /
+                        (2UL * (SCU.PLL_CTRL.B.REFDIV + 1UL));
     }
     return nBusFrequency;
 } // end of MCU_GetPllFreq()
