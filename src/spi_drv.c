@@ -26,6 +26,7 @@
 //! \file spi_drv.h
 //! \file spi_drv.c
 //! \file spi_drv_cfg.h.tmpl
+//! \file spi_drv_types.h
 //! \file spi_drv_irq.c
 //! \file spi_drv_irq.h
 //! @}
@@ -226,39 +227,50 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
     }                                             \
 //! @}   
 
-
-#define SPI_CHANNEL_SET_CLK(Channel)                                      \
-{                                                                         \
-        IPC.CTRL[IPC_SPI##Channel##_INDEX].B.DIV = IPC_CTRL_DIV_5;        \
-        IPC.CTRL[IPC_SPI##Channel##_INDEX].B.SRCSEL = IPC_SRCSEL_PLL;     \
-        if (OFF == IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN)            \
-        {                                                                 \
-            IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN = ON;              \
-        }                                                                 \
-        U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / \
-                       (IPC_CTRL_DIV_5 + 1U)    /                         \
-                       TXCFG_DIV_VALUE_2        /                         \
-                       SPI_CHANNEL_##Channel##_BAUDRATE;                  \
-                                                                          \
-        U8 nTXCFG_Prescaller = TXCFG_DIV_2;                               \
-                                                                          \
-        if (nDivider > 128U)                                              \
-        {                                                                 \
-            nDivider = nDivider/8;                                        \
-            nTXCFG_Prescaller = TXCFG_DIV_16;                             \
-        }                                                                 \
-        if (nDivider > 128U)                                              \
-        {                                                                 \
-            nDivider = nDivider/8;                                        \
-            nTXCFG_Prescaller = TXCFG_DIV_128;                            \
-        }                                                                 \
-                                                                          \
-        SPI##Channel.TXCFG.B.PRESCALE = nTXCFG_Prescaller;                \
-        SPI##Channel.CLK.B.DIV = (U8)(nDivider*2U-2U);                    \
-        SPI##Channel.CTRL.B.MODE = ON;                                    \
-        SPI##Channel.CTRL.B.EN = ON;                                      \
-        while(ON != SPI##Channel.CTRL.B.EN){}                             \
+//! \name Set clk divs
+//! @{ 
+#define SPI_CHANNEL_SET_CLK(Channel)                                  \
+{                                                                     \
+    IPC.CTRL[IPC_SPI##Channel##_INDEX].B.DIV = IPC_CTRL_DIV_5;        \
+    IPC.CTRL[IPC_SPI##Channel##_INDEX].B.SRCSEL = IPC_SRCSEL_PLL;     \
+    if (OFF == IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN)            \
+    {                                                                 \
+        IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN = ON;              \
+    }                                                                 \
+    U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / \
+                    (IPC_CTRL_DIV_5 + 1U)    /                        \
+                    TXCFG_DIV_VALUE_2        /                        \
+                    SPI_CHANNEL_##Channel##_BAUDRATE;                 \
+                                                                      \
+    U8 nTXCFG_Prescaller = TXCFG_DIV_2;                               \
+                                                                      \
+    if (nDivider > 128U)                                              \
+    {                                                                 \
+        nDivider = nDivider/8;                                        \
+        nTXCFG_Prescaller = TXCFG_DIV_16;                             \
+    }                                                                 \
+    if (nDivider > 128U)                                              \
+    {                                                                 \
+        nDivider = nDivider/8;                                        \
+        nTXCFG_Prescaller = TXCFG_DIV_128;                            \
+    }                                                                 \
+                                                                      \
+    SPI##Channel.TXCFG.B.PRESCALE = nTXCFG_Prescaller;                \
+    SPI##Channel.CLK.B.DIV = (U8)(nDivider*2U-2U);                    \
+    SPI##Channel.CTRL.B.MODE = ON;                                    \
+    SPI##Channel.CTRL.B.EN = ON;                                      \
+    while(ON != SPI##Channel.CTRL.B.EN){}                             \
 }
+//! @}
+
+//! \name Enable IRQs
+//! @{ 
+#define SPI_CHANNEL_SET_IRQ(Channel)  \
+{                                     \
+    SPI##Channel.INTE.B.RXIE = ON;    \
+}
+//! @}
+
 
 
 //**************************************************************************************************
@@ -349,31 +361,37 @@ STD_RESULT SPI_Init(void)
         #if (ON == SPI_CHANNEL_0_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_0);
             SPI_CHANNEL_SET_CLK(0)
+            SPI_CHANNEL_SET_IRQ(0)
         #endif
 
         #if (ON == SPI_CHANNEL_1_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_1);
             SPI_CHANNEL_SET_CLK(1)
+            SPI_CHANNEL_SET_IRQ(1)
         #endif
 
         #if (ON == SPI_CHANNEL_2_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_2);
             SPI_CHANNEL_SET_CLK(2)
+            SPI_CHANNEL_SET_IRQ(2)
         #endif
 
         #if (ON == SPI_CHANNEL_3_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_3);
             SPI_CHANNEL_SET_CLK(3)
+            SPI_CHANNEL_SET_IRQ(3)
         #endif
 
         #if (ON == SPI_CHANNEL_4_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_4);
             SPI_CHANNEL_SET_CLK(4)
+            SPI_CHANNEL_SET_IRQ(4)
         #endif
 
         #if (ON == SPI_CHANNEL_5_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_5);
             SPI_CHANNEL_SET_CLK(5)
+            SPI_CHANNEL_SET_IRQ(5)
         #endif
 
         SPI_bInitialized = TRUE;
@@ -453,7 +471,6 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
     if (OFF == SPI0.STS.B.BUSY)
     {
         SPI0.DATA.B.DATA = (U32) 0x6789ABCDU;
-        SPI0.DATA.B.DATA;
     }
 
     return nFuncResult;

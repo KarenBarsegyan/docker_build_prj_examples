@@ -87,6 +87,24 @@
 //==================================================================================================
 //**************************************************************************************************
 
+//**************************************************************************************************
+//! SPI channel 0 interrupt service routine
+//!
+//! \note None
+//!
+//! \param None
+//!
+//! \return None
+//**************************************************************************************************
+
+INTERRUPT void SPI_LowLevel_0_Interrupt(void)
+{
+#if (TRUE == SPI_CHANNEL_0_IN_USE)
+    // SPI0.TXCFG.B.MSKTX = ON;
+    SPI0.DATA.B.DATA;
+#endif
+} // end of SPI_LowLevel_0_Interrupt()
+
 
 
 //**************************************************************************************************
@@ -98,12 +116,12 @@
 //!
 //! \return None
 //**************************************************************************************************
-#if (TRUE == SPI_CHANNEL_1_IN_USE)
 INTERRUPT void SPI_LowLevel_1_Interrupt(void)
 {
+#if (TRUE == SPI_CHANNEL_1_IN_USE)
     // TODO
-} // end of SPI_LowLevel_1_Interrupt()
 #endif
+} // end of SPI_LowLevel_1_Interrupt()
 
 
 
@@ -116,12 +134,12 @@ INTERRUPT void SPI_LowLevel_1_Interrupt(void)
 //!
 //! \return None
 //**************************************************************************************************
-#if (TRUE == SPI_CHANNEL_2_IN_USE)
 INTERRUPT void SPI_LowLevel_2_Interrupt(void)
 {
+#if (TRUE == SPI_CHANNEL_2_IN_USE)
     // TODO
-} // end of SPI_LowLevel_2_Interrupt()
 #endif
+} // end of SPI_LowLevel_2_Interrupt()
 
 
 
@@ -134,12 +152,12 @@ INTERRUPT void SPI_LowLevel_2_Interrupt(void)
 //!
 //! \return None
 //**************************************************************************************************
-#if (TRUE == SPI_CHANNEL_3_IN_USE)
 INTERRUPT void SPI_LowLevel_3_Interrupt(void)
 {
+    #if (TRUE == SPI_CHANNEL_3_IN_USE)
     // TODO
+    #endif
 } // end of SPI_LowLevel_3_Interrupt()
-#endif
 
 
 
@@ -152,12 +170,12 @@ INTERRUPT void SPI_LowLevel_3_Interrupt(void)
 //!
 //! \return None
 //**************************************************************************************************
-#if (TRUE == SPI_CHANNEL_4_IN_USE)
 INTERRUPT void SPI_LowLevel_4_Interrupt(void)
 {
+    #if (TRUE == SPI_CHANNEL_4_IN_USE)
     // TODO
+    #endif
 } // end of SPI_LowLevel_4_Interrupt()
-#endif
 
 
 
@@ -170,30 +188,12 @@ INTERRUPT void SPI_LowLevel_4_Interrupt(void)
 //!
 //! \return None
 //**************************************************************************************************
-#if (TRUE == SPI_CHANNEL_5_IN_USE)
 INTERRUPT void SPI_LowLevel_5_Interrupt(void)
 {
+    #if (TRUE == SPI_CHANNEL_5_IN_USE)
     // TODO
+    #endif
 } // end of SPI_LowLevel_5_Interrupt()
-#endif
-
-
-
-//**************************************************************************************************
-//! SPI channel 6 interrupt service routine
-//!
-//! \note None
-//!
-//! \param None
-//!
-//! \return None
-//**************************************************************************************************
-#if (TRUE == SPI_CHANNEL_6_IN_USE)
-INTERRUPT void SPI_LowLevel_6_Interrupt(void)
-{
-    // TODO
-} // end of SPI_LowLevel_6_Interrupt()
-#endif
 
 
 

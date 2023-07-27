@@ -1,6 +1,6 @@
 //**************************************************************************************************
 // @Module  SPI driver
-//! \file   spi_drv.h
+//! \file   spi_drv_irq.h
 //! \par    Platform
 //!             YTM32
 //! \par    Compatible

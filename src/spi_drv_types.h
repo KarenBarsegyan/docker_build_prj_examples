@@ -1,6 +1,6 @@
 //**************************************************************************************************
 // @Module  SPI driver
-//! \file   spi_drv.c
+//! \file   spi_drv_types.h
 //! \par    Platform
 //!             YTM32
 //! \par    Compatible
@@ -224,6 +224,7 @@
 
 //! \name SPI Channel Settings
 //! @{
+
 //! MAX BAUDRATE value
 #define SPI_MAX_BAUDRATE                (5000000UL)
 //! MIN BAUDRATE value
@@ -234,6 +235,7 @@
 #define SPI_MAX_PHASE_VALUE             (3U)
 //! MAX bit order value
 #define SPI_MAX_BIT_ORDER_VALUE         (1U)
+
 //! @}
 
 //! \name Data size

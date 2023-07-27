@@ -537,10 +537,10 @@
 
 //! Enable IRQ_26 \n
 //! Valid values: ON, OFF.
-#define IRQ_26_ENABLE                                                  (OFF)
+#define IRQ_26_ENABLE                                                  (ON)
 //! Aliases for the IRQ_26 interrupt handler. \n
 //! Valid value: IRQ_DEFAULT_HANDLER, handler function address.
-#define IRQ_26_ALIAS_FUN1                                              IRQ_DEFAULT_HANDLER
+#define IRQ_26_ALIAS_FUN1                                              SPI_LowLevel_0_Interrupt
 #define IRQ_26_ALIAS_FUN2                                              IRQ_DEFAULT_HANDLER
 //! The group priority level for the IRQ_26 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_GROUP_PRIORITY_LEVEL.
@@ -551,10 +551,10 @@
 
 //! Enable IRQ_27 \n
 //! Valid values: ON, OFF.
-#define IRQ_27_ENABLE                                                  (OFF)
+#define IRQ_27_ENABLE                                                  (ON)
 //! Aliases for the IRQ_27 interrupt handler. \n
 //! Valid value: IRQ_DEFAULT_HANDLER, handler function address.
-#define IRQ_27_ALIAS_FUN1                                              IRQ_DEFAULT_HANDLER
+#define IRQ_27_ALIAS_FUN1                                              SPI_LowLevel_1_Interrupt
 #define IRQ_27_ALIAS_FUN2                                              IRQ_DEFAULT_HANDLER
 //! The group priority level for the IRQ_27 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_GROUP_PRIORITY_LEVEL.
@@ -565,10 +565,10 @@
 
 //! Enable IRQ_28 \n
 //! Valid values: ON, OFF.
-#define IRQ_28_ENABLE                                                  (OFF)
+#define IRQ_28_ENABLE                                                  (ON)
 //! Aliases for the IRQ_28 interrupt handler. \n
 //! Valid value: IRQ_DEFAULT_HANDLER, handler function address.
-#define IRQ_28_ALIAS_FUN1                                              IRQ_DEFAULT_HANDLER
+#define IRQ_28_ALIAS_FUN1                                              SPI_LowLevel_2_Interrupt
 #define IRQ_28_ALIAS_FUN2                                              IRQ_DEFAULT_HANDLER
 //! The group priority level for the IRQ_28 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_GROUP_PRIORITY_LEVEL.
@@ -2525,10 +2525,10 @@
 
 //! Enable IRQ_168 \n
 //! Valid values: ON, OFF.
-#define IRQ_168_ENABLE                                                 (OFF)
+#define IRQ_168_ENABLE                                                 (ON)
 //! Aliases for the IRQ_168 interrupt handler. \n
 //! Valid value: IRQ_DEFAULT_HANDLER, handler function address.
-#define IRQ_168_ALIAS_FUN1                                             IRQ_DEFAULT_HANDLER
+#define IRQ_168_ALIAS_FUN1                                             SPI_LowLevel_3_Interrupt
 #define IRQ_168_ALIAS_FUN2                                             IRQ_DEFAULT_HANDLER
 //! The group priority level for the IRQ_168 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_GROUP_PRIORITY_LEVEL.
@@ -2539,10 +2539,10 @@
 
 //! Enable IRQ_169 \n
 //! Valid values: ON, OFF.
-#define IRQ_169_ENABLE                                                 (OFF)
+#define IRQ_169_ENABLE                                                 (ON)
 //! Aliases for the IRQ_169 interrupt handler. \n
 //! Valid value: IRQ_DEFAULT_HANDLER, handler function address.
-#define IRQ_169_ALIAS_FUN1                                             IRQ_DEFAULT_HANDLER
+#define IRQ_169_ALIAS_FUN1                                             SPI_LowLevel_4_Interrupt
 #define IRQ_169_ALIAS_FUN2                                             IRQ_DEFAULT_HANDLER
 //! The group priority level for the IRQ_169 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_GROUP_PRIORITY_LEVEL.
@@ -2553,10 +2553,10 @@
 
 //! Enable IRQ_170 \n
 //! Valid values: ON, OFF.
-#define IRQ_170_ENABLE                                                 (OFF)
+#define IRQ_170_ENABLE                                                 (ON)
 //! Aliases for the IRQ_170 interrupt handler. \n
 //! Valid value: IRQ_DEFAULT_HANDLER, handler function address.
-#define IRQ_170_ALIAS_FUN1                                             IRQ_DEFAULT_HANDLER
+#define IRQ_170_ALIAS_FUN1                                             SPI_LowLevel_5_Interrupt
 #define IRQ_170_ALIAS_FUN2                                             IRQ_DEFAULT_HANDLER
 //! The group priority level for the IRQ_170 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_GROUP_PRIORITY_LEVEL.
