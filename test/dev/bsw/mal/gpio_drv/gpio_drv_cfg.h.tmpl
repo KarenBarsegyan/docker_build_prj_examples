@@ -136,8 +136,7 @@
 
 // JTAG_TDO_SWD_SWO A10 MUX_ALT_7
 // Port A pin 10
-#define GPIO_PORT_A_PIN_10_ENABLE          (ON)
-#define GPIO_PORT_A_PIN_10_TOGGLE          (OFF)
+#define GPIO_PORT_A_PIN_10_ENABLE          (OFF)
 #define GPIO_PORT_A_PIN_10_MUX             (GPIO_MUX_ALT_7)
 #define GPIO_PORT_A_PIN_10_DIRECTION       (GPIO_PIN_OUTPUT)
 #define GPIO_PORT_A_PIN_10_STRENGTH_LEVEL  (GPIO_STRENGTH_HIGH)
@@ -350,8 +349,7 @@
 #define GPIO_PORT_B_PIN_3_VALUE            (GPIO_PIN_LOW)
 
 // Port B pin 4
-#define GPIO_PORT_B_PIN_4_ENABLE           (ON)
-#define GPIO_PORT_B_PIN_4_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_B_PIN_4_ENABLE           (OFF)
 #define GPIO_PORT_B_PIN_4_DIRECTION        (GPIO_PIN_OUTPUT)
 #define GPIO_PORT_B_PIN_4_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
 #define GPIO_PORT_B_PIN_4_PULL_ENABLE      (GPIO_PULL_ENABLE)
@@ -1165,8 +1163,7 @@
 #define GPIO_PORT_E_PIN_7_VALUE            (GPIO_PIN_LOW)
 
 // Port E pin 8
-#define GPIO_PORT_E_PIN_8_ENABLE           (ON)
-#define GPIO_PORT_E_PIN_8_MUX              (GPIO_MUX_ALT_1)
+#define GPIO_PORT_E_PIN_8_ENABLE           (OFF)
 #define GPIO_PORT_E_PIN_8_DIRECTION        (GPIO_PIN_OUTPUT)
 #define GPIO_PORT_E_PIN_8_STRENGTH_LEVEL   (GPIO_STRENGTH_HIGH)
 #define GPIO_PORT_E_PIN_8_PULL_ENABLE      (GPIO_PULL_ENABLE)
@@ -1364,14 +1361,14 @@
 
 // WakeUp pin 0 in use
 // Valid value: ON / OFF
-#define GPIO_WKU_PIN_0_ENABLE        ON
+#define GPIO_WKU_PIN_0_ENABLE        OFF
 // WakeUp condition
 // Valid values:  GPIO_WU_DISABLE, GPIO_WU_RISING_EDGE, GPIO_WU_FALLING_EDGE,
 //                GPIO_WU_RISING_OR_FALLING_EDGE
 #define GPIO_WKU_PIN_0_WU_ENABLE     GPIO_WU_DISABLE
 // WakeUp event ID
 // Valid value: [0;255]
-#define GPIO_WKU_PIN_0_EVENT             (123U)
+#define GPIO_WKU_PIN_0_EVENT             (0U)
 
 // WakeUp pin 1 in use
 // Valid value: ON / OFF
@@ -1716,6 +1713,6 @@
 
 
 
-#endif // end of GPIO_DRV_CFG_H
+#endif // end of #ifndef GPIO_DRV_CFG_H
 
 //****************************************** end of file *******************************************

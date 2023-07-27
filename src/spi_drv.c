@@ -227,6 +227,40 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 //! @}   
 
 
+#define SPI_CHANNEL_SET_CLK(Channel)                                      \
+{                                                                         \
+        IPC.CTRL[IPC_SPI##Channel##_INDEX].B.DIV = IPC_CTRL_DIV_5;        \
+        IPC.CTRL[IPC_SPI##Channel##_INDEX].B.SRCSEL = IPC_SRCSEL_PLL;     \
+        if (OFF == IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN)            \
+        {                                                                 \
+            IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN = ON;              \
+        }                                                                 \
+        U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / \
+                       (IPC_CTRL_DIV_5 + 1U)    /                         \
+                       TXCFG_DIV_VALUE_2        /                         \
+                       SPI_CHANNEL_##Channel##_BAUDRATE;                  \
+                                                                          \
+        U8 nTXCFG_Prescaller = TXCFG_DIV_2;                               \
+                                                                          \
+        if (nDivider > 128U)                                              \
+        {                                                                 \
+            nDivider = nDivider/8;                                        \
+            nTXCFG_Prescaller = TXCFG_DIV_16;                             \
+        }                                                                 \
+        if (nDivider > 128U)                                              \
+        {                                                                 \
+            nDivider = nDivider/8;                                        \
+            nTXCFG_Prescaller = TXCFG_DIV_128;                            \
+        }                                                                 \
+                                                                          \
+        SPI##Channel.TXCFG.B.PRESCALE = nTXCFG_Prescaller;                \
+        SPI##Channel.CLK.B.DIV = (U8)(nDivider*2U-2U);                    \
+        SPI##Channel.CTRL.B.MODE = ON;                                    \
+        SPI##Channel.CTRL.B.EN = ON;                                      \
+        while(ON != SPI##Channel.CTRL.B.EN){}                             \
+}
+
+
 //**************************************************************************************************
 // Definitions of static global (private) variables
 //**************************************************************************************************
@@ -314,72 +348,37 @@ STD_RESULT SPI_Init(void)
         // pullup\pulldown for it
         #if (ON == SPI_CHANNEL_0_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_0);
+            SPI_CHANNEL_SET_CLK(0)
         #endif
 
         #if (ON == SPI_CHANNEL_1_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_1);
+            SPI_CHANNEL_SET_CLK(1)
         #endif
 
         #if (ON == SPI_CHANNEL_2_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_2);
+            SPI_CHANNEL_SET_CLK(2)
         #endif
 
         #if (ON == SPI_CHANNEL_3_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_3);
+            SPI_CHANNEL_SET_CLK(3)
         #endif
 
         #if (ON == SPI_CHANNEL_4_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_4);
+            SPI_CHANNEL_SET_CLK(4)
         #endif
 
         #if (ON == SPI_CHANNEL_5_IN_USE)
             SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_5);
+            SPI_CHANNEL_SET_CLK(5)
         #endif
-        
-        // Set div
-        IPC.CTRL[IPC_SPI0_INDEX].B.DIV = IPC_CTRL_DIV_5;
-
-        // Set clock source to PLL
-        IPC.CTRL[IPC_SPI0_INDEX].B.SRCSEL = IPC_SRCSEL_PLL; 
-
-        // If SPI clk is not taken on
-        if (OFF == IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN)
-        {
-            // Take ON SPI clk 
-            IPC.CTRL[IPC_SPI0_INDEX].B.CLKEN = ON;
-        }
-
-        // Start freq = clock source / 2 
-        U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / // PLL freq
-                       (IPC_CTRL_DIV_5 + 1U)    /                         // IPC Div
-                       TXCFG_DIV_VALUE_2        /                         // SPI Div 1
-                       SPI_CHANNEL_0_BAUDRATE;
-
-        U8 nTXCFG_Prescaller = TXCFG_DIV_2;
-
-        if (nDivider > 128U) 
-        {
-            nDivider = nDivider/8;
-            nTXCFG_Prescaller = TXCFG_DIV_16;
-        }  
-        if (nDivider > 128U) 
-        {
-            nDivider = nDivider/8;
-            nTXCFG_Prescaller = TXCFG_DIV_128;
-        }  
-
-        // SPI prescaler 1
-        SPI0.TXCFG.B.PRESCALE = nTXCFG_Prescaller;
-
-        // SPI prescaler 2
-        SPI0.CLK.B.DIV = (U8)(nDivider*2U-2U);
-
-        SPI0.CTRL.B.MODE = ON;
-        SPI0.CTRL.B.EN = ON;
-
-        while(ON != SPI0.CTRL.B.EN){}
 
         SPI_bInitialized = TRUE;
+
+        nFuncResult = RESULT_OK;
     }
 
     return nFuncResult;

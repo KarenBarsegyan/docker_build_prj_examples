@@ -2,6 +2,7 @@
 #include "scheduler.h"
 #include "spi_drv.h"
 #include "gpio_drv.h"
+#include "gpio_drv_types.h"
 
 
 #define LED5_PORT       (GPIO_PORT_B)
@@ -24,7 +25,7 @@
 
 void TEST_Init(void) 
 {
-    // GPIO_Init();
+    GPIO_Init();
     SPI_Init();
 }
 
