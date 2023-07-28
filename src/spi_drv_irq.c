@@ -28,8 +28,11 @@
 // SPI interface
 #include "spi_drv.h"
 
-// HC32F4A registers
-#include "derivative_cfg.h"
+// Get program module specific types
+#include "spi_drv_types.h"
+
+// Get SFR registers header
+#include "ytm32b1m_sfr.h"
 
 
 
@@ -99,8 +102,8 @@
 INTERRUPT void SPI_LowLevel_0_Interrupt(void)
 {
 #if (TRUE == SPI_CHANNEL_0_IN_USE)
-    // SPI0.TXCFG.B.MSKTX = ON;
-    SPI0.DATA.B.DATA;
+    SPI_HighLevel_RX_ISR(SPI_CHANNEL_0);
+    SPI_HighLevel_TX_ISR(SPI_CHANNEL_0);  
 #endif
 } // end of SPI_LowLevel_0_Interrupt()
 
@@ -118,7 +121,8 @@ INTERRUPT void SPI_LowLevel_0_Interrupt(void)
 INTERRUPT void SPI_LowLevel_1_Interrupt(void)
 {
 #if (TRUE == SPI_CHANNEL_1_IN_USE)
-    SPI1.DATA.B.DATA;
+    SPI_HighLevel_RX_ISR(SPI_CHANNEL_1);
+    SPI_HighLevel_TX_ISR(SPI_CHANNEL_1);
 #endif
 } // end of SPI_LowLevel_1_Interrupt()
 
@@ -136,7 +140,8 @@ INTERRUPT void SPI_LowLevel_1_Interrupt(void)
 INTERRUPT void SPI_LowLevel_2_Interrupt(void)
 {
 #if (TRUE == SPI_CHANNEL_2_IN_USE)
-    // TODO
+    SPI_HighLevel_RX_ISR(SPI_CHANNEL_2);
+    SPI_HighLevel_TX_ISR(SPI_CHANNEL_2);
 #endif
 } // end of SPI_LowLevel_2_Interrupt()
 
@@ -154,7 +159,8 @@ INTERRUPT void SPI_LowLevel_2_Interrupt(void)
 INTERRUPT void SPI_LowLevel_3_Interrupt(void)
 {
     #if (TRUE == SPI_CHANNEL_3_IN_USE)
-    // TODO
+    SPI_HighLevel_RX_ISR(SPI_CHANNEL_3);
+    SPI_HighLevel_TX_ISR(SPI_CHANNEL_3);
     #endif
 } // end of SPI_LowLevel_3_Interrupt()
 
@@ -172,7 +178,8 @@ INTERRUPT void SPI_LowLevel_3_Interrupt(void)
 INTERRUPT void SPI_LowLevel_4_Interrupt(void)
 {
     #if (TRUE == SPI_CHANNEL_4_IN_USE)
-    // TODO
+    SPI_HighLevel_RX_ISR(SPI_CHANNEL_4);
+    SPI_HighLevel_TX_ISR(SPI_CHANNEL_4);
     #endif
 } // end of SPI_LowLevel_4_Interrupt()
 
@@ -190,7 +197,8 @@ INTERRUPT void SPI_LowLevel_4_Interrupt(void)
 INTERRUPT void SPI_LowLevel_5_Interrupt(void)
 {
     #if (TRUE == SPI_CHANNEL_5_IN_USE)
-    // TODO
+    SPI_HighLevel_RX_ISR(SPI_CHANNEL_5);
+    SPI_HighLevel_TX_ISR(SPI_CHANNEL_5);
     #endif
 } // end of SPI_LowLevel_5_Interrupt()
 

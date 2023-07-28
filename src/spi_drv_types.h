@@ -57,6 +57,8 @@
 #define SPI_PORT_MAX                    (SPI_PORT_E)
 #define SPI_PORT_NOT_USED               (255U)
 
+#define SPI_PORT_QTY                    (SPI_PORT_MAX + 1U)
+
 #define IPC_PCTRLA                      (0U)
 #define IPC_PCTRLB                      (1U)
 #define IPC_PCTRLC                      (2U)
