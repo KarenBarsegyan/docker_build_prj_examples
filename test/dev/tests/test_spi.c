@@ -27,6 +27,9 @@ void TEST_Init(void)
 {
     GPIO_Init();
     SPI_Init();
+    GPIO_SetPinState(LED5_PORT,
+                     LED5_PIN,
+                     GPIO_PIN_HIGH);   
 }
 
 
@@ -37,11 +40,11 @@ void TEST_1ms(void)
 }
 
 
-
 void TEST_10ms(void) 
 {
     U8 aData[8U];
     SPI_Write(1U, aData, 1U);
+    
 }
 
 
@@ -54,60 +57,78 @@ void TEST_100ms(void)
 
 void TEST_1sec(void) 
 {
-    static BOOLEAN bState = FALSE;
-
-    if (FALSE == bState){
+    static BOOLEAN bSpiInit = TRUE;
+    if (TRUE == bSpiInit)
+    {
+        bSpiInit = FALSE;
+        SPI_DeInit();
         GPIO_SetPinState(LED5_PORT,
                          LED5_PIN,
                          GPIO_PIN_LOW);
-
-        GPIO_SetPinState(LED6_PORT,
-                         LED6_PIN,
-                         GPIO_PIN_LOW);
-
-        GPIO_SetPinState(LED7_PORT,
-                         LED7_PIN,
-                         GPIO_PIN_LOW);
-
-        GPIO_SetPinState(LED8R_PORT,
-                         LED8R_PIN,
+    }
+    else
+    {
+        SPI_Init();
+        bSpiInit = TRUE;
+        GPIO_SetPinState(LED5_PORT,
+                         LED5_PIN,
                          GPIO_PIN_HIGH);
+    }
+    
+    static BOOLEAN bState = FALSE;
 
-        GPIO_SetPinState(LED8G_PORT,
-                         LED8G_PIN,
-                         GPIO_PIN_HIGH);
+    if (FALSE == bState){
+        // GPIO_SetPinState(LED5_PORT,
+        //                  LED5_PIN,
+        //                  GPIO_PIN_LOW);
 
-        GPIO_SetPinState(LED8B_PORT,
-                         LED8B_PIN,
-                         GPIO_PIN_HIGH);
+        // GPIO_SetPinState(LED6_PORT,
+        //                  LED6_PIN,
+        //                  GPIO_PIN_LOW);
+
+        // GPIO_SetPinState(LED7_PORT,
+        //                  LED7_PIN,
+        //                  GPIO_PIN_LOW);
+
+        // GPIO_SetPinState(LED8R_PORT,
+        //                  LED8R_PIN,
+        //                  GPIO_PIN_HIGH);
+
+        // GPIO_SetPinState(LED8G_PORT,
+        //                  LED8G_PIN,
+        //                  GPIO_PIN_HIGH);
+
+        // GPIO_SetPinState(LED8B_PORT,
+        //                  LED8B_PIN,
+        //                  GPIO_PIN_HIGH);
         
         bState = TRUE;
     }
     else
     {
-        GPIO_SetPinState(LED5_PORT,
-                         LED5_PIN,
-                         GPIO_PIN_HIGH);
+        // GPIO_SetPinState(LED5_PORT,
+        //                  LED5_PIN,
+        //                  GPIO_PIN_HIGH);
 
-        GPIO_SetPinState(LED6_PORT,
-                         LED6_PIN,
-                         GPIO_PIN_HIGH);
+        // GPIO_SetPinState(LED6_PORT,
+        //                  LED6_PIN,
+        //                  GPIO_PIN_HIGH);
 
-        GPIO_SetPinState(LED7_PORT,
-                         LED7_PIN,
-                         GPIO_PIN_HIGH);
+        // GPIO_SetPinState(LED7_PORT,
+        //                  LED7_PIN,
+        //                  GPIO_PIN_HIGH);
 
-        GPIO_SetPinState(LED8R_PORT,
-                         LED8R_PIN,
-                         GPIO_PIN_LOW);
+        // GPIO_SetPinState(LED8R_PORT,
+        //                  LED8R_PIN,
+        //                  GPIO_PIN_LOW);
 
-        GPIO_SetPinState(LED8G_PORT,
-                         LED8G_PIN,
-                         GPIO_PIN_LOW);
+        // GPIO_SetPinState(LED8G_PORT,
+        //                  LED8G_PIN,
+        //                  GPIO_PIN_LOW);
 
-        GPIO_SetPinState(LED8B_PORT,
-                         LED8B_PIN,
-                         GPIO_PIN_LOW);
+        // GPIO_SetPinState(LED8B_PORT,
+        //                  LED8B_PIN,
+        //                  GPIO_PIN_LOW);
                         
         bState = FALSE;
     }

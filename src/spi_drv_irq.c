@@ -96,7 +96,6 @@
 //!
 //! \return None
 //**************************************************************************************************
-
 INTERRUPT void SPI_LowLevel_0_Interrupt(void)
 {
 #if (TRUE == SPI_CHANNEL_0_IN_USE)
@@ -119,7 +118,7 @@ INTERRUPT void SPI_LowLevel_0_Interrupt(void)
 INTERRUPT void SPI_LowLevel_1_Interrupt(void)
 {
 #if (TRUE == SPI_CHANNEL_1_IN_USE)
-    // TODO
+    SPI1.DATA.B.DATA;
 #endif
 } // end of SPI_LowLevel_1_Interrupt()
 

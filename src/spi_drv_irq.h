@@ -66,29 +66,17 @@
 // Declarations of interrupt service routines
 //**************************************************************************************************
 
-#if(ON == SPI_CHANNEL_1_IN_USE)
+extern INTERRUPT void SPI_LowLevel_0_Interrupt(void);
+
 extern INTERRUPT void SPI_LowLevel_1_Interrupt(void);
-#endif
 
-#if(ON == SPI_CHANNEL_2_IN_USE)
 extern INTERRUPT void SPI_LowLevel_2_Interrupt(void);
-#endif
 
-#if(ON == SPI_CHANNEL_3_IN_USE)
 extern INTERRUPT void SPI_LowLevel_3_Interrupt(void);
-#endif
 
-#if(ON == SPI_CHANNEL_4_IN_USE)
 extern INTERRUPT void SPI_LowLevel_4_Interrupt(void);
-#endif
 
-#if(ON == SPI_CHANNEL_5_IN_USE)
 extern INTERRUPT void SPI_LowLevel_5_Interrupt(void);
-#endif
-
-#if(ON == SPI_CHANNEL_6_IN_USE)
-extern INTERRUPT void SPI_LowLevel_6_Interrupt(void);
-#endif
 
 
 

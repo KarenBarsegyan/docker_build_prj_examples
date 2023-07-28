@@ -165,55 +165,55 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 #define SPI_CHANNEL_PCTRL_FILL(Channel)                                     \
 {                                                                           \
     PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.PE  =      \
-                                       SPI_CHANNEL_0_MOSI_OUTPUT_MODE;      \
+                                       Channel##_MOSI_OUTPUT_MODE;          \
     PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.MUX =      \
-                                       SPI_CHANNEL_0_MOSI_ALT_FUNK;         \
+                                       Channel##_MOSI_ALT_FUNK;             \
     PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.PS  =      \
-                                       SPI_CHANNEL_0_MOSI_PULLUP_MODE;      \
+                                       Channel##_MOSI_PULLUP_MODE;          \
                                                                             \
     PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.PE  =      \
-                                       SPI_CHANNEL_0_MISO_OUTPUT_MODE;      \
+                                       Channel##_MISO_OUTPUT_MODE;          \
     PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.MUX =      \
-                                       SPI_CHANNEL_0_MISO_ALT_FUNK;         \
+                                       Channel##_MISO_ALT_FUNK;             \
     PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.PS  =      \
-                                       SPI_CHANNEL_0_MISO_PULLUP_MODE;      \
+                                       Channel##_MISO_PULLUP_MODE;          \
                                                                             \
     PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.PE  =      \
-                                       SPI_CHANNEL_0_SCLK_OUTPUT_MODE;      \
+                                       Channel##_SCLK_OUTPUT_MODE;          \
     PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.MUX =      \
-                                       SPI_CHANNEL_0_SCLK_ALT_FUNK;         \
+                                       Channel##_SCLK_ALT_FUNK;             \
     PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.PS  =      \
-                                       SPI_CHANNEL_0_SCLK_PULLUP_MODE;      \
+                                       Channel##_SCLK_PULLUP_MODE;          \
                                                                             \
-    if (ON == SPI_CHANNEL_0_CS_0_IN_USE)                                    \
+    if (ON == Channel##_CS_0_IN_USE)                                        \
     {                                                                       \
         PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.PE  =  \
-                                           SPI_CHANNEL_0_CS_0_OUTPUT_MODE;  \
+                                           Channel##_CS_0_OUTPUT_MODE;      \
         PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.MUX =  \
-                                           SPI_CHANNEL_0_CS_0_ALT_FUNK;     \
+                                           Channel##_CS_0_ALT_FUNK;         \
         PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.PS  =  \
-                                           SPI_CHANNEL_0_CS_0_PULLUP_MODE;  \
+                                           Channel##_CS_0_PULLUP_MODE;      \
                                                                             \
     }                                                                       \
                                                                             \
-    if (ON == SPI_CHANNEL_0_CS_1_IN_USE)                                    \
+    if (ON == Channel##_CS_1_IN_USE)                                        \
     {                                                                       \
         PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.PE  =  \
-                                           SPI_CHANNEL_0_CS_1_OUTPUT_MODE;  \
+                                           Channel##_CS_1_OUTPUT_MODE;      \
         PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.MUX =  \
-                                           SPI_CHANNEL_0_CS_1_ALT_FUNK;     \
+                                           Channel##_CS_1_ALT_FUNK;         \
         PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.PS  =  \
-                                           SPI_CHANNEL_0_CS_1_PULLUP_MODE;  \
+                                           Channel##_CS_1_PULLUP_MODE;      \
     }                                                                       \
                                                                             \
-    if (ON == SPI_CHANNEL_0_CS_2_IN_USE)                                    \
+    if (ON == Channel##_CS_2_IN_USE)                                        \
     {                                                                       \
         PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.PE  =  \
-                                           SPI_CHANNEL_0_CS_2_OUTPUT_MODE;  \
+                                           Channel##_CS_2_OUTPUT_MODE;      \
         PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.MUX =  \
-                                           SPI_CHANNEL_0_CS_2_ALT_FUNK;     \
+                                           Channel##_CS_2_ALT_FUNK;         \
         PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.PS  =  \
-                                           SPI_CHANNEL_0_CS_2_PULLUP_MODE;  \
+                                           Channel##_CS_2_PULLUP_MODE;      \
     }                                                                       \
 }
 //! @}
@@ -271,6 +271,23 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 }
 //! @}
 
+//! \name Disable IRQs
+//! @{ 
+#define SPI_CHANNEL_DISABLE_IRQ(Channel)  \
+{                                         \
+    SPI##Channel.INTE.B.RXIE = OFF;       \
+}
+//! @}
+
+//! \name Disable channel
+//! @{ 
+#define SPI_CHANNEL_DISABLE(Channel)                                  \
+{                                                                     \
+    SPI##Channel.CTRL.B.EN = OFF;                                     \
+    while(OFF != SPI##Channel.CTRL.B.EN){}                            \
+}
+//! @}
+
 
 
 //**************************************************************************************************
@@ -289,6 +306,8 @@ static PCTRL_tag* PCTRL_pPorts[SPI_PORT_MAX + 1U] =
     &PCTRLD,
     &PCTRLE,
 };
+
+
 
 //**************************************************************************************************
 // Declarations of local (private) functions
@@ -320,13 +339,13 @@ STD_RESULT SPI_Init(void)
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
 
-    #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
     if (TRUE == SPI_bInitialized)
     {
+        #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
         SPI_REPORT_DEV_ERROR(SPI_API_ID_INIT, DEV_ERROR_ALREADY_INIT);
+        #endif
     }
     else
-    #endif
     {
         // If GPIO clk is not taken on
         if (OFF == IPC.CTRL[IPC_PCTRL_GPIO_INDEX].B.CLKEN)
@@ -418,7 +437,50 @@ STD_RESULT SPI_DeInit(void)
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
     
-    // TODO
+    if (FALSE == SPI_bInitialized)
+    {
+        #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_INIT, DEV_ERROR_ALREADY_INIT);
+        #endif
+    }
+    else
+    {
+        // If channel X is used, setup GPIO MUX and 
+        // pullup\pulldown for it
+        #if (ON == SPI_CHANNEL_0_IN_USE)
+            SPI_CHANNEL_DISABLE_IRQ(0)
+            SPI_CHANNEL_DISABLE(0)
+        #endif
+
+        #if (ON == SPI_CHANNEL_1_IN_USE)
+            SPI_CHANNEL_DISABLE_IRQ(1)
+            SPI_CHANNEL_DISABLE(1)
+        #endif
+
+        #if (ON == SPI_CHANNEL_2_IN_USE)
+            SPI_CHANNEL_DISABLE_IRQ(2)
+            SPI_CHANNEL_DISABLE(2)
+        #endif
+
+        #if (ON == SPI_CHANNEL_3_IN_USE)
+            SPI_CHANNEL_DISABLE_IRQ(3)
+            SPI_CHANNEL_DISABLE(3)
+        #endif
+
+        #if (ON == SPI_CHANNEL_4_IN_USE)
+            SPI_CHANNEL_DISABLE_IRQ(4)
+            SPI_CHANNEL_DISABLE(4)
+        #endif
+
+        #if (ON == SPI_CHANNEL_5_IN_USE)
+            SPI_CHANNEL_DISABLE_IRQ(5)
+            SPI_CHANNEL_DISABLE(5)
+        #endif
+
+        nFuncResult = RESULT_OK;
+
+        SPI_bInitialized = FALSE;
+    }
 
     return nFuncResult;
 } // end of SPI_DeInit()
@@ -443,7 +505,10 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
     
-    // TODO
+    if (TRUE == SPI_bInitialized)
+    {
+
+    }
 
     return nFuncResult;
 } // end of SPI_Read()
@@ -467,10 +532,21 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
                      const U8          nDataFrameQty)
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
-    
-    if (OFF == SPI0.STS.B.BUSY)
+
+    if (TRUE == SPI_bInitialized)
     {
-        SPI0.DATA.B.DATA = (U32) 0x6789ABCDU;
+        if (OFF == SPI0.STS.B.BUSY)
+        {
+            SPI0.DATA.B.DATA = (U32) 0x6789ABCDU;
+        }
+
+        if (OFF == SPI1.STS.B.BUSY)
+        {
+            SPI1.DATA.B.DATA = (U32) 0x12345678U;
+        }
+
+        nFuncResult = RESULT_OK;
+
     }
 
     return nFuncResult;
