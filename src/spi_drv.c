@@ -13,7 +13,7 @@
 //! \par    History
 //! | Date       | Version | Author  | Comment
 //! |:----------:|:-------:|:-------:|--------------------------------------------------------------
-//! | 00.00.2023 |  1.0.0  |   BKR   | First release.
+//! | 11.08.2023 |  1.0.0  |   BKR   | First release.
 //**************************************************************************************************
 
 
@@ -332,9 +332,9 @@ STD_RESULT SPI_Init(void)
 //**************************************************************************************************
 //! Deinitializes SW and HW SPI driver resources
 //!
-//! \note None
+//! \note None.
 //!
-//! \param None
+//! \param None.
 //!
 //! \return RESULT_OK     - deinitialization is completed successfully
 //! \return RESULT_NOT_OK - deinitialization is not completed

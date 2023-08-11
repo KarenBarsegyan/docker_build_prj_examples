@@ -13,7 +13,7 @@
 //! \par    History
 //! | Date       | Version | Author  | Comment
 //! |:----------:|:-------:|:-------:|--------------------------------------------------------------
-//! | 00.00.2023 |  1.0.0  |   BKR   | First release.
+//! | 11.08.2023 |  1.0.0  |   BKR   | First release.
 //**************************************************************************************************
 
 
@@ -39,6 +39,8 @@
 // Declarations of global (public) data types
 //**************************************************************************************************
 
+//! \name SPI Parameters
+//! @{
 typedef struct
 {
     BOOLEAN bChannelEnabled;
@@ -51,6 +53,7 @@ typedef struct
     U8      nCSAvailble[4U];
     U32     nBaudRate;
 } SPI_CHANNEL_PARAMS;
+//! @}
 
 
 
@@ -272,9 +275,8 @@ typedef struct
 #define SPI_DATA_SIZE_20                (20U)
 #define SPI_DATA_SIZE_24                (24U)
 #define SPI_DATA_SIZE_32                (32U)
-//! Minimal data size
+
 #define SPI_DATA_SIZE_MIN               (SPI_DATA_SIZE_4)
-//! Maximal data size
 #define SPI_DATA_SIZE_MAX               (SPI_DATA_SIZE_32)
 //! @}
 
