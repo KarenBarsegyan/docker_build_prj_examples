@@ -207,8 +207,8 @@
 //-------------------------------------------- SPI1 ------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 #define SPI_CHANNEL_1_IN_USE                    (ON)
-#define SPI_CHANNEL_1_MODE                      (SPI_MODE_MASTER)
-#define SPI_CHANNEL_1_BAUDRATE                  (100000UL)
+#define SPI_CHANNEL_1_MODE                      (SPI_MODE_SLAVE)
+#define SPI_CHANNEL_1_BAUDRATE                  (50000UL)
 
 // MOSI - Port and Pin settings
 // Valid Ports and Pins:
@@ -426,6 +426,7 @@
 // Hardware SPI CS 0 Port and Pin settings
 // Valid Ports and Pins:
 // PTC_3, PTC_17
+#define SPI_CHANNEL_4_CS_0_IN_USE               (OFF)
 #define SPI_CHANNEL_4_CS_0_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_4_CS_0_PIN                  (0U)
 #define SPI_CHANNEL_4_CS_0_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
@@ -434,6 +435,7 @@
 // Hardware SPI CS 1 Port and Pin settings
 // Valid Ports and Pins:
 // PTB_25, PTD_5
+#define SPI_CHANNEL_4_CS_1_IN_USE               (OFF)
 #define SPI_CHANNEL_4_CS_1_PORT                 (SPI_PORT_A)
 #define SPI_CHANNEL_4_CS_1_PIN                  (0U)
 #define SPI_CHANNEL_4_CS_1_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
@@ -475,18 +477,20 @@
 // Hardware SPI CS 0 Port and Pin settings
 // Valid Ports and Pins:
 // PTC_8
-#define SPI_CHANNEL_3_CS_0_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_0_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_0_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_0_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
+#define SPI_CHANNEL_5_CS_0_IN_USE               (OFF)
+#define SPI_CHANNEL_5_CS_0_PORT                 (SPI_PORT_A)
+#define SPI_CHANNEL_5_CS_0_PIN                  (0U)
+#define SPI_CHANNEL_5_CS_0_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
+#define SPI_CHANNEL_5_CS_0_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 // Hardware SPI CS 1 Port and Pin settings
 // Valid Ports and Pins:
 // PTC_9
-#define SPI_CHANNEL_3_CS_1_PORT                 (SPI_PORT_A)
-#define SPI_CHANNEL_3_CS_1_PIN                  (0U)
-#define SPI_CHANNEL_3_CS_1_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
-#define SPI_CHANNEL_3_CS_1_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
+#define SPI_CHANNEL_5_CS_1_IN_USE               (OFF)
+#define SPI_CHANNEL_5_CS_1_PORT                 (SPI_PORT_A)
+#define SPI_CHANNEL_5_CS_1_PIN                  (0U)
+#define SPI_CHANNEL_5_CS_1_OUTPUT_MODE          (SPI_OUTPUT_MODE_PUSH_PULL)
+#define SPI_CHANNEL_5_CS_1_PULLUP_MODE          (SPI_PULLUP_MODE_DISABLE)
 
 
 

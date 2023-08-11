@@ -134,7 +134,6 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 
 
 
-
 //! \name Is GPIO port used
 //! @{
 #define SPI_CHANNEL_GPIO_PORT_IN_USE(Channel, Port) ( \
@@ -189,7 +188,6 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
                                            Channel##_CS_0_ALT_FUNK;         \
         PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.PS  =  \
                                            Channel##_CS_0_PULLUP_MODE;      \
-                                                                            \
     }                                                                       \
                                                                             \
     if (ON == Channel##_CS_1_IN_USE)                                        \
@@ -211,116 +209,28 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
         PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.PS  =  \
                                            Channel##_CS_2_PULLUP_MODE;      \
     }                                                                       \
+                                                                            \
+    if (ON == Channel##_CS_3_IN_USE)                                        \
+    {                                                                       \
+        PCTRL_pPorts[Channel##_CS_3_PORT]->PCR[Channel##_CS_3_PIN].B.PE  =  \
+                                           Channel##_CS_3_OUTPUT_MODE;      \
+        PCTRL_pPorts[Channel##_CS_3_PORT]->PCR[Channel##_CS_3_PIN].B.MUX =  \
+                                           Channel##_CS_3_ALT_FUNK;         \
+        PCTRL_pPorts[Channel##_CS_3_PORT]->PCR[Channel##_CS_3_PIN].B.PS  =  \
+                                           Channel##_CS_3_PULLUP_MODE;      \
+    }                                                                       \
 }
 //! @}
 
-//! \name Take clock on special port ON
-//! @{ 
-#define SPI_GPIO_PORT_TAKE_ON_CLK(Port) \
-    if (ON != IPC.CTRL[Port##_INDEX].B.CLKEN) \
-    {                                             \
-        IPC.CTRL[Port##_INDEX].B.CLKEN = ON;  \
-    }                                             \
-//! @}   
 
-//! \name Set up SPI channel settings
-//! @{ 
-#define SPI_CHANNEL_SET_CLK(Channel)                                  \
-{                                                                     \
-    IPC.CTRL[IPC_SPI##Channel##_INDEX].B.DIV = IPC_CTRL_DIV_5;        \
-    IPC.CTRL[IPC_SPI##Channel##_INDEX].B.SRCSEL = IPC_SRCSEL_PLL;     \
-    if (OFF == IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN)            \
-    {                                                                 \
-        IPC.CTRL[IPC_SPI##Channel##_INDEX].B.CLKEN = ON;              \
-    }                                                                 \
-    U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / \
-                    (IPC_CTRL_DIV_5 + 1U)    /                        \
-                    TXCFG_DIV_VALUE_2        /                        \
-                    SPI_stDynamicParams[Channel].nBaudRate;           \
-                                                                      \
-    U8 nTXCFG_Prescaller = TXCFG_DIV_2;                               \
-                                                                      \
-    if (nDivider > 128U)                                              \
-    {                                                                 \
-        nDivider = nDivider/8;                                        \
-        nTXCFG_Prescaller = TXCFG_DIV_16;                             \
-    }                                                                 \
-    if (nDivider > 128U)                                              \
-    {                                                                 \
-        nDivider = nDivider/8;                                        \
-        nTXCFG_Prescaller = TXCFG_DIV_128;                            \
-    }                                                                 \
-                                                                      \
-    SPI##Channel.TXCFG.B.PRESCALE = nTXCFG_Prescaller;                \
-    SPI##Channel.CLK.B.DIV = (U8)(nDivider*2U-2U);                    \
-}
-
-#define SPI_CHANNEL_SET_CFG(Channel)                                  \
-{                                                                     \
-    SPI_CHANNEL_SET_CLK(Channel)                                      \
-    SPI##Channel.CTRL.B.MODE = !SPI_CHANNEL_##Channel##_MODE;         \
-    SPI##Channel.CTRL.B.EN = ON;                                      \
-    while(ON != SPI##Channel.CTRL.B.EN){}                             \
-}
-//! @}
-
-//! \name Set SPI channel Baudrate
-//! @{ 
-#define SET_SPI_CHANNEL_BAUDRATE(Channel)                       \
-    if (nBaudrate <= SPI_MAX_BAUDRATE &&                        \
-        nBaudrate >= SPI_MIN_BAUDRATE)                          \
-    {                                                           \
-        SPI_stDynamicParams[Channel].nBaudRate = nBaudrate;     \
-        while(ON == SPI##Channel.STS.B.BUSY){}                  \
-        SPI_CHANNEL_SET_CLK(Channel);                           \
-    }
-    
-//! @}
-
-//! \name Enable IRQs
-//! @{ 
-#define SPI_CHANNEL_SET_IRQ(Channel)  \
-{                                     \
-    SPI##Channel.INTE.B.RXIE = OFF;   \
-    SPI##Channel.INTE.B.TCIE = ON;    \
-}
-//! @}
-                                     
-
-//! \name Disable IRQs
-//! @{ 
-#define SPI_CHANNEL_DISABLE_IRQ(Channel)  \
-{                                         \
-    SPI##Channel.INTE.B.RXIE = OFF;       \
-}
-//! @}
-
-//! \name Disable channel
-//! @{ 
-#define SPI_CHANNEL_DISABLE(Channel)                                  \
-{                                                                     \
-    SPI##Channel.CTRL.B.EN = OFF;                                     \
-    while(OFF != SPI##Channel.CTRL.B.EN){}                            \
-}
-//! @}
-
-//! \name Disable channel
-//! @{ 
-#define SPI_CH_NOT_ENABLED(Channel) \
-    !((SPI_CHANNEL_0 == Channel &&    \
-       ON == SPI_CHANNEL_0_IN_USE) || \
-      (SPI_CHANNEL_1 == Channel &&    \
-       ON == SPI_CHANNEL_1_IN_USE) || \
-      (SPI_CHANNEL_2 == Channel &&    \
-       ON == SPI_CHANNEL_2_IN_USE) || \
-      (SPI_CHANNEL_3 == Channel &&    \
-       ON == SPI_CHANNEL_3_IN_USE) || \
-      (SPI_CHANNEL_4 == Channel &&    \
-       ON == SPI_CHANNEL_4_IN_USE) || \
-      (SPI_CHANNEL_5 == Channel &&    \
-       ON == SPI_CHANNEL_5_IN_USE))
+//! \name SPI CLK settings values
+//! @{
+#define CLK_SCKPCS_VALUE    (0xFU)
+#define CLK_PCSSCK_VALUE    (0xFU)
+#define CLK_FMDLY_VALUE     (0xFU)
 
 //! @}
+
 
 
 //**************************************************************************************************
@@ -341,7 +251,7 @@ static PCTRL_tag* PCTRL_pPorts[SPI_PORT_QTY] =
 };
 
 //! Port control registers array
-static SPI_tag* SPI_pChannels[SPI_CHANNEL_QNT] =
+static SPI_tag* SPI_pChannels[SPI_CHANNEL_QTY] =
 {
     &SPI0,
     &SPI1,
@@ -352,31 +262,30 @@ static SPI_tag* SPI_pChannels[SPI_CHANNEL_QNT] =
 };
 
 //! Data buffers for Circ Buf module
-stCIRCBUF stCircBufferRX [SPI_CHANNEL_QNT];
-U32       pCitcBuffDataRX[SPI_CHANNEL_RX_FIFO_SIZE];
-stCIRCBUF stCircBufferTX [SPI_CHANNEL_QNT];
-U32       pCitcBuffDataTX[SPI_CHANNEL_TX_FIFO_SIZE];
+stCIRCBUF stCircBufferRX [SPI_CHANNEL_QTY];
+U32       pCitcBuffDataRX[SPI_CHANNEL_QTY][SPI_CHANNEL_RX_FIFO_SIZE];
+stCIRCBUF stCircBufferTX [SPI_CHANNEL_QTY];
+U32       pCitcBuffDataTX[SPI_CHANNEL_QTY][SPI_CHANNEL_TX_FIFO_SIZE];
 
-struct stSPIParams 
-{
-    BOOLEAN bActiveClockPolarity;
-    BOOLEAN bClockPhase;
-    BOOLEAN bBitOrder;
-    U8      nDataFrameSize;
-    U8      nCSNum;
-    U32     nBaudRate;
+SPI_CHANNEL_PARAMS SPI_stChannelsParams[SPI_CHANNEL_QTY];
 
-} SPI_stDynamicParams[SPI_CHANNEL_QNT];
-
-SPI_CALLBACK SPI_CallBacks[SPI_CHANNEL_QNT];
+SPI_CALLBACK SPI_CallBacks[SPI_CHANNEL_QTY];
 
 //**************************************************************************************************
 // Declarations of local (private) functions
 //**************************************************************************************************
 
+static void SPI_Init_Params(void);
 static void SPI_Init_SW(void);
 static void SPI_Init_HW(void);
+static void SPI_DeInit_SW(void);
+static void SPI_DeInit_HW(void);
+static void SPI_DisableChannel(U8 nChannelNum);
 static BOOLEAN SPI_StartTransfer(const U8 nChannelNum);
+static void SPI_TakeOnPortClk(U8 nPortNum);
+static void SPI_SetupChannelClk(U8 nChannelNum);
+static void SPI_SetupChannelParams(U8 nChannelNum);
+static void SPI_ConfigureChannel(U8 nChannelNum);
 
 
 //**************************************************************************************************
@@ -407,6 +316,7 @@ STD_RESULT SPI_Init(void)
     }
     else
     {
+        SPI_Init_Params();
         SPI_Init_SW();
         SPI_Init_HW();
 
@@ -439,41 +349,11 @@ STD_RESULT SPI_DeInit(void)
     }
     else
     {
-        // If channel X is used, deinit IRQ 
-        // And take off enable bit
-        #if (ON == SPI_CHANNEL_0_IN_USE)
-            SPI_CHANNEL_DISABLE_IRQ(0)
-            SPI_CHANNEL_DISABLE(0)
-        #endif
-
-        #if (ON == SPI_CHANNEL_1_IN_USE)
-            SPI_CHANNEL_DISABLE_IRQ(1)
-            SPI_CHANNEL_DISABLE(1)
-        #endif
-
-        #if (ON == SPI_CHANNEL_2_IN_USE)
-            SPI_CHANNEL_DISABLE_IRQ(2)
-            SPI_CHANNEL_DISABLE(2)
-        #endif
-
-        #if (ON == SPI_CHANNEL_3_IN_USE)
-            SPI_CHANNEL_DISABLE_IRQ(3)
-            SPI_CHANNEL_DISABLE(3)
-        #endif
-
-        #if (ON == SPI_CHANNEL_4_IN_USE)
-            SPI_CHANNEL_DISABLE_IRQ(4)
-            SPI_CHANNEL_DISABLE(4)
-        #endif
-
-        #if (ON == SPI_CHANNEL_5_IN_USE)
-            SPI_CHANNEL_DISABLE_IRQ(5)
-            SPI_CHANNEL_DISABLE(5)
-        #endif
-
-        nFuncResult = RESULT_OK;
+        SPI_DeInit_HW();
+        SPI_DeInit_SW();
 
         SPI_bInitialized = FALSE;
+        nFuncResult = RESULT_OK;
     }
 
     return nFuncResult;
@@ -508,7 +388,7 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CH_NOT_ENABLED(nChannelNum))
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_PARAM_0);
     }
@@ -530,7 +410,7 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
                 CIRCBUF_GetData((U32*)&nLocalData,
                                 &stCircBufferRX[nChannelNum]);
                 
-                U8 nDataSize = SPI_stDynamicParams[nChannelNum].nDataFrameSize;
+                U8 nDataSize = SPI_stChannelsParams[nChannelNum].nDataFrameSize;
 
                 if ((SPI_DATA_SIZE_8 >= nDataSize) && 
                     (0U < nDataSize))
@@ -590,7 +470,7 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CH_NOT_ENABLED(nChannelNum))
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_PARAM_0);
     }
@@ -610,7 +490,7 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
             // Put all data in FIFO
             for (U8 nDataCnt = 0U; nDataCnt < nDataFrameQty; nDataCnt++)
             {
-                U8 nDataSize = SPI_stDynamicParams[nChannelNum].nDataFrameSize;
+                U8 nDataSize = SPI_stChannelsParams[nChannelNum].nDataFrameSize;
 
                 if ((SPI_DATA_SIZE_8 >= nDataSize) && 
                     (0U < nDataSize))
@@ -632,15 +512,7 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
                                 &stCircBufferTX[nChannelNum]);
             }
 
-            if (OFF == SPI_pChannels[nChannelNum]->STS.B.BUSY)
-            {
-                SPI_StartTransfer(nChannelNum);
-            }
-            else
-            {
-                // SPI state is RUN
-                DoNothing();
-            }
+            SPI_StartTransfer(nChannelNum);
 
             nFuncResult = RESULT_OK;
         }
@@ -678,7 +550,7 @@ STD_RESULT SPI_Purge(const U8      nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_PURGE, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CH_NOT_ENABLED(nChannelNum))
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_PURGE, DEV_ERROR_PARAM_0);
     }
@@ -687,14 +559,17 @@ STD_RESULT SPI_Purge(const U8      nChannelNum,
         if (TRUE == bPurgeRX)
         {
             CIRCBUF_Purge(&stCircBufferRX[nChannelNum]);
+            SPI_pChannels[nChannelNum]->RXFIFO.B.RESET = ON;
         }
         else
         {
             DoNothing();
         }
+
         if (TRUE == bPurgeTX)
         {
             CIRCBUF_Purge(&stCircBufferTX[nChannelNum]);
+            SPI_pChannels[nChannelNum]->TXFIFO.B.RESET = ON;
         }
         else
         {
@@ -723,7 +598,28 @@ STD_RESULT SPI_GetRXItemsCount(const U8    nChannelNum,
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
     
-    // TODO
+    if (FALSE == SPI_bInitialized)
+    {
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_GETRXITEMSCOUNT, DEV_ERROR_NOT_INIT);
+    }
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    {
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_GETRXITEMSCOUNT, DEV_ERROR_PARAM_0);
+    }
+    else
+    {
+        if (NULL_PTR != pBytesCount)
+        {
+            *pBytesCount =(U16)(CIRCBUF_GetNumberOfItems(&stCircBufferRX[nChannelNum]));
+            
+            nFuncResult = RESULT_OK;
+        }
+        else
+        {
+            // Report runtime error
+            SPI_REPORT_RT_ERROR(SPI_API_ID_GETRXITEMSCOUNT, RT_ERROR_NULL_PTR);
+        }
+    }
 
     return nFuncResult;
 } // end of SPI_GetRXItemsCount()
@@ -746,41 +642,24 @@ STD_RESULT SPI_SetBaudrate(const U8  nChannelNum,
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
     
-    if (SPI_CHANNEL_0 == nChannelNum &&
-        ON == SPI_CHANNEL_0_IN_USE)
+    if (FALSE == SPI_bInitialized)
     {
-        SET_SPI_CHANNEL_BAUDRATE(0);
-        nFuncResult = RESULT_OK;      
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_NOT_INIT);
     }
-    if (SPI_CHANNEL_1 == nChannelNum &&
-        ON == SPI_CHANNEL_1_IN_USE)
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
-        SET_SPI_CHANNEL_BAUDRATE(1);
-        nFuncResult = RESULT_OK;      
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_PARAM_0);
     }
-    if (SPI_CHANNEL_2 == nChannelNum &&
-        ON == SPI_CHANNEL_2_IN_USE)
+    else if (0U == nBaudrate)
     {
-        SET_SPI_CHANNEL_BAUDRATE(2);
-        nFuncResult = RESULT_OK;      
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_PARAM_1);
     }
-    if (SPI_CHANNEL_3 == nChannelNum &&
-        ON == SPI_CHANNEL_3_IN_USE)
+    else
     {
-        SET_SPI_CHANNEL_BAUDRATE(3);
-        nFuncResult = RESULT_OK;      
-    }
-    if (SPI_CHANNEL_4 == nChannelNum &&
-        ON == SPI_CHANNEL_4_IN_USE)
-    {
-        SET_SPI_CHANNEL_BAUDRATE(4);
-        nFuncResult = RESULT_OK;      
-    }
-    if (SPI_CHANNEL_5 == nChannelNum &&
-        ON == SPI_CHANNEL_5_IN_USE)
-    {
-        SET_SPI_CHANNEL_BAUDRATE(5);
-        nFuncResult = RESULT_OK;      
+        SPI_stChannelsParams[nChannelNum].nBaudRate = nBaudrate;
+        SPI_SetupChannelClk(nChannelNum);
+        
+        nFuncResult = RESULT_OK;
     }
 
     return nFuncResult;
@@ -811,12 +690,97 @@ STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
                                  const U8      nCSNum)
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
+    
+    if (FALSE == SPI_bInitialized)
+    {
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_NOT_INIT);
+    }
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    {
+        SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_0);
+    }
+    else
+    {
+        nFuncResult = RESULT_OK;
 
-    SPI_stDynamicParams[nChannelNum].bActiveClockPolarity = bActiveClockPolarity;
-    SPI_stDynamicParams[nChannelNum].bClockPhase          = bClockPhase;
-    SPI_stDynamicParams[nChannelNum].bBitOrder            = bBitOrder;
-    SPI_stDynamicParams[nChannelNum].nDataFrameSize       = nDataFrameSize;
-    SPI_stDynamicParams[nChannelNum].nCSNum               = nCSNum;
+        // Setup clock polarity
+        if (SPI_CLOCK_POL_LOW == bActiveClockPolarity ||
+            SPI_CPOL_0        == bActiveClockPolarity)
+        {
+            SPI_stChannelsParams[nChannelNum].bActiveClockPolarity = SPI_CFG_CPOL_0;
+        }
+        else if (SPI_CLOCK_POL_HIGH == bActiveClockPolarity ||
+                 SPI_CPOL_1         == bActiveClockPolarity)
+        {
+            SPI_stChannelsParams[nChannelNum].bActiveClockPolarity = SPI_CFG_CPOL_1;
+        }
+        else
+        {
+            nFuncResult = RESULT_NOT_OK;
+            SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_1);
+        }
+
+        // Setup clock phase
+        if (SPI_PHASE_RISING == bClockPhase ||
+            SPI_CPHA_0       == bClockPhase)
+        {
+            SPI_stChannelsParams[nChannelNum].bClockPhase = SPI_CFG_CPHA_0;
+        }
+        else if (SPI_PHASE_FALLING == bClockPhase ||
+                 SPI_CPHA_1        == bClockPhase)
+        {
+            SPI_stChannelsParams[nChannelNum].bClockPhase = SPI_CFG_CPHA_1;
+        }
+        else
+        {
+            nFuncResult = RESULT_NOT_OK;
+            SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_2);
+        }
+
+        // Setup bit order
+        if (SPI_BIT_ORDER_LSB_FIRST == bBitOrder)
+        {
+            SPI_stChannelsParams[nChannelNum].bBitOrder = SPI_CFG_BIT_ORDER_LSB_FIRST;
+        }
+        else if (SPI_BIT_ORDER_MSB_FIRST == bBitOrder)
+        {
+            SPI_stChannelsParams[nChannelNum].bBitOrder = SPI_CFG_BIT_ORDER_MSB_FIRST;
+        }
+        else
+        {
+            nFuncResult = RESULT_NOT_OK;
+            SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_3);
+        }
+
+        // Setup frame size
+        if ((SPI_DATA_SIZE_MIN > nDataFrameSize) ||
+            (SPI_DATA_SIZE_MAX < nDataFrameSize))
+        {
+            SPI_stChannelsParams[nChannelNum].nDataFrameSize = nDataFrameSize;
+        }
+        else
+        {
+            nFuncResult = RESULT_NOT_OK;
+            SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_4);
+        }
+        
+        // Setup CS num
+        if (SPI_CS_NUM_MIN <= nCSNum &&
+            SPI_CS_NUM_MAX >= nCSNum &&
+            SPI_CS_AVAILABLE == SPI_stChannelsParams[nChannelNum].nCSAvailble[nCSNum])
+        {
+            SPI_stChannelsParams[nChannelNum].nCSNum = nCSNum;
+        }
+        else
+        {
+            nFuncResult = RESULT_NOT_OK;
+            SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_5);
+        }
+
+        // Apply changes 
+        while(ON == SPI_pChannels[nChannelNum]->STS.B.BUSY){}
+        SPI_SetupChannelParams(nChannelNum);
+    }
 
     return nFuncResult;
 } // end of SPI_SetTransferFormat()
@@ -843,7 +807,7 @@ STD_RESULT SPI_SetCallbackFunction(const U8           nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETCALLBACKFUNCTION, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CH_NOT_ENABLED(nChannelNum))
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETCALLBACKFUNCTION, DEV_ERROR_PARAM_0);
     }
@@ -861,7 +825,6 @@ STD_RESULT SPI_SetCallbackFunction(const U8           nChannelNum,
             SPI_REPORT_RT_ERROR(SPI_API_ID_SETCALLBACKFUNCTION, RT_ERROR_NULL_PTR);
         }
     }
-    return nFuncResult;
 
     return nFuncResult;
 } // end of SPI_SetCallbackFunction()
@@ -885,7 +848,7 @@ void SPI_HighLevel_RX_ISR(const U8 nChannelNum)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_RX_ISR, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CH_NOT_ENABLED(nChannelNum))
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_RX_ISR, DEV_ERROR_PARAM_0);
     }
@@ -926,7 +889,7 @@ void SPI_HighLevel_TX_ISR(const U8 nChannelNum)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_TX_ISR, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CH_NOT_ENABLED(nChannelNum))
+    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_TX_ISR, DEV_ERROR_PARAM_0);
     }
@@ -953,6 +916,300 @@ void SPI_HighLevel_TX_ISR(const U8 nChannelNum)
 //**************************************************************************************************
 
 //**************************************************************************************************
+//! Initialize channels params struct
+//! \note       None.
+//! \param[in]  None.
+//! \return     None.
+//**************************************************************************************************
+static void SPI_Init_Params(void)
+{
+    // Fill SPI0 param structure
+    #if (ON == SPI_CHANNEL_0_IN_USE)
+        SPI_stChannelsParams[SPI_CHANNEL_0].bChannelEnabled      = TRUE;
+
+        #if (SPI_MODE_MASTER == SPI_CHANNEL_0_MODE)
+            SPI_stChannelsParams[SPI_CHANNEL_0].bChannelMode     = SPI_CFG_MASTER;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_0].bChannelMode     = SPI_CFG_SLAVE;
+        #endif
+
+        SPI_stChannelsParams[SPI_CHANNEL_0].bActiveClockPolarity = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_0].bClockPhase          = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_0].bBitOrder            = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_0].nDataFrameSize       = SPI_DATA_SIZE_MAX;
+        SPI_stChannelsParams[SPI_CHANNEL_0].nBaudRate            = SPI_CHANNEL_0_BAUDRATE;
+        
+        #if (ON == SPI_CHANNEL_0_CS_3_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSNum = SPI_CS_NUM_3;
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_0_CS_2_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSNum = SPI_CS_NUM_2;
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_0_CS_1_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSNum = SPI_CS_NUM_1;
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_0_CS_0_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSNum = SPI_CS_NUM_0;
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_0].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_NOT_AVAILABLE;
+        #endif
+    #else
+        SPI_stChannelsParams[SPI_CHANNEL_0].bChannelEnabled = FALSE; 
+    #endif
+
+    // Fill SPI1 param structure
+    #if (ON == SPI_CHANNEL_1_IN_USE)
+        SPI_stChannelsParams[SPI_CHANNEL_1].bChannelEnabled      = TRUE;
+        
+        #if (SPI_MODE_MASTER == SPI_CHANNEL_1_MODE)
+            SPI_stChannelsParams[SPI_CHANNEL_1].bChannelMode     = SPI_CFG_MASTER;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_1].bChannelMode     = SPI_CFG_SLAVE;
+        #endif
+
+        SPI_stChannelsParams[SPI_CHANNEL_1].bActiveClockPolarity = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_1].bClockPhase          = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_1].bBitOrder            = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_1].nDataFrameSize       = SPI_DATA_SIZE_MAX;
+        SPI_stChannelsParams[SPI_CHANNEL_1].nBaudRate            = SPI_CHANNEL_1_BAUDRATE;
+        
+        #if (ON == SPI_CHANNEL_1_CS_3_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSNum = SPI_CS_NUM_3;
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_1_CS_2_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSNum = SPI_CS_NUM_2;
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_1_CS_1_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSNum = SPI_CS_NUM_1;
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_1_CS_0_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSNum = SPI_CS_NUM_0;
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_1].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_NOT_AVAILABLE;
+        #endif
+    #else
+        SPI_stChannelsParams[SPI_CHANNEL_1].bChannelEnabled = FALSE; 
+    #endif
+
+    // Fill SPI2 param structure
+    #if (ON == SPI_CHANNEL_2_IN_USE)
+        SPI_stChannelsParams[SPI_CHANNEL_2].bChannelEnabled      = TRUE;
+        
+        #if (SPI_MODE_MASTER == SPI_CHANNEL_2_MODE)
+            SPI_stChannelsParams[SPI_CHANNEL_2].bChannelMode     = SPI_CFG_MASTER;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_2].bChannelMode     = SPI_CFG_SLAVE;
+        #endif
+
+        SPI_stChannelsParams[SPI_CHANNEL_2].bActiveClockPolarity = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_2].bClockPhase          = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_2].bBitOrder            = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_2].nDataFrameSize       = SPI_DATA_SIZE_MAX;
+        SPI_stChannelsParams[SPI_CHANNEL_2].nBaudRate            = SPI_CHANNEL_2_BAUDRATE;
+        
+        #if (ON == SPI_CHANNEL_2_CS_3_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSNum = SPI_CS_NUM_3;
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_2_CS_2_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSNum = SPI_CS_NUM_2;
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_2_CS_1_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSNum = SPI_CS_NUM_1;
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_2_CS_0_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSNum = SPI_CS_NUM_0;
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_2].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_NOT_AVAILABLE;
+        #endif
+    #else
+        SPI_stChannelsParams[SPI_CHANNEL_2].bChannelEnabled = FALSE; 
+    #endif
+
+    // Fill SPI3 param structure
+    #if (ON == SPI_CHANNEL_3_IN_USE)
+        SPI_stChannelsParams[SPI_CHANNEL_3].bChannelEnabled      = TRUE;
+        
+        #if (SPI_MODE_MASTER == SPI_CHANNEL_3_MODE)
+            SPI_stChannelsParams[SPI_CHANNEL_3].bChannelMode     = SPI_CFG_MASTER;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_3].bChannelMode     = SPI_CFG_SLAVE;
+        #endif
+
+        SPI_stChannelsParams[SPI_CHANNEL_3].bActiveClockPolarity = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_3].bClockPhase          = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_3].bBitOrder            = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_3].nDataFrameSize       = SPI_DATA_SIZE_MAX;
+        SPI_stChannelsParams[SPI_CHANNEL_3].nBaudRate            = SPI_CHANNEL_3_BAUDRATE;
+        
+        #if (ON == SPI_CHANNEL_3_CS_3_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSNum = SPI_CS_NUM_3;
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_3_CS_2_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSNum = SPI_CS_NUM_2;
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_3_CS_1_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSNum = SPI_CS_NUM_1;
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_3_CS_0_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSNum = SPI_CS_NUM_0;
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_NOT_AVAILABLE;
+        #endif
+    #else
+        SPI_stChannelsParams[SPI_CHANNEL_3].bChannelEnabled = FALSE; 
+    #endif
+
+    // Fill SPI4 param structure
+    #if (ON == SPI_CHANNEL_4_IN_USE)
+        SPI_stChannelsParams[SPI_CHANNEL_4].bChannelEnabled      = TRUE;
+        
+        #if (SPI_MODE_MASTER == SPI_CHANNEL_4_MODE)
+            SPI_stChannelsParams[SPI_CHANNEL_4].bChannelMode     = SPI_CFG_MASTER;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_4].bChannelMode     = SPI_CFG_SLAVE;
+        #endif
+
+        SPI_stChannelsParams[SPI_CHANNEL_4].bActiveClockPolarity = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_4].bClockPhase          = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_4].bBitOrder            = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_4].nDataFrameSize       = SPI_DATA_SIZE_MAX;
+        SPI_stChannelsParams[SPI_CHANNEL_4].nBaudRate            = SPI_CHANNEL_4_BAUDRATE;
+        
+        #if (ON == SPI_CHANNEL_4_CS_3_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSNum = SPI_CS_NUM_3;
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_4_CS_2_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSNum = SPI_CS_NUM_2;
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_4_CS_1_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSNum = SPI_CS_NUM_1;
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_4_CS_0_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSNum = SPI_CS_NUM_0;
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_NOT_AVAILABLE;
+        #endif
+    #else
+        SPI_stChannelsParams[SPI_CHANNEL_4].bChannelEnabled = FALSE; 
+    #endif
+
+    // Fill SPI5 param structure
+    #if (ON == SPI_CHANNEL_5_IN_USE)
+        SPI_stChannelsParams[SPI_CHANNEL_5].bChannelEnabled      = TRUE;
+        
+        #if (SPI_MODE_MASTER == SPI_CHANNEL_5_MODE)
+            SPI_stChannelsParams[SPI_CHANNEL_5].bChannelMode     = SPI_CFG_MASTER;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_5].bChannelMode     = SPI_CFG_SLAVE;
+        #endif
+
+        SPI_stChannelsParams[SPI_CHANNEL_5].bActiveClockPolarity = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_5].bClockPhase          = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_5].bBitOrder            = FALSE;
+        SPI_stChannelsParams[SPI_CHANNEL_5].nDataFrameSize       = SPI_DATA_SIZE_MAX;
+        SPI_stChannelsParams[SPI_CHANNEL_5].nBaudRate            = SPI_CHANNEL_5_BAUDRATE;
+        
+        #if (ON == SPI_CHANNEL_5_CS_3_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSNum = SPI_CS_NUM_3;
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_5_CS_2_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSNum = SPI_CS_NUM_2;
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_5_CS_1_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSNum = SPI_CS_NUM_1;
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_1] = SPI_CS_NOT_AVAILABLE;
+        #endif
+
+        #if (ON == SPI_CHANNEL_5_CS_0_IN_USE)
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSNum = SPI_CS_NUM_0;
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_AVAILABLE;
+        #else
+            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_0] = SPI_CS_NOT_AVAILABLE;
+        #endif
+    #else
+        SPI_stChannelsParams[SPI_CHANNEL_5].bChannelEnabled = FALSE; 
+    #endif
+   
+} // end of SPI_Init_Params
+
+
+
+//**************************************************************************************************
 //! Initializes bufers and another software modules for SPI
 //! \note       None.
 //! \param[in]  None.
@@ -960,31 +1217,26 @@ void SPI_HighLevel_TX_ISR(const U8 nChannelNum)
 //**************************************************************************************************
 static void SPI_Init_SW(void)
 {
-    for (U8 nChannelNum = 0; nChannelNum < SPI_CHANNEL_QNT; ++nChannelNum)
+    for (U8 nChannelNum = 0; nChannelNum < SPI_CHANNEL_QTY; ++nChannelNum)
     {
         stCircBufferRX[nChannelNum].itemSize = sizeof(U32);
         stCircBufferTX[nChannelNum].itemSize = sizeof(U32);
 
         CIRCBUF_Init(&stCircBufferRX[nChannelNum],
-                    pCitcBuffDataRX,
-                    SIZE_OF_ARRAY(pCitcBuffDataRX));
+                     pCitcBuffDataRX[nChannelNum],
+                     SIZE_OF_ARRAY(pCitcBuffDataRX[nChannelNum]));
 
         CIRCBUF_Init(&stCircBufferTX[nChannelNum],
-                    pCitcBuffDataTX,
-                    SIZE_OF_ARRAY(pCitcBuffDataTX));
+                     pCitcBuffDataTX[nChannelNum],
+                     SIZE_OF_ARRAY(pCitcBuffDataTX[nChannelNum]));
 
         CIRCBUF_Purge(&stCircBufferRX[nChannelNum]);
         CIRCBUF_Purge(&stCircBufferTX[nChannelNum]);
-
-        SPI_SetTransferFormat(nChannelNum,              
-                              FALSE,                
-                              FALSE,                
-                              FALSE,                
-                              SPI_DATA_SIZE_MAX,    
-                              0U); 
     }
 
 } // end of SPI_Init_SW
+
+
 
 //**************************************************************************************************
 //! Initializes all SPI channels registers
@@ -1003,69 +1255,112 @@ static void SPI_Init_HW(void)
 
     // If port X is used, take it's clk on
     #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_A) )
-        SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLA)
+        SPI_TakeOnPortClk(IPC_PCTRLA_INDEX);
     #endif
 
     #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_B) )
-        SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLB)
+        SPI_TakeOnPortClk(IPC_PCTRLB_INDEX);
     #endif
 
     #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_C) )
-        SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLC)
+        SPI_TakeOnPortClk(IPC_PCTRLC_INDEX);
     #endif
 
     #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_D) )
-        SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLD)
+        SPI_TakeOnPortClk(IPC_PCTRLD_INDEX);
     #endif
 
     #if (TRUE == SPI_GPIO_PORT_IN_USE(SPI_PORT_E) )
-        SPI_GPIO_PORT_TAKE_ON_CLK(IPC_PCTRLE)
+        SPI_TakeOnPortClk(IPC_PCTRLE_INDEX);
     #endif
-    
+
     // If channel X is used, setup GPIO MUX and 
     // pullup\pulldown for it
     #if (ON == SPI_CHANNEL_0_IN_USE)
         SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_0);
-        SPI_stDynamicParams[SPI_CHANNEL_0].nBaudRate = SPI_CHANNEL_0_BAUDRATE;
-        SPI_CHANNEL_SET_CFG(0)
-        SPI_CHANNEL_SET_IRQ(0)
+        SPI_ConfigureChannel(SPI_CHANNEL_0);
     #endif
 
     #if (ON == SPI_CHANNEL_1_IN_USE)
         SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_1);
-        SPI_stDynamicParams[SPI_CHANNEL_1].nBaudRate = SPI_CHANNEL_1_BAUDRATE;
-        SPI_CHANNEL_SET_CFG(1)
-        SPI_CHANNEL_SET_IRQ(1)
+        SPI_ConfigureChannel(SPI_CHANNEL_1);
     #endif
 
     #if (ON == SPI_CHANNEL_2_IN_USE)
         SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_2);
-        SPI_stDynamicParams[SPI_CHANNEL_2].nBaudRate = SPI_CHANNEL_2_BAUDRATE;
-        SPI_CHANNEL_SET_CFG(2)
-        SPI_CHANNEL_SET_IRQ(2)
+        SPI_ConfigureChannel(SPI_CHANNEL_2);
     #endif
 
     #if (ON == SPI_CHANNEL_3_IN_USE)
         SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_3);
-        SPI_stDynamicParams[SPI_CHANNEL_3].nBaudRate = SPI_CHANNEL_3_BAUDRATE;
-        SPI_CHANNEL_SET_CFG(3)
-        SPI_CHANNEL_SET_IRQ(3)
+        SPI_ConfigureChannel(SPI_CHANNEL_3);
     #endif
 
     #if (ON == SPI_CHANNEL_4_IN_USE)
         SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_4);
-        SPI_stDynamicParams[SPI_CHANNEL_4].nBaudRate = SPI_CHANNEL_4_BAUDRATE;
-        SPI_CHANNEL_SET_CFG(4)
-        SPI_CHANNEL_SET_IRQ(4)
+        SPI_ConfigureChannel(SPI_CHANNEL_4);
     #endif
 
     #if (ON == SPI_CHANNEL_5_IN_USE)
         SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_5);
-        SPI_stDynamicParams[SPI_CHANNEL_5].nBaudRate = SPI_CHANNEL_5_BAUDRATE;
-        SPI_CHANNEL_SET_CFG(5)
-        SPI_CHANNEL_SET_IRQ(5)
+        SPI_ConfigureChannel(SPI_CHANNEL_5);
     #endif
+
 } // end of SPI_Init_HW
+
+
+
+//**************************************************************************************************
+//! DeInitializes all bufers and another software modules for SPI
+//! \note       None.
+//! \param[in]  None.
+//! \return     None.
+//**************************************************************************************************
+void SPI_DeInit_SW()
+{   
+    for (U8 nChannelNum = 0; nChannelNum < SPI_CHANNEL_QTY; ++nChannelNum)
+    {
+        SPI_Purge(nChannelNum,
+                  TRUE,
+                  TRUE);
+    }
+} // end of SPI_DeInit_SW
+
+
+
+//**************************************************************************************************
+//! DeInitializes all SPI channels registers
+//! \note       None.
+//! \param[in]  None.
+//! \return     None.
+//**************************************************************************************************
+void SPI_DeInit_HW()
+{
+    // If channel X is used, deinit IRQ 
+    // And take off enable bit
+    #if (ON == SPI_CHANNEL_0_IN_USE)
+        SPI_DisableChannel(SPI_CHANNEL_0);
+    #endif
+
+    #if (ON == SPI_CHANNEL_1_IN_USE)
+        SPI_DisableChannel(SPI_CHANNEL_1);
+    #endif
+
+    #if (ON == SPI_CHANNEL_2_IN_USE)
+        SPI_DisableChannel(SPI_CHANNEL_2);
+    #endif
+
+    #if (ON == SPI_CHANNEL_3_IN_USE)
+        SPI_DisableChannel(SPI_CHANNEL_3);
+    #endif
+
+    #if (ON == SPI_CHANNEL_4_IN_USE)
+        SPI_DisableChannel(SPI_CHANNEL_4);
+    #endif
+      
+} // end of SPI_DeInit_HW
+
+
 
 //**************************************************************************************************
 //! Start SPI transfer
@@ -1087,11 +1382,11 @@ static BOOLEAN SPI_StartTransfer(const U8 nChannelNum)
         // Get TX data from the buffer        
         if (CIRCBUF_NO_ERR == CIRCBUF_GetData(&nTxData, &stCircBufferTX[nChannelNum]))
         {
-            // if (OFF == SPI_pChannels[nChannelNum]->STS.B.BUSY)
-            {
-                SPI_pChannels[nChannelNum]->DATA.B.DATA = nTxData;
-                bFuncResult = TRUE;
-            }
+            while (ON == SPI_pChannels[nChannelNum]->STS.B.BUSY) {}
+            
+            SPI_pChannels[nChannelNum]->DATA.B.DATA = nTxData;
+            bFuncResult = TRUE;
+            
         }
         else
         {
@@ -1107,6 +1402,130 @@ static BOOLEAN SPI_StartTransfer(const U8 nChannelNum)
 
     return bFuncResult;
 } // end of SPI_StartTransfer()
+
+
+
+//**************************************************************************************************
+//! Take on clock for specific port
+//! \note       None.
+//! \param[in]  nPortNum  - IPC port number
+//! \return     None.
+//**************************************************************************************************
+static void SPI_TakeOnPortClk(U8 nPortNum)
+{
+    if (ON != IPC.CTRL[nPortNum].B.CLKEN)
+    {
+        IPC.CTRL[nPortNum].B.CLKEN = ON;
+    } 
+} // end of SPI_TakeOnPortClk
+
+
+
+//**************************************************************************************************
+//! Setup all dividers and clk params
+//! \note       None.
+//! \param[in]  nChannelNum  - SPI channel number
+//! \return     None.
+//**************************************************************************************************
+static void SPI_SetupChannelClk(U8 nChannelNum)
+{ 
+    U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / 
+                    (IPC_CTRL_DIV_5 + 1U)    /                        
+                    TXCFG_DIV_VALUE_2        /                        
+                    SPI_stChannelsParams[nChannelNum].nBaudRate;           
+                                                                      
+    U8 nTXCFG_Prescaller = TXCFG_DIV_2;                               
+                                                                      
+    if (nDivider > 128U)                                              
+    {                                                                 
+        nDivider = nDivider/8;                                        
+        nTXCFG_Prescaller = TXCFG_DIV_16;                             
+    }                                                                 
+    if (nDivider > 128U)                                              
+    {                                                                 
+        nDivider = nDivider/8;                                        
+        nTXCFG_Prescaller = TXCFG_DIV_128;                            
+    }                                                                 
+
+    SPI_pChannels[nChannelNum]->TXCFG.B.PRESCALE = nTXCFG_Prescaller;                
+    SPI_pChannels[nChannelNum]->CLK.B.DIV = (U8)(nDivider*2U-2U); 
+} // end of SPI_SetupChannelClk
+
+
+
+//**************************************************************************************************
+//! Setup all transmit]receive params
+//! \note       None.
+//! \param[in]  nChannelNum  - SPI channel number
+//! \return     None.
+//**************************************************************************************************
+static void SPI_SetupChannelParams(U8 nChannelNum)
+{
+    SPI_pChannels[nChannelNum]->TXCFG.B.CPOL    = SPI_stChannelsParams[nChannelNum].bActiveClockPolarity;
+    SPI_pChannels[nChannelNum]->TXCFG.B.CPHA    = SPI_stChannelsParams[nChannelNum].bClockPhase;
+    SPI_pChannels[nChannelNum]->TXCFG.B.LSBF    = SPI_stChannelsParams[nChannelNum].bBitOrder;
+    SPI_pChannels[nChannelNum]->TXCFG.B.FRAMESZ = SPI_stChannelsParams[nChannelNum].nDataFrameSize - 1U;
+    SPI_pChannels[nChannelNum]->TXCFG.B.PCS     = SPI_stChannelsParams[nChannelNum].nCSNum;
+
+} // end of SPI_SetupChannelParams
+
+
+
+//**************************************************************************************************
+//! Configure channel
+//! \note       None.
+//! \param[in]  nChannelNum  - SPI channel number
+//! \return     None.
+//**************************************************************************************************
+static void SPI_ConfigureChannel(U8 nChannelNum)
+{
+    static U8 SPI_IpcSpiIndexes[] = {IPC_SPI0_INDEX, IPC_SPI1_INDEX, IPC_SPI2_INDEX,
+                                     IPC_SPI3_INDEX, IPC_SPI4_INDEX, IPC_SPI5_INDEX};
+
+    IPC.CTRL[SPI_IpcSpiIndexes[nChannelNum]].B.DIV = IPC_CTRL_DIV_5;        
+    IPC.CTRL[SPI_IpcSpiIndexes[nChannelNum]].B.SRCSEL = IPC_SRCSEL_PLL;  
+
+    if (OFF == IPC.CTRL[SPI_IpcSpiIndexes[nChannelNum]].B.CLKEN)            
+    {                                                                 
+        IPC.CTRL[SPI_IpcSpiIndexes[nChannelNum]].B.CLKEN = ON;              
+    } 
+
+    SPI_SetupChannelClk(nChannelNum); 
+
+    SPI_pChannels[nChannelNum]->CTRL.B.MODE = SPI_stChannelsParams[nChannelNum].bChannelMode;         
+    SPI_pChannels[nChannelNum]->CTRL.B.EN = ON;           
+
+    while(ON != SPI_pChannels[nChannelNum]->CTRL.B.EN){}  
+
+    SPI_pChannels[nChannelNum]->CLK.B.SCKPCS = CLK_SCKPCS_VALUE;
+    SPI_pChannels[nChannelNum]->CLK.B.PCSSCK = CLK_PCSSCK_VALUE;
+    SPI_pChannels[nChannelNum]->CLK.B.FMDLY  = CLK_FMDLY_VALUE;
+
+    SPI_SetupChannelParams(nChannelNum); 
+
+    SPI_pChannels[nChannelNum]->INTE.B.RXIE = ON;
+    SPI_pChannels[nChannelNum]->INTE.B.TCIE = ON;
+} // end of SPI_ConfigureChannel
+
+
+
+//**************************************************************************************************
+//! Take off channel
+//! \note       None.
+//! \param[in]  nChannelNum  - SPI channel number
+//! \return     None.
+//**************************************************************************************************
+static void SPI_DisableChannel(U8 nChannelNum)
+{
+    SPI_pChannels[nChannelNum]->INTE.B.RXIE = OFF;
+    SPI_pChannels[nChannelNum]->INTE.B.TCIE = OFF;
+
+    SPI_pChannels[nChannelNum]->CTRL.B.EN = OFF;           
+
+    while(OFF != SPI_pChannels[nChannelNum]->CTRL.B.EN){}  
+
+} // end of SPI_DisableChannel
+
 
 
 //****************************************** end of file *******************************************

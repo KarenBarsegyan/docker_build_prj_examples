@@ -558,10 +558,10 @@
 #define IRQ_27_ALIAS_FUN2                                              IRQ_DEFAULT_HANDLER
 //! The group priority level for the IRQ_27 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_GROUP_PRIORITY_LEVEL.
-#define IRQ_27_GROUP_PRIORITY_LEVEL                                    (IRQ_GROUP_PRIORITY_LEVEL_MIN)
+#define IRQ_27_GROUP_PRIORITY_LEVEL                                    (IRQ_GROUP_PRIORITY_LEVEL_MIN-1U)
 //! The sub-priority level for the IRQ_27 interrupt handler. \n
 //! For valid values search for #valid_values_IRQ_x_SUB_PRIORITY_LEVEL.
-#define IRQ_27_SUB_PRIORITY_LEVEL                                      (IRQ_SUB_PRIORITY_LEVEL_MIN)
+#define IRQ_27_SUB_PRIORITY_LEVEL                                      (IRQ_SUB_PRIORITY_LEVEL_MIN-1U)
 
 //! Enable IRQ_28 \n
 //! Valid values: ON, OFF.

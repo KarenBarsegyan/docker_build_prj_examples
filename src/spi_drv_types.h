@@ -39,6 +39,18 @@
 // Declarations of global (public) data types
 //**************************************************************************************************
 
+typedef struct
+{
+    BOOLEAN bChannelEnabled;
+    BOOLEAN bChannelMode;
+    BOOLEAN bActiveClockPolarity;
+    BOOLEAN bClockPhase;
+    BOOLEAN bBitOrder;
+    U8      nDataFrameSize;
+    U8      nCSNum;
+    U8      nCSAvailble[4U];
+    U32     nBaudRate;
+} SPI_CHANNEL_PARAMS;
 
 
 
@@ -46,7 +58,7 @@
 // Definitions of global (public) constants
 //**************************************************************************************************
 
-//! \name All possible port names
+//! \name All possible GPIO port names
 //! @{
 #define SPI_PORT_A                      (0U)
 #define SPI_PORT_B                      (1U)
@@ -58,16 +70,9 @@
 #define SPI_PORT_NOT_USED               (255U)
 
 #define SPI_PORT_QTY                    (SPI_PORT_MAX + 1U)
-
-#define IPC_PCTRLA                      (0U)
-#define IPC_PCTRLB                      (1U)
-#define IPC_PCTRLC                      (2U)
-#define IPC_PCTRLD                      (3U)
-#define IPC_PCTRLE                      (4U)
-#define IPC_PCTRLMIN                    (SPI_PORT_A)
-#define IPC_PCTRLMAX                    (SPI_PORT_E)
-#define IPC_PCTRLNOT_USED               (255U)
 //! @}
+
+
 
 //! \name IPC Dividers
 //! @{
@@ -89,6 +94,8 @@
 #define IPC_CTRL_DIV_16                 (15U)
 //! @}
 
+
+
 //! \name IPC Source
 //! @{
 #define IPC_SRCSEL_NO_CLOCK             (0U)
@@ -98,6 +105,8 @@
 #define IPC_SRCSEL_SXOSC                (4U)
 #define IPC_SRCSEL_PLL                  (5U)
 //! @}
+
+
 
 //! \name TXCFG Dividers
 //! @{
@@ -120,8 +129,7 @@
 #define TXCFG_DIV_VALUE_128             (128U)
 //! @}
 
-//! Port quantity
-#define SPI_PORT_QNT                    (SPI_PORT_MAX + 1U)
+
 
 //! \name All possible pin names
 //! @{
@@ -160,10 +168,11 @@
 #define SPI_PIN_MIN                     (SPI_PIN_0)
 #define SPI_PIN_MAX                     (SPI_PIN_31)
 #define SPI_PIN_NOT_USED                (255U)
+
+#define SPI_PIN_QNT                     (SPI_PIN_MAX + 1U)
 //! @}
 
-//! Pin quantity
-#define SPI_PIN_QNT                     (SPI_PIN_MAX + 1U)
+
 
 //! \name Pin pull-up modes
 //! @{
@@ -171,11 +180,15 @@
 #define SPI_PULLUP_MODE_ENABLE          (1U)
 //! @}
 
+
+
 //! \name Pin output modes
 //! @{
 #define SPI_OUTPUT_MODE_OPEN_DRAIN      (0U)
 #define SPI_OUTPUT_MODE_PUSH_PULL       (1U)
 //! @}
+
+
 
 //! \name SPI channels definitions
 //! @{
@@ -187,10 +200,11 @@
 #define SPI_CHANNEL_5                   (5U)
 #define SPI_CHANNEL_MIN                 (SPI_CHANNEL_0)
 #define SPI_CHANNEL_MAX                 (SPI_CHANNEL_5)
+
+#define SPI_CHANNEL_QTY                 (SPI_CHANNEL_MAX + 1U)
 //! @}
 
-//! Channel quantity
-#define SPI_CHANNEL_QNT                 (SPI_CHANNEL_MAX + 1U)
+
 
 //! \name CS state
 //! @{
@@ -198,11 +212,15 @@
 #define SPI_CS_INACTIVE                 (LOGIC_1)
 //! @}
 
+
+
 //! \name Bit states
 //! @{
 #define SPI_BIT_SET                     (1U)
 #define SPI_BIT_CLR                     (0U)
 //! @}
+
+
 
 //! \name IPC spi control indexes
 //! @{
@@ -213,6 +231,7 @@
 #define IPC_SPI4_INDEX                  (46U)
 #define IPC_SPI5_INDEX                  (47U)
 //! @}
+
 
 //! \name IPC gpio port control indexes
 //! @{
@@ -226,19 +245,14 @@
 
 //! \name SPI Channel Settings
 //! @{
-
-//! MAX BAUDRATE value
 #define SPI_MAX_BAUDRATE                (5000000UL)
-//! MIN BAUDRATE value
 #define SPI_MIN_BAUDRATE                (1000UL)
-//! MAX clock polarity value
 #define SPI_MAX_POLARITY_VALUE          (3U)
-//! MAX clock phase value
 #define SPI_MAX_PHASE_VALUE             (3U)
-//! MAX bit order value
 #define SPI_MAX_BIT_ORDER_VALUE         (1U)
-
 //! @}
+
+
 
 //! \name Data size
 //! @{
@@ -265,6 +279,37 @@
 //! @}
 
 
+
+//! \name CS pin number
+//! @{
+#define SPI_CS_NUM_0                    (0U)
+#define SPI_CS_NUM_1                    (1U)
+#define SPI_CS_NUM_2                    (2U)
+#define SPI_CS_NUM_3                    (3U)
+#define SPI_CS_AVAILABLE                (254U)
+#define SPI_CS_NOT_AVAILABLE            (255U)
+
+#define SPI_CS_NUM_MIN                  (SPI_CS_NUM_0)
+#define SPI_CS_NUM_MAX                  (SPI_CS_NUM_3)
+#define SPI_CS_QTY                      (SPI_CS_NUM_MAX + 1U)
+//! @}
+
+
+
+//! \name SPI settings values
+//! @{
+#define SPI_CFG_CPOL_0                  (0U)
+#define SPI_CFG_CPOL_1                  (1U)
+
+#define SPI_CFG_CPHA_0                  (0U)
+#define SPI_CFG_CPHA_1                  (1U)
+
+#define SPI_CFG_MASTER                  (1U)
+#define SPI_CFG_SLAVE                   (0U)
+
+#define SPI_CFG_BIT_ORDER_LSB_FIRST     (1U)
+#define SPI_CFG_BIT_ORDER_MSB_FIRST     (0U)
+//! @}
 
 #endif  // SPI_DRV_TYPES_H
 
