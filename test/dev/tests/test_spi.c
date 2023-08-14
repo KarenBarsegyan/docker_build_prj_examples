@@ -93,12 +93,17 @@ void TEST_100ms(void)
     SPI_Purge(1U, TRUE, TRUE);
     SPI_Write(1U, aDataSlave, SIZE_OF_ARRAY(aDataSlave));
     SPI_Write(0U, aDataMaster, SIZE_OF_ARRAY(aDataMaster));
+
+    static U32 nBaudRate = 1000UL; 
+    SPI_SetBaudrate(0U, nBaudRate);
+    nBaudRate += 1000UL;
+    if (nBaudRate > 5000000UL) 
+    {
+        nBaudRate = 1000UL;
+    }
 }
 
 void TEST_1sec(void) 
 {
-    static U32 nBaudRate = 30000UL; 
 
-    SPI_SetBaudrate(0U, nBaudRate);
-    SPI_SetBaudrate(1U, nBaudRate*2);
 }

@@ -298,6 +298,15 @@ typedef struct
 
 
 
+//! \name SPI CLK settings values
+//! @{
+#define CLK_SCKPCS_VALUE    (0xFU)
+#define CLK_PCSSCK_VALUE    (0xFU)
+#define CLK_FMDLY_VALUE     (0xFU)
+//! @}
+
+
+
 //! \name SPI settings values
 //! @{
 #define SPI_CFG_CPOL_0                  (0U)

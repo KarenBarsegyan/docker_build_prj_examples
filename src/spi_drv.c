@@ -223,21 +223,12 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 //! @}
 
 
-//! \name SPI CLK settings values
-//! @{
-#define CLK_SCKPCS_VALUE    (0xFU)
-#define CLK_PCSSCK_VALUE    (0xFU)
-#define CLK_FMDLY_VALUE     (0xFU)
-
-//! @}
-
-
 
 //**************************************************************************************************
 // Definitions of static global (private) variables
 //**************************************************************************************************
 
-//! Initialization flag
+//! SPI Initialized Flag
 static BOOLEAN SPI_bInitialized;
 
 //! Port control registers array
@@ -261,15 +252,22 @@ static SPI_tag* SPI_pChannels[SPI_CHANNEL_QTY] =
     &SPI5
 };
 
-//! Data buffers for Circ Buf module
+//! RX circ buffer structure
 stCIRCBUF stCircBufferRX [SPI_CHANNEL_QTY];
+//! RX data buffer for Circ Buf module
 U32       pCitcBuffDataRX[SPI_CHANNEL_QTY][SPI_CHANNEL_RX_FIFO_SIZE];
+//! TX circ buffer structure
 stCIRCBUF stCircBufferTX [SPI_CHANNEL_QTY];
+//! TX data buffer for Circ Buf module
 U32       pCitcBuffDataTX[SPI_CHANNEL_QTY][SPI_CHANNEL_TX_FIFO_SIZE];
 
+//! Static and dynamic params of all channels
 SPI_CHANNEL_PARAMS SPI_stChannelsParams[SPI_CHANNEL_QTY];
 
+//! Links to callback functions
 SPI_CALLBACK SPI_CallBacks[SPI_CHANNEL_QTY];
+
+
 
 //**************************************************************************************************
 // Declarations of local (private) functions
@@ -286,6 +284,7 @@ static void SPI_TakeOnPortClk(U8 nPortNum);
 static void SPI_SetupChannelClk(U8 nChannelNum);
 static void SPI_SetupChannelParams(U8 nChannelNum);
 static void SPI_ConfigureChannel(U8 nChannelNum);
+
 
 
 //**************************************************************************************************
@@ -388,7 +387,9 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_PARAM_0);
     }
@@ -396,7 +397,8 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_PARAM_1);
     }
-    else if (NULL_PTR == nDataFrameQty)
+    else if (0U                       > nDataFrameQty ||
+             SPI_CHANNEL_RX_FIFO_SIZE < nDataFrameQty)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_PARAM_2);
     }
@@ -470,7 +472,9 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_PARAM_0);
     }
@@ -478,7 +482,8 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_PARAM_1);
     }
-    else if (NULL_PTR == nDataFrameQty)
+    else if (0U                       > nDataFrameQty ||
+             SPI_CHANNEL_TX_FIFO_SIZE < nDataFrameQty)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_PARAM_2);
     }
@@ -550,7 +555,9 @@ STD_RESULT SPI_Purge(const U8      nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_PURGE, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_PURGE, DEV_ERROR_PARAM_0);
     }
@@ -593,8 +600,8 @@ STD_RESULT SPI_Purge(const U8      nChannelNum,
 //! \return RESULT_OK     - function is completed successfully
 //! \return RESULT_NOT_OK - function is ended with an error
 //**************************************************************************************************
-STD_RESULT SPI_GetRXItemsCount(const U8    nChannelNum,
-                               U16*  const pBytesCount)
+STD_RESULT SPI_GetRXItemsCount(const U8   nChannelNum,
+                               U16* const pBytesCount)
 {
     STD_RESULT nFuncResult = RESULT_NOT_OK;
     
@@ -602,7 +609,9 @@ STD_RESULT SPI_GetRXItemsCount(const U8    nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_GETRXITEMSCOUNT, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_GETRXITEMSCOUNT, DEV_ERROR_PARAM_0);
     }
@@ -646,17 +655,21 @@ STD_RESULT SPI_SetBaudrate(const U8  nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_PARAM_0);
     }
-    else if (0U == nBaudrate)
+    else if (SPI_MIN_BAUDRATE > nBaudrate ||
+             SPI_MAX_BAUDRATE < nBaudrate)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_PARAM_1);
     }
     else
     {
         SPI_stChannelsParams[nChannelNum].nBaudRate = nBaudrate;
+        while(ON == SPI_pChannels[nChannelNum]->STS.B.BUSY){}
         SPI_SetupChannelClk(nChannelNum);
         
         nFuncResult = RESULT_OK;
@@ -695,7 +708,9 @@ STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_0);
     }
@@ -807,7 +822,9 @@ STD_RESULT SPI_SetCallbackFunction(const U8           nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETCALLBACKFUNCTION, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETCALLBACKFUNCTION, DEV_ERROR_PARAM_0);
     }
@@ -848,7 +865,9 @@ void SPI_HighLevel_RX_ISR(const U8 nChannelNum)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_RX_ISR, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_RX_ISR, DEV_ERROR_PARAM_0);
     }
@@ -889,7 +908,9 @@ void SPI_HighLevel_TX_ISR(const U8 nChannelNum)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_TX_ISR, DEV_ERROR_NOT_INIT);
     }
-    else if (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if (SPI_CHANNEL_MIN > nChannelNum ||
+             SPI_CHANNEL_MAX < nChannelNum ||
+             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_TX_ISR, DEV_ERROR_PARAM_0);
     }
