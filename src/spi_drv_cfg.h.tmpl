@@ -114,23 +114,27 @@
 
 //--------------------------------------------------------------------------------------------------
 
+//! Enable or Disable CS port Y of channel X
+//! Valid values: ON, OFF
+//! #define SPI_CHANNEL_X_CS_Y_IN_USE                       (OFF)
+
 //! Specify CS port
 //! Valid values: SPI_PORT_A...SPI_PORT_E
-//! #define SPI_CHANNEL_X_SCLK_PORT                         (SPI_PORT_A)
+//! #define SPI_CHANNEL_X_CS_Y_PORT                         (SPI_PORT_A)
 
 //! Specify CS pin
 //! Valid values: 0...15
-//! #define SPI_CHANNEL_X_SCLK_PIN                          (0U)
+//! #define SPI_CHANNEL_X_CS_Y_PIN                          (0U)
 
 //! Specify CS pin type
 //! Valid values: SPI_OUTPUT_MODE_PUSH_PULL,
 //!               SPI_OUTPUT_MODE_OPEN_DRAIN
-//! #define SPI_CHANNEL_X_SCLK_OUTPUT_MODE                  (SPI_OUTPUT_MODE_PUSH_PULL)
+//! #define SPI_CHANNEL_X_CS_Y_OUTPUT_MODE                  (SPI_OUTPUT_MODE_PUSH_PULL)
 
 //! Specify CS pin pull-up
 //! Valid values: SPI_PULLUP_MODE_DISABLE,
 //!               SPI_PULLUP_MODE_ENABLE
-//! #define SPI_CHANNEL_X_SCLK_PULLUP_MODE                  (SPI_PULLUP_MODE_DISABLE)
+//! #define SPI_CHANNEL_X_CS_Y_PULLUP_MODE                  (SPI_PULLUP_MODE_DISABLE)
 
 
 
