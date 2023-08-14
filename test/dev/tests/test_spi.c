@@ -99,6 +99,6 @@ void TEST_1sec(void)
 {
     static U32 nBaudRate = 30000UL; 
 
-    // SPI_SetBaudrate(0U, nBaudRate);
-    // SPI_SetBaudrate(1U, nBaudRate*2);
+    SPI_SetBaudrate(0U, nBaudRate);
+    SPI_SetBaudrate(1U, nBaudRate*2);
 }
