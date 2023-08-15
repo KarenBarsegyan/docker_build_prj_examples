@@ -302,8 +302,8 @@ static void SPI_ConfigureChannel(U8 nChannelNum);
 //!
 //! \param None
 //!
-//! \return RESULT_OK     - initialization is completed successfully
-//! \return RESULT_NOT_OK - initialization is not completed
+//! \return RESULT_OK     - initialization is completed successfully \n
+//!         RESULT_NOT_OK - initialization is not completed
 //**************************************************************************************************
 STD_RESULT SPI_Init(void)
 {
@@ -335,8 +335,8 @@ STD_RESULT SPI_Init(void)
 //!
 //! \param None.
 //!
-//! \return RESULT_OK     - deinitialization is completed successfully
-//! \return RESULT_NOT_OK - deinitialization is not completed
+//! \return RESULT_OK     - deinitialization is completed successfully \n
+//!         RESULT_NOT_OK - deinitialization is not completed
 //**************************************************************************************************
 STD_RESULT SPI_DeInit(void)
 {
@@ -369,8 +369,8 @@ STD_RESULT SPI_DeInit(void)
 //! \param[in] pDataBuffer   - pointer to destination buffer
 //! \param[in] nDataFrameQty - quantity of the read data frames
 //!
-//! \return RESULT_OK     - reading data is completed successfully
-//! \return RESULT_NOT_OK - reading data is ended with an error
+//! \return RESULT_OK     - reading data is completed successfully \n
+//!         RESULT_NOT_OK - reading data is ended with an error
 //**************************************************************************************************
 STD_RESULT SPI_Read(const U8    nChannelNum,
                     void* const pDataBuffer,
@@ -454,8 +454,8 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
 //! \param[in] pDataBuffer   - pointer to source buffer
 //! \param[in] nDataFrameQty - quantity of the write data frames
 //!
-//! \return RESULT_OK     - writing data is completed successfully
-//! \return RESULT_NOT_OK - writing data is ended with an error
+//! \return RESULT_OK     - writing data is completed successfully \n
+//!         RESULT_NOT_OK - writing data is ended with an error
 //**************************************************************************************************
 STD_RESULT SPI_Write(const U8          nChannelNum,
                      const void* const pDataBuffer,
@@ -542,8 +542,8 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
 //! \param[in] bPurgeRX      - purge RX request
 //! \param[in] bPurgeTX      - purge TX request
 //!
-//! \return RESULT_OK     - purging FIFO is completed successfully
-//! \return RESULT_NOT_OK - purging FIFO is ended with an error
+//! \return RESULT_OK     - purging FIFO is completed successfully \n
+//!         RESULT_NOT_OK - purging FIFO is ended with an error
 //**************************************************************************************************
 STD_RESULT SPI_Purge(const U8      nChannelNum,
                      const BOOLEAN bPurgeRX,
@@ -597,8 +597,8 @@ STD_RESULT SPI_Purge(const U8      nChannelNum,
 //! \param[in] nChannelNum   - SPI channel number
 //! \param[out] pBytesCount  - pointer to variable that store the number of RX data frames
 //!
-//! \return RESULT_OK     - function is completed successfully
-//! \return RESULT_NOT_OK - function is ended with an error
+//! \return RESULT_OK     - function is completed successfully \n
+//!         RESULT_NOT_OK - function is ended with an error
 //**************************************************************************************************
 STD_RESULT SPI_GetRXItemsCount(const U8   nChannelNum,
                                U16* const pBytesCount)
@@ -643,8 +643,8 @@ STD_RESULT SPI_GetRXItemsCount(const U8   nChannelNum,
 //! \param[in] nChannelNum   - SPI channel number
 //! \param[in] nBaudrate     - transmission speed
 //!
-//! \return RESULT_OK     - function is completed successfully
-//! \return RESULT_NOT_OK - function is ended with an error
+//! \return RESULT_OK     - function is completed successfully \n
+//!         RESULT_NOT_OK - function is ended with an error
 //**************************************************************************************************
 STD_RESULT SPI_SetBaudrate(const U8  nChannelNum,
                            const U32 nBaudrate)
@@ -692,8 +692,8 @@ STD_RESULT SPI_SetBaudrate(const U8  nChannelNum,
 //! \param[in] nDataFrameSize       - data frame size
 //! \param[in] nCSNum               - logical CS number
 //!
-//! \return RESULT_OK     - function is completed successfully
-//! \return RESULT_NOT_OK - function is ended with an error
+//! \return RESULT_OK     - function is completed successfully \n
+//!         RESULT_NOT_OK - function is ended with an error
 //**************************************************************************************************
 STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
                                  const BOOLEAN bActiveClockPolarity,
@@ -810,8 +810,8 @@ STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
 //! \param[in] nChannelNum       - SPI channel number
 //! \param[in] pCallbackFunction - callback function pointer
 //!
-//! \return RESULT_OK     - function is completed successfully
-//! \return RESULT_NOT_OK - function is ended with an error
+//! \return RESULT_OK     - function is completed successfully \n
+//!         RESULT_NOT_OK - function is ended with an error
 //**************************************************************************************************
 STD_RESULT SPI_SetCallbackFunction(const U8           nChannelNum,
                                    const SPI_CALLBACK pCallbackFunction)
