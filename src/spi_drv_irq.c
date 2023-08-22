@@ -31,9 +31,6 @@
 // Get program module specific types
 #include "spi_drv_types.h"
 
-// Get SFR registers header
-#include "ytm32b1m_sfr.h"
-
 
 
 //**************************************************************************************************

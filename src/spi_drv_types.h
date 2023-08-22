@@ -29,11 +29,10 @@
 // Native header
 #include "spi_drv.h" 
 
-// Get config header
-#include "spi_drv_cfg.h"
-
 // Get FIFO buffer functions
 #include "circ_buffer.h"
+
+
 
 //**************************************************************************************************
 // Declarations of global (public) data types
@@ -300,9 +299,9 @@ typedef struct
 
 //! \name SPI CLK settings values
 //! @{
-#define CLK_SCKPCS_VALUE    (0xFU)
-#define CLK_PCSSCK_VALUE    (0xFU)
-#define CLK_FMDLY_VALUE     (0xFU)
+#define SPI_CLK_SCKPCS_VALUE    (0xFU)
+#define SPI_CLK_PCSSCK_VALUE    (0xFU)
+#define SPI_CLK_FMDLY_VALUE     (0xFU)
 //! @}
 
 
@@ -322,6 +321,8 @@ typedef struct
 #define SPI_CFG_BIT_ORDER_MSB_FIRST     (0U)
 //! @}
 
-#endif  // SPI_DRV_TYPES_H
+
+
+#endif  // #ifndef SPI_DRV_TYPES_H
 
 //****************************************** end of file *******************************************

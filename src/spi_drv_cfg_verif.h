@@ -5,7 +5,7 @@
 //!             YTM32
 //! \par    Compatible
 //!             YTM32B1M families
-//! \brief  Implementation of the SPI driver configuration
+//! \brief  Verification of the SPI driver configuration
 //!
 //! \par    Abbreviations
 //!             MCU - MicroController Unit
@@ -15,6 +15,10 @@
 //! |:----------:|:-------:|:-------:|--------------------------------------------------------------
 //! | 11.08.2023 |  1.0.0  |   BKR   | First release.
 //**************************************************************************************************
+
+
+#ifndef SPI_DRV_CFG_VERIF_H
+#define SPI_DRV_CFG_VERIF_H
 
 
 
@@ -1201,5 +1205,6 @@
 // None.
 
 
+#endif  // SPI_DRV_CFG_VERIF_H
 
 //****************************************** end of file *******************************************

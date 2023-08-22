@@ -5,18 +5,18 @@
 В документе используются следующие аббревиатуры и сокращения:
 
 ПМ – Программный Модуль  
-API – Application Program Interface  
-MCU – MicroController Unit
-SPI – Serial Peripheral Interface
-CS – Сhip Select
-FIFO – First In First Out
-MISO – Master Input Slave Output
-MOSI – Master Output Slave Input
-SPI – Serial Peripheral Interface
+API – Application Program Interface   
+MCU – MicroController Unit   
+SPI – Serial Peripheral Interface   
+CS – Сhip Select   
+FIFO – First In First Out   
+MISO – Master Input Slave Output    
+MOSI – Master Output Slave Input    
+SPI – Serial Peripheral Interface   
 
 # 2. Общие положения
 
-Драйвер SPI (далее “программный модуль”) предоставляет набор API для работы c перефирией SPI, входящей в состав микроконтроллеров семейства HC32F4Ax.
+Драйвер SPI (далее “программный модуль”) предоставляет набор API для работы c перефирией SPI, входящей в состав микроконтроллеров семейства YTM32B1M.
 
 В состав API типичного программного модуля входят:
 - типы данных
@@ -33,9 +33,9 @@ SPI – Serial Peripheral Interface
 
 ## Основные функции программного модуля
 
-1. Иницилизация и деинициализация SPI-переферии микроконтроллера;
+1. Иницилизация и деинициализация SPI-периферии микроконтроллера;
 2. Отправка и прием сообщений в режимах master и slave
-3. Настройка баудрейта
+3. Настройка бодрейта
 4. Настройка параметров приема-передачи
 5. Формирование событий по отправке/приему новых данных;
 
@@ -188,11 +188,15 @@ SPI – Serial Peripheral Interface
         IRQ_Init();
 
         // SPI initialization
-        SPI_Init();
+        STD_RESULT result = SPI_Init();
     }
 ```
 
 2. Для деинициализации, необходимо вызвать функцию `SPI_DeInit()` :
+```c
+    // SPI deinitialization
+    SPI_DeInit();
+```
 
 3. Для чтения данных из приемного буфера, необходимо вызвать функцию `SPI_Read()` :
 ```c
@@ -201,7 +205,7 @@ SPI – Serial Peripheral Interface
 
     // Read SPI data
     STD_RESULT nResult = SPI_Read(SPI_CHANNEL_0, APP_nDataBuffer, APP_nLength);
-    switch(nResult)
+    switch (nResult)
     {
         case RESULT_NOT_OK:
             // Error
@@ -225,7 +229,7 @@ SPI – Serial Peripheral Interface
 
     // Write SPI data
     STD_RESULT nResult = SPI_Write(SPI_CHANNEL_0, APP_nDataBuffer, APP_nLength);
-    switch(nResult)
+    switch (nResult)
     {
         case RESULT_NOT_OK:
             // Error
@@ -244,12 +248,12 @@ SPI – Serial Peripheral Interface
 
 5. Для очистки приемного или передающего буферов, необходимо вызвать функцию `SPI_Purge()`:
 ```c
-    static U8 APP_nDataBuffer[APP_BUFFER_SIZE];
-    static U8 APP_nLength = APP_BUFFER_SIZE;
+    U8 APP_nDataBuffer[APP_BUFFER_SIZE];
+    U8 APP_nLength = APP_BUFFER_SIZE;
 
     // Purge SPI buffers (RX and TX)
     STD_RESULT nResult = SPI_Purge(SPI_MODULE_1, APP_TRUE, APP_TRUE);
-    switch(nResult)
+    switch (nResult)
     {
         case RESULT_NOT_OK:
             // Error
@@ -269,11 +273,11 @@ SPI – Serial Peripheral Interface
 6. Для получения количества принятых байт, необходимо вызвать функцию `SPI_GetRXItemsCount()`:
 
 ```c
-    static U16 APP_nRxItemsQty;
+    U16 APP_nRxItemsQty;
 
     // Read number of received bytes from SPI
     STD_RESULT nResult = SPI_GetRXItemsCount(SPI_CHANNEL_0, &APP_nRxItemsQty);
-    switch(nResult)
+    switch (nResult)
     {
         case RESULT_NOT_OK:
             // Error
@@ -305,7 +309,7 @@ SPI – Serial Peripheral Interface
                                                SPI_FRAME_LENGTH,
                                                SPI_CS);
 
-    switch(nResult)
+    switch (nResult)
     {
         case RESULT_NOT_OK:
             // Error
@@ -330,7 +334,7 @@ SPI – Serial Peripheral Interface
 
     STD_RESULT nResult = SPI_SetBaudrate(SPI_CHANNEL_0, SPI_BAUDRATE);
 
-    switch(nResult)
+    switch (nResult)
     {
         case RESULT_NOT_OK:
             // Error
@@ -350,12 +354,12 @@ SPI – Serial Peripheral Interface
 9. Для задания функции обратного вызова по событию приема пакета, необходимо вызвать функцию `SPI_SetCallbackFunction()`:
 
 ```c
-    static void APP_CallbackSPI(void);
+    void APP_CallbackSPI(void);
 
     // Set callback function
     STD_RESULT nResult = SPI_SetCallbackFunction(SPI_CHANNEL_0, APP_CallbackSPI);
 
-    switch(nResult)
+    switch (nResult)
     {
         case RESULT_NOT_OK:
             // Error
