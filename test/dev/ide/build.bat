@@ -15,7 +15,7 @@ set SUCCESS_TIMEOUT=5
 set JOBS_COUNT=25
 
 :: CMake root directory (relatively Shortcuts dir)
-set CMAKE_ROOT_DIR="%cd%\..\..\..\"
+set CMAKE_ROOT_DIR="%~dp0..\..\.."
 :: CMake build directory
 set CMAKE_BUILD_DIR="%CMAKE_ROOT_DIR%\build"
 
