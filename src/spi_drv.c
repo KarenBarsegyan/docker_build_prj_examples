@@ -1490,11 +1490,20 @@ static void SPI_SetupChannelClk(U8 nChannelNum)
 //**************************************************************************************************
 static void SPI_SetupChannelParams(U8 nChannelNum)
 {
-    SPI_pChannels[nChannelNum]->TXCFG.B.CPOL    = SPI_stChannelsParams[nChannelNum].bActiveClockPolarity;
-    SPI_pChannels[nChannelNum]->TXCFG.B.CPHA    = SPI_stChannelsParams[nChannelNum].bClockPhase;
-    SPI_pChannels[nChannelNum]->TXCFG.B.LSBF    = SPI_stChannelsParams[nChannelNum].bBitOrder;
-    SPI_pChannels[nChannelNum]->TXCFG.B.FRAMESZ = SPI_stChannelsParams[nChannelNum].nDataFrameSize - 1U;
-    SPI_pChannels[nChannelNum]->TXCFG.B.PCS     = SPI_stChannelsParams[nChannelNum].nCSNum;
+    SPI_pChannels[nChannelNum]->TXCFG.B.CPOL = 
+            SPI_stChannelsParams[nChannelNum].bActiveClockPolarity;
+
+    SPI_pChannels[nChannelNum]->TXCFG.B.CPHA = 
+            SPI_stChannelsParams[nChannelNum].bClockPhase;
+
+    SPI_pChannels[nChannelNum]->TXCFG.B.LSBF = 
+            SPI_stChannelsParams[nChannelNum].bBitOrder;
+
+    SPI_pChannels[nChannelNum]->TXCFG.B.FRAMESZ = 
+            SPI_stChannelsParams[nChannelNum].nDataFrameSize - 1U;
+            
+    SPI_pChannels[nChannelNum]->TXCFG.B.PCS = 
+            SPI_stChannelsParams[nChannelNum].nCSNum;
 
 } // end of SPI_SetupChannelParams()
 
