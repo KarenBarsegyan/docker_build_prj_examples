@@ -134,7 +134,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
      OFF == SPI_CHANNEL_4_IN_USE && \
      OFF == SPI_CHANNEL_5_IN_USE)
     
-    #define NO_ONE_SPI_IN_USE
+    #define SPI_NO_ONE_IN_USE
 #endif
 
 
@@ -143,13 +143,13 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 //! @{
 #define SPI_CHANNEL_GPIO_PORT_IN_USE(Channel, Port) ( \
     SPI_##Channel##_IN_USE == ON && (      \
-    SPI_##Channel##_MOSI_PORT == Port ||   \
-    SPI_##Channel##_MISO_PORT == Port ||   \
-    SPI_##Channel##_SCLK_PORT == Port ||   \
-    SPI_##Channel##_CS_0_PORT == Port ||   \
-    SPI_##Channel##_CS_1_PORT == Port ||   \
-    SPI_##Channel##_CS_2_PORT == Port ||   \
-    SPI_##Channel##_CS_3_PORT == Port) )
+    SPI_##Channel##_MOSI_PORT == (Port) ||   \
+    SPI_##Channel##_MISO_PORT == (Port) ||   \
+    SPI_##Channel##_SCLK_PORT == (Port) ||   \
+    SPI_##Channel##_CS_0_PORT == (Port) ||   \
+    SPI_##Channel##_CS_1_PORT == (Port) ||   \
+    SPI_##Channel##_CS_2_PORT == (Port) ||   \
+    SPI_##Channel##_CS_3_PORT == (Port)) )
 
 #define SPI_GPIO_PORT_IN_USE(Port) (                     \
     SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_0, Port) || \
@@ -167,21 +167,21 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
     SPI_PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.PE  =      \
                                        Channel##_MOSI_OUTPUT_MODE;              \
     SPI_PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.MUX =      \
-                                       Channel##_MOSI_ALT_FUNK;                 \
+                                       Channel##_MOSI_ALT_FUNC;                 \
     SPI_PCTRL_pPorts[Channel##_MOSI_PORT]->PCR[Channel##_MOSI_PIN].B.PS  =      \
                                        Channel##_MOSI_PULLUP_MODE;              \
                                                                                 \
     SPI_PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.PE  =      \
                                        Channel##_MISO_OUTPUT_MODE;              \
     SPI_PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.MUX =      \
-                                       Channel##_MISO_ALT_FUNK;                 \
+                                       Channel##_MISO_ALT_FUNC;                 \
     SPI_PCTRL_pPorts[Channel##_MISO_PORT]->PCR[Channel##_MISO_PIN].B.PS  =      \
                                        Channel##_MISO_PULLUP_MODE;              \
                                                                                 \
     SPI_PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.PE  =      \
                                        Channel##_SCLK_OUTPUT_MODE;              \
     SPI_PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.MUX =      \
-                                       Channel##_SCLK_ALT_FUNK;                 \
+                                       Channel##_SCLK_ALT_FUNC;                 \
     SPI_PCTRL_pPorts[Channel##_SCLK_PORT]->PCR[Channel##_SCLK_PIN].B.PS  =      \
                                        Channel##_SCLK_PULLUP_MODE;              \
                                                                                 \
@@ -190,7 +190,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
         SPI_PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.PE  =  \
                                            Channel##_CS_0_OUTPUT_MODE;          \
         SPI_PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.MUX =  \
-                                           Channel##_CS_0_ALT_FUNK;             \
+                                           Channel##_CS_0_ALT_FUNC;             \
         SPI_PCTRL_pPorts[Channel##_CS_0_PORT]->PCR[Channel##_CS_0_PIN].B.PS  =  \
                                            Channel##_CS_0_PULLUP_MODE;          \
     }                                                                           \
@@ -200,7 +200,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
         SPI_PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.PE  =  \
                                            Channel##_CS_1_OUTPUT_MODE;          \
         SPI_PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.MUX =  \
-                                           Channel##_CS_1_ALT_FUNK;             \
+                                           Channel##_CS_1_ALT_FUNC;             \
         SPI_PCTRL_pPorts[Channel##_CS_1_PORT]->PCR[Channel##_CS_1_PIN].B.PS  =  \
                                            Channel##_CS_1_PULLUP_MODE;          \
     }                                                                           \
@@ -210,7 +210,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
         SPI_PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.PE  =  \
                                            Channel##_CS_2_OUTPUT_MODE;          \
         SPI_PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.MUX =  \
-                                           Channel##_CS_2_ALT_FUNK;             \
+                                           Channel##_CS_2_ALT_FUNC;             \
         SPI_PCTRL_pPorts[Channel##_CS_2_PORT]->PCR[Channel##_CS_2_PIN].B.PS  =  \
                                            Channel##_CS_2_PULLUP_MODE;          \
     }                                                                           \
@@ -220,7 +220,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
         SPI_PCTRL_pPorts[Channel##_CS_3_PORT]->PCR[Channel##_CS_3_PIN].B.PE  =  \
                                            Channel##_CS_3_OUTPUT_MODE;          \
         SPI_PCTRL_pPorts[Channel##_CS_3_PORT]->PCR[Channel##_CS_3_PIN].B.MUX =  \
-                                           Channel##_CS_3_ALT_FUNK;             \
+                                           Channel##_CS_3_ALT_FUNC;             \
         SPI_PCTRL_pPorts[Channel##_CS_3_PORT]->PCR[Channel##_CS_3_PIN].B.PS  =  \
                                            Channel##_CS_3_PULLUP_MODE;          \
     }                                                                           \
@@ -238,7 +238,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
 //! SPI Initialized Flag
 static BOOLEAN SPI_bInitialized;
 
-#ifndef NO_ONE_SPI_IN_USE
+#ifndef SPI_NO_ONE_IN_USE
 //! Port control registers array
 static PCTRL_tag* SPI_PCTRL_pPorts[SPI_PORT_QTY] =
 {
@@ -291,11 +291,11 @@ static BOOLEAN SPI_StartTransfer(const U8 nChannelNum);
 static void SPI_SetupChannelClk(U8 nChannelNum);
 static void SPI_SetupChannelParams(U8 nChannelNum);
 
-#ifndef NO_ONE_SPI_IN_USE
+#ifndef SPI_NO_ONE_IN_USE
 static void SPI_ConfigureChannel(U8 nChannelNum);
 static void SPI_TakeOnPortClk(U8 nPortNum);
 static void SPI_DisableChannel(U8 nChannelNum);
-#endif
+#endif // end of SPI_NO_ONE_IN_USE 
 
 //**************************************************************************************************
 //==================================================================================================
@@ -1354,9 +1354,9 @@ static void SPI_InitHW(void)
 //! \param[in]  None.
 //! \return     None.
 //**************************************************************************************************
-static void SPI_DeInitSW()
+static void SPI_DeInitSW(void)
 {   
-    for (U8 nChannelNum = 0; nChannelNum < SPI_CHANNEL_QTY; ++nChannelNum)
+    for (U8 nChannelNum = 0U; nChannelNum < SPI_CHANNEL_QTY; ++nChannelNum)
     {
         SPI_Purge(nChannelNum,
                   TRUE,
@@ -1372,7 +1372,7 @@ static void SPI_DeInitSW()
 //! \param[in]  None.
 //! \return     None.
 //**************************************************************************************************
-static void SPI_DeInitHW()
+static void SPI_DeInitHW(void)
 {
     // If channel X is used, deinit IRQ 
     // And take off enable bit
@@ -1450,7 +1450,7 @@ static BOOLEAN SPI_StartTransfer(const U8 nChannelNum)
 
 
 
-#ifndef NO_ONE_SPI_IN_USE 
+#ifndef SPI_NO_ONE_IN_USE 
 //**************************************************************************************************
 //! Take on clock for specific port
 //! \note       None.
@@ -1464,7 +1464,7 @@ static void SPI_TakeOnPortClk(U8 nPortNum)
         IPC.CTRL[nPortNum].B.CLKEN = ON;
     } 
 } // end of SPI_TakeOnPortClk()
-#endif
+#endif // end of SPI_NO_ONE_IN_USE 
 
 
 
@@ -1528,7 +1528,7 @@ static void SPI_SetupChannelParams(U8 nChannelNum)
 
 
 
-#ifndef NO_ONE_SPI_IN_USE 
+#ifndef SPI_NO_ONE_IN_USE 
 //**************************************************************************************************
 //! Configure channel
 //! \note       None.
@@ -1569,11 +1569,11 @@ static void SPI_ConfigureChannel(U8 nChannelNum)
     SPI_pChannels[nChannelNum]->INTE.B.TCIE = ON;
 
 } // end of SPI_ConfigureChannel()
-#endif
+#endif // end of SPI_NO_ONE_IN_USE 
 
 
 
-#ifndef NO_ONE_SPI_IN_USE 
+#ifndef SPI_NO_ONE_IN_USE 
 //**************************************************************************************************
 //! Take off channel
 //! \note       None.
@@ -1592,7 +1592,7 @@ static void SPI_DisableChannel(U8 nChannelNum)
         DoNothing();
     }   
 } // end of SPI_DisableChannel()
-#endif
+#endif // end of SPI_NO_ONE_IN_USE 
 
 
 

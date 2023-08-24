@@ -60,6 +60,14 @@ typedef struct
 // Definitions of global (public) constants
 //**************************************************************************************************
 
+//! \name SPI FIFO buffer size min\max value
+//! @{
+#define SPI_FIFO_SIZE_MIN               (1U)
+#define SPI_FIFO_SIZE_MAX               (255U)
+//! @}
+
+
+
 //! \name All possible GPIO port names
 //! @{
 #define SPI_PORT_A                      (0U)
