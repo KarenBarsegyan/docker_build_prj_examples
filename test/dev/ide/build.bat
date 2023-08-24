@@ -1,8 +1,5 @@
 @echo off
 
-:: Specify target name
-set TARGET_NAME=GAZ_NN_PKE
-
 :: Specify build system: STANDARD | NINJA
 ::set BUILD_SYSTEM=STANDARD
 set BUILD_SYSTEM=NINJA

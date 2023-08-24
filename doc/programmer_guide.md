@@ -6,13 +6,13 @@
 
 ПМ – Программный Модуль  
 API – Application Program Interface   
-MCU – MicroController Unit   
-SPI – Serial Peripheral Interface   
 CS – Сhip Select   
 FIFO – First In First Out   
+MCU – MicroController Unit   
 MISO – Master Input Slave Output    
 MOSI – Master Output Slave Input    
 SPI – Serial Peripheral Interface   
+ 
 
 # 2. Общие положения
 

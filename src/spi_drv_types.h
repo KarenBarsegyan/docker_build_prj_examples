@@ -78,57 +78,57 @@ typedef struct
 
 //! \name IPC Dividers
 //! @{
-#define IPC_CTRL_DIV_0                  (0U)
-#define IPC_CTRL_DIV_2                  (1U)
-#define IPC_CTRL_DIV_3                  (2U)
-#define IPC_CTRL_DIV_4                  (3U)
-#define IPC_CTRL_DIV_5                  (4U)
-#define IPC_CTRL_DIV_6                  (5U)
-#define IPC_CTRL_DIV_7                  (6U)
-#define IPC_CTRL_DIV_8                  (7U)
-#define IPC_CTRL_DIV_9                  (8U)
-#define IPC_CTRL_DIV_10                 (9U)
-#define IPC_CTRL_DIV_11                 (10U)
-#define IPC_CTRL_DIV_12                 (11U)
-#define IPC_CTRL_DIV_13                 (12U)
-#define IPC_CTRL_DIV_14                 (13U)
-#define IPC_CTRL_DIV_15                 (14U)
-#define IPC_CTRL_DIV_16                 (15U)
+#define SPI_IPC_CTRL_DIV_0              (0U)
+#define SPI_IPC_CTRL_DIV_2              (1U)
+#define SPI_IPC_CTRL_DIV_3              (2U)
+#define SPI_IPC_CTRL_DIV_4              (3U)
+#define SPI_IPC_CTRL_DIV_5              (4U)
+#define SPI_IPC_CTRL_DIV_6              (5U)
+#define SPI_IPC_CTRL_DIV_7              (6U)
+#define SPI_IPC_CTRL_DIV_8              (7U)
+#define SPI_IPC_CTRL_DIV_9              (8U)
+#define SPI_IPC_CTRL_DIV_10             (9U)
+#define SPI_IPC_CTRL_DIV_11             (10U)
+#define SPI_IPC_CTRL_DIV_12             (11U)
+#define SPI_IPC_CTRL_DIV_13             (12U)
+#define SPI_IPC_CTRL_DIV_14             (13U)
+#define SPI_IPC_CTRL_DIV_15             (14U)
+#define SPI_IPC_CTRL_DIV_16             (15U)
 //! @}
 
 
 
 //! \name IPC Source
 //! @{
-#define IPC_SRCSEL_NO_CLOCK             (0U)
-#define IPC_SRCSEL_FIRC                 (1U)
-#define IPC_SRCSEL_SIRC                 (2U)
-#define IPC_SRCSEL_FXOSC                (3U)
-#define IPC_SRCSEL_SXOSC                (4U)
-#define IPC_SRCSEL_PLL                  (5U)
+#define SPI_IPC_SRCSEL_NO_CLOCK         (0U)
+#define SPI_IPC_SRCSEL_FIRC             (1U)
+#define SPI_IPC_SRCSEL_SIRC             (2U)
+#define SPI_IPC_SRCSEL_FXOSC            (3U)
+#define SPI_IPC_SRCSEL_SXOSC            (4U)
+#define SPI_IPC_SRCSEL_PLL              (5U)
 //! @}
 
 
 
 //! \name TXCFG Dividers
 //! @{
-#define TXCFG_DIV_1                     (0U)
-#define TXCFG_DIV_2                     (1U)
-#define TXCFG_DIV_4                     (2U)
-#define TXCFG_DIV_8                     (3U)
-#define TXCFG_DIV_16                    (4U)
-#define TXCFG_DIV_32                    (5U)
-#define TXCFG_DIV_64                    (6U)
-#define TXCFG_DIV_128                   (7U)
+#define SPI_TXCFG_DIV_1                 (0U)
+#define SPI_TXCFG_DIV_2                 (1U)
+#define SPI_TXCFG_DIV_4                 (2U)
+#define SPI_TXCFG_DIV_8                 (3U)
+#define SPI_TXCFG_DIV_16                (4U)
+#define SPI_TXCFG_DIV_32                (5U)
+#define SPI_TXCFG_DIV_64                (6U)
+#define SPI_TXCFG_DIV_128               (7U)
 
-#define TXCFG_DIV_VALUE_1               (1U)
-#define TXCFG_DIV_VALUE_2               (2U)
-#define TXCFG_DIV_VALUE_4               (3U)
-#define TXCFG_DIV_VALUE_8               (8U)
-#define TXCFG_DIV_VALUE_16              (16U)
-#define TXCFG_DIV_VALUE_32              (32U)
-#define TXCFG_DIV_VALUE_64              (64U)
-#define TXCFG_DIV_VALUE_128             (128U)
+#define SPI_TXCFG_DIV_VALUE_1           (1U)
+#define SPI_TXCFG_DIV_VALUE_2           (2U)
+#define SPI_TXCFG_DIV_VALUE_4           (3U)
+#define SPI_TXCFG_DIV_VALUE_8           (8U)
+#define SPI_TXCFG_DIV_VALUE_16          (16U)
+#define SPI_TXCFG_DIV_VALUE_32          (32U)
+#define SPI_TXCFG_DIV_VALUE_64          (64U)
+#define SPI_TXCFG_DIV_VALUE_128         (128U)
 //! @}
 
 
@@ -226,23 +226,26 @@ typedef struct
 
 //! \name IPC spi control indexes
 //! @{
-#define IPC_SPI0_INDEX                  (42U)
-#define IPC_SPI1_INDEX                  (43U)
-#define IPC_SPI2_INDEX                  (44U)
-#define IPC_SPI3_INDEX                  (45U)
-#define IPC_SPI4_INDEX                  (46U)
-#define IPC_SPI5_INDEX                  (47U)
+#define SPI_IPC_SPI0_INDEX              (42U)
+#define SPI_IPC_SPI1_INDEX              (43U)
+#define SPI_IPC_SPI2_INDEX              (44U)
+#define SPI_IPC_SPI3_INDEX              (45U)
+#define SPI_IPC_SPI4_INDEX              (46U)
+#define SPI_IPC_SPI5_INDEX              (47U)
+
+#define SPI_IPC_INDEX_MIN               (SPI_IPC_SPI0_INDEX)
+#define SPI_IPC_INDEX_MAX               (SPI_IPC_SPI5_INDEX)
 //! @}
 
 
 //! \name IPC gpio port control indexes
 //! @{
-#define IPC_PCTRL_GPIO_INDEX            (17U)
-#define IPC_PCTRLA_INDEX                (18U)
-#define IPC_PCTRLB_INDEX                (19U)
-#define IPC_PCTRLC_INDEX                (20U)
-#define IPC_PCTRLD_INDEX                (21U)
-#define IPC_PCTRLE_INDEX                (22U)
+#define SPI_IPC_PCTRL_GPIO_INDEX        (17U)
+#define SPI_IPC_PCTRLA_INDEX            (18U)
+#define SPI_IPC_PCTRLB_INDEX            (19U)
+#define SPI_IPC_PCTRLC_INDEX            (20U)
+#define SPI_IPC_PCTRLD_INDEX            (21U)
+#define SPI_IPC_PCTRLE_INDEX            (22U)
 //! @}
 
 //! \name SPI Channel Settings
