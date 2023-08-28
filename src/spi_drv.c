@@ -110,14 +110,14 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_moduleID) - 1U;
 
 //! Dev error function
 #define SPI_REPORT_DEV_ERROR(SPI_nAPIID, nErrorID)         \
-    ET_ReportDevelopmentError(SPI_moduleID,               \
+    ET_ReportDevelopmentError(SPI_moduleID,                \
                               SPI_nModuleIDSize,           \
                               0U,                          \
                               SPI_nAPIID,                  \
                               nErrorID);
 //! Runtime error function
 #define SPI_REPORT_RT_ERROR(SPI_nAPIID, nErrorID)          \
-    ET_ReportRuntimeError(SPI_moduleID,                   \
+    ET_ReportRuntimeError(SPI_moduleID,                    \
                           SPI_nModuleIDSize,               \
                           0U,                              \
                           SPI_nAPIID,                      \
@@ -142,7 +142,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_moduleID) - 1U;
 //! \name Is GPIO port used
 //! @{
 #define SPI_CHANNEL_GPIO_PORT_IN_USE(Channel, Port) ( \
-    SPI_##Channel##_IN_USE == ON && (      \
+    SPI_##Channel##_IN_USE == ON && (        \
     SPI_##Channel##_MOSI_PORT == (Port) ||   \
     SPI_##Channel##_MISO_PORT == (Port) ||   \
     SPI_##Channel##_SCLK_PORT == (Port) ||   \
@@ -151,7 +151,7 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_moduleID) - 1U;
     SPI_##Channel##_CS_2_PORT == (Port) ||   \
     SPI_##Channel##_CS_3_PORT == (Port)) )
 
-#define SPI_GPIO_PORT_IN_USE(Port) (                     \
+#define SPI_GPIO_PORT_IN_USE(Port) (                 \
     SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_0, Port) || \
     SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_1, Port) || \
     SPI_CHANNEL_GPIO_PORT_IN_USE(CHANNEL_2, Port) || \
