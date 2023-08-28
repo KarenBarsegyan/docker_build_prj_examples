@@ -106,18 +106,18 @@ typedef enum
 //! Program module ID ( = program module prefix)
 static const U8 SPI_moduleID[] = "SPI_DRV";
 //! Program module ID size
-static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_pModuleID) - 1U;
+static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_moduleID) - 1U;
 
 //! Dev error function
 #define SPI_REPORT_DEV_ERROR(SPI_nAPIID, nErrorID)         \
-    ET_ReportDevelopmentError(SPI_pModuleID,               \
+    ET_ReportDevelopmentError(SPI_moduleID,               \
                               SPI_nModuleIDSize,           \
                               0U,                          \
                               SPI_nAPIID,                  \
                               nErrorID);
 //! Runtime error function
 #define SPI_REPORT_RT_ERROR(SPI_nAPIID, nErrorID)          \
-    ET_ReportRuntimeError(SPI_pModuleID,                   \
+    ET_ReportRuntimeError(SPI_moduleID,                   \
                           SPI_nModuleIDSize,               \
                           0U,                              \
                           SPI_nAPIID,                      \
