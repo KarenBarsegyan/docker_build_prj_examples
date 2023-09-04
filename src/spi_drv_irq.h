@@ -58,28 +58,26 @@
 // Declarations of global (public) functions
 //**************************************************************************************************
 
-// None.
-
-
-
-//**************************************************************************************************
-// Declarations of interrupt service routines
-//**************************************************************************************************
-
+//! \brief SPI0 interrupt handler
 extern INTERRUPT void SPI_LowLevel_0_Interrupt(void);
 
+//! \brief SPI1 interrupt handler
 extern INTERRUPT void SPI_LowLevel_1_Interrupt(void);
 
+//! \brief SPI2 interrupt handler
 extern INTERRUPT void SPI_LowLevel_2_Interrupt(void);
 
+//! \brief SPI3 interrupt handler
 extern INTERRUPT void SPI_LowLevel_3_Interrupt(void);
 
+//! \brief SPI4 interrupt handler
 extern INTERRUPT void SPI_LowLevel_4_Interrupt(void);
 
+//! \brief SPI5 interrupt handler
 extern INTERRUPT void SPI_LowLevel_5_Interrupt(void);
 
 
 
-#endif  // SPI_DRV_IRQ_H
+#endif  // #ifndef SPI_DRV_IRQ_H
 
 //****************************************** end of file *******************************************

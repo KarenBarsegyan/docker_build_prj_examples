@@ -27,7 +27,7 @@
 //! Enable/disable the development error detection feature of the SPI module.
 //! Used only for debug purposes and should be disabled in the final release.
 //! Valid values: ON / OFF
-#define SPI_DEVELOPMENT_ERROR_DETECTION                 (OFF)
+#define SPI_DEVELOPMENT_ERROR_DETECTION                 (ON)
 
 //! Sizes of the FIFO buffers.
 //! Valid values: 1...255

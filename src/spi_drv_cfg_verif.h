@@ -37,10 +37,10 @@
 // Verification of the imported configuration parameters
 //**************************************************************************************************
 
-#if (SPI_FIFO_SIZE_MAX < SPI_CHANNEL_RX_FIFO_SIZE || \
-     SPI_FIFO_SIZE_MAX < SPI_CHANNEL_TX_FIFO_SIZE || \
-     SPI_FIFO_SIZE_MIN > SPI_CHANNEL_RX_FIFO_SIZE || \
-     SPI_FIFO_SIZE_MIN > SPI_CHANNEL_TX_FIFO_SIZE)
+#if ((SPI_FIFO_SIZE_MAX < SPI_CHANNEL_RX_FIFO_SIZE) || \
+     (SPI_FIFO_SIZE_MAX < SPI_CHANNEL_TX_FIFO_SIZE) || \
+     (SPI_FIFO_SIZE_MIN > SPI_CHANNEL_RX_FIFO_SIZE) || \
+     (SPI_FIFO_SIZE_MIN > SPI_CHANNEL_TX_FIFO_SIZE))
 
     #error "SPI_CHANNEL_FIFO_SIZE configuration value is not valid!"
 #endif
@@ -51,13 +51,13 @@
 
 #if (ON == SPI_CHANNEL_0_IN_USE)
 
-#if (SPI_CHANNEL_0_MODE != SPI_MODE_MASTER && \
-     SPI_CHANNEL_0_MODE != SPI_MODE_SLAVE)
+#if ((SPI_CHANNEL_0_MODE != SPI_MODE_MASTER) && \
+     (SPI_CHANNEL_0_MODE != SPI_MODE_SLAVE))
     #error "SPI_CHANNEL_0_MODE configuration value is not valid!"
 #endif
 
-#if (SPI_CHANNEL_0_BAUDRATE < SPI_MIN_BAUDRATE || \
-     SPI_CHANNEL_0_BAUDRATE > SPI_MAX_BAUDRATE)
+#if ((SPI_CHANNEL_0_BAUDRATE < SPI_MIN_BAUDRATE) || \
+     (SPI_CHANNEL_0_BAUDRATE > SPI_MAX_BAUDRATE))
     #error "SPI_CHANNEL_0_BAUDRATE configuration value is not valid!"
 #endif
 
@@ -85,8 +85,8 @@
 #ifndef SPI_CHANNEL_0_MOSI_PULLUP_MODE
     #error "SPI_CHANNEL_0_MOSI_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_0_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_0_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_0_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_0_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_0_MOSI_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -112,8 +112,8 @@
 #ifndef SPI_CHANNEL_0_MISO_PULLUP_MODE
     #error "SPI_CHANNEL_0_MISO_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_0_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_0_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_0_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_0_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_0_MISO_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -141,8 +141,8 @@
 #ifndef SPI_CHANNEL_0_SCLK_PULLUP_MODE
     #error "SPI_CHANNEL_0_SCLK_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_0_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_0_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_0_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_0_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_0_SCLK_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -169,8 +169,8 @@
     #ifndef SPI_CHANNEL_0_CS_0_PULLUP_MODE
         #error "SPI_CHANNEL_0_CS_0_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_0_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_0_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_0_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_0_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_0_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -198,8 +198,8 @@
     #ifndef SPI_CHANNEL_0_CS_1_PULLUP_MODE
         #error "SPI_CHANNEL_0_CS_1_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_0_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_0_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_0_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_0_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_0_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -225,8 +225,8 @@
     #ifndef SPI_CHANNEL_0_CS_2_PULLUP_MODE
         #error "SPI_CHANNEL_0_CS_2_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_0_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_0_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_0_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_0_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_0_CS_2_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -252,8 +252,8 @@
     #ifndef SPI_CHANNEL_0_CS_3_PULLUP_MODE
         #error "SPI_CHANNEL_0_CS_3_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_0_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_0_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_0_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_0_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_0_CS_3_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -270,13 +270,13 @@
 
 #if (ON == SPI_CHANNEL_1_IN_USE)
 
-#if (SPI_CHANNEL_1_MODE != SPI_MODE_MASTER && \
-     SPI_CHANNEL_1_MODE != SPI_MODE_SLAVE)
+#if ((SPI_CHANNEL_1_MODE != SPI_MODE_MASTER) && \
+     (SPI_CHANNEL_1_MODE != SPI_MODE_SLAVE))
     #error "SPI_CHANNEL_1_MODE configuration value is not valid!"
 #endif
 
-#if (SPI_CHANNEL_1_BAUDRATE < SPI_MIN_BAUDRATE || \
-     SPI_CHANNEL_1_BAUDRATE > SPI_MAX_BAUDRATE)
+#if ((SPI_CHANNEL_1_BAUDRATE < SPI_MIN_BAUDRATE) || \
+     (SPI_CHANNEL_1_BAUDRATE > SPI_MAX_BAUDRATE))
     #error "SPI_CHANNEL_1_BAUDRATE configuration value is not valid!"
 #endif
 
@@ -304,8 +304,8 @@
 #ifndef SPI_CHANNEL_1_MOSI_PULLUP_MODE
     #error "SPI_CHANNEL_1_MOSI_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_1_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_1_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_1_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_1_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_1_MOSI_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -358,8 +358,8 @@
 #ifndef SPI_CHANNEL_1_SCLK_PULLUP_MODE
     #error "SPI_CHANNEL_1_SCLK_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_1_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_1_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_1_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_1_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_1_SCLK_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -386,8 +386,8 @@
     #ifndef SPI_CHANNEL_1_CS_0_PULLUP_MODE
         #error "SPI_CHANNEL_1_CS_0_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_1_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_1_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_1_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_1_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_1_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -415,8 +415,8 @@
     #ifndef SPI_CHANNEL_1_CS_1_PULLUP_MODE
         #error "SPI_CHANNEL_1_CS_1_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_1_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_1_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_1_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_1_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_1_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -442,8 +442,8 @@
     #ifndef SPI_CHANNEL_1_CS_2_PULLUP_MODE
         #error "SPI_CHANNEL_1_CS_2_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_1_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_1_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_1_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_1_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_1_CS_2_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -453,7 +453,7 @@
 //-------------------------------------------- CS3 ------------------------------------------------
 #if (SPI_CHANNEL_1_CS_3_IN_USE == ON)
     #if   (SPI_CHANNEL_1_CS_3_PORT == SPI_PORT_B && SPI_CHANNEL_1_CS_3_PIN == SPI_PIN_17)
-        #define SPI_CHANNEL_1_CS_2_ALT_FUNC (3U)
+        #define SPI_CHANNEL_1_CS_3_ALT_FUNC (3U)
     #else
         #error "SPI_CHANNEL_1_CS_3_PORT configuration value is not valid!"
     #endif
@@ -469,8 +469,8 @@
     #ifndef SPI_CHANNEL_1_CS_3_PULLUP_MODE
         #error "SPI_CHANNEL_1_CS_3_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_1_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_1_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_1_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_1_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_1_CS_3_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -487,13 +487,13 @@
 
 #if (ON == SPI_CHANNEL_2_IN_USE)
 
-#if (SPI_CHANNEL_2_MODE != SPI_MODE_MASTER && \
-     SPI_CHANNEL_2_MODE != SPI_MODE_SLAVE)
+#if ((SPI_CHANNEL_2_MODE != SPI_MODE_MASTER) && \
+     (SPI_CHANNEL_2_MODE != SPI_MODE_SLAVE))
     #error "SPI_CHANNEL_2_MODE configuration value is not valid!"
 #endif
 
-#if (SPI_CHANNEL_2_BAUDRATE < SPI_MIN_BAUDRATE || \
-     SPI_CHANNEL_2_BAUDRATE > SPI_MAX_BAUDRATE)
+#if ((SPI_CHANNEL_2_BAUDRATE < SPI_MIN_BAUDRATE) || \
+     (SPI_CHANNEL_2_BAUDRATE > SPI_MAX_BAUDRATE))
     #error "SPI_CHANNEL_2_BAUDRATE configuration value is not valid!"
 #endif
 
@@ -519,8 +519,8 @@
 #ifndef SPI_CHANNEL_2_MOSI_PULLUP_MODE
     #error "SPI_CHANNEL_2_MOSI_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_2_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_2_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_2_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_2_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_2_MOSI_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -546,8 +546,8 @@
 #ifndef SPI_CHANNEL_2_MISO_PULLUP_MODE
     #error "SPI_CHANNEL_2_MISO_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_2_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_2_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_2_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_2_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_2_MISO_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -573,8 +573,8 @@
 #ifndef SPI_CHANNEL_2_SCLK_PULLUP_MODE
     #error "SPI_CHANNEL_2_SCLK_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_2_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_2_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_2_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_2_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_2_SCLK_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -603,8 +603,8 @@
     #ifndef SPI_CHANNEL_2_CS_0_PULLUP_MODE
         #error "SPI_CHANNEL_2_CS_0_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_2_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_2_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_2_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_2_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_2_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -632,8 +632,8 @@
     #ifndef SPI_CHANNEL_2_CS_1_PULLUP_MODE
         #error "SPI_CHANNEL_2_CS_1_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_2_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_2_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_2_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_2_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_2_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -643,7 +643,7 @@
 //-------------------------------------------- CS2 ------------------------------------------------
 #if (SPI_CHANNEL_2_CS_2_IN_USE == ON)
     #if   (SPI_CHANNEL_2_CS_2_PORT == SPI_PORT_E && SPI_CHANNEL_2_CS_2_PIN == SPI_PIN_13)
-        #define SPI_CHANNEL_2_CS_0_ALT_FUNC (3U)
+        #define SPI_CHANNEL_2_CS_2_ALT_FUNC (3U)
     #else
         #error "SPI_CHANNEL_2_CS_2_PORT configuration value is not valid!"
     #endif
@@ -659,8 +659,8 @@
     #ifndef SPI_CHANNEL_2_CS_2_PULLUP_MODE
         #error "SPI_CHANNEL_2_CS_2_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_2_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_2_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_2_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_2_CS_2_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_2_CS_2_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -686,8 +686,8 @@
     #ifndef SPI_CHANNEL_2_CS_3_PULLUP_MODE
         #error "SPI_CHANNEL_2_CS_3_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_2_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_2_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_2_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_2_CS_3_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_2_CS_3_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -704,13 +704,13 @@
 
 #if (ON == SPI_CHANNEL_3_IN_USE)
 
-#if (SPI_CHANNEL_3_MODE != SPI_MODE_MASTER && \
-     SPI_CHANNEL_3_MODE != SPI_MODE_SLAVE)
+#if ((SPI_CHANNEL_3_MODE != SPI_MODE_MASTER) && \
+     (SPI_CHANNEL_3_MODE != SPI_MODE_SLAVE))
     #error "SPI_CHANNEL_3_MODE configuration value is not valid!"
 #endif
 
-#if (SPI_CHANNEL_3_BAUDRATE < SPI_MIN_BAUDRATE || \
-     SPI_CHANNEL_3_BAUDRATE > SPI_MAX_BAUDRATE)
+#if ((SPI_CHANNEL_3_BAUDRATE < SPI_MIN_BAUDRATE) || \
+     (SPI_CHANNEL_3_BAUDRATE > SPI_MAX_BAUDRATE))
     #error "SPI_CHANNEL_3_BAUDRATE configuration value is not valid!"
 #endif
 
@@ -734,8 +734,8 @@
 #ifndef SPI_CHANNEL_3_MOSI_PULLUP_MODE
     #error "SPI_CHANNEL_3_MOSI_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_3_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_3_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_3_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_3_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_3_MOSI_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -759,8 +759,8 @@
 #ifndef SPI_CHANNEL_3_MISO_PULLUP_MODE
     #error "SPI_CHANNEL_3_MISO_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_3_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_3_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_3_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_3_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_3_MISO_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -784,8 +784,8 @@
 #ifndef SPI_CHANNEL_3_SCLK_PULLUP_MODE
     #error "SPI_CHANNEL_3_SCLK_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_3_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_3_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_3_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_3_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_3_SCLK_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -810,8 +810,8 @@
     #ifndef SPI_CHANNEL_3_CS_0_PULLUP_MODE
         #error "SPI_CHANNEL_3_CS_0_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_3_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_3_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_3_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_3_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_3_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -839,8 +839,8 @@
     #ifndef SPI_CHANNEL_3_CS_1_PULLUP_MODE
         #error "SPI_CHANNEL_3_CS_1_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_3_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_3_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_3_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_3_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_3_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -857,13 +857,13 @@
 
 #if (ON == SPI_CHANNEL_4_IN_USE)
 
-#if (SPI_CHANNEL_4_MODE != SPI_MODE_MASTER && \
-     SPI_CHANNEL_4_MODE != SPI_MODE_SLAVE)
+#if ((SPI_CHANNEL_4_MODE != SPI_MODE_MASTER) && \
+     (SPI_CHANNEL_4_MODE != SPI_MODE_SLAVE))
     #error "SPI_CHANNEL_4_MODE configuration value is not valid!"
 #endif
 
-#if (SPI_CHANNEL_4_BAUDRATE < SPI_MIN_BAUDRATE || \
-     SPI_CHANNEL_4_BAUDRATE > SPI_MAX_BAUDRATE)
+#if ((SPI_CHANNEL_4_BAUDRATE < SPI_MIN_BAUDRATE) || \
+     (SPI_CHANNEL_4_BAUDRATE > SPI_MAX_BAUDRATE))
     #error "SPI_CHANNEL_4_BAUDRATE configuration value is not valid!"
 #endif
 
@@ -887,15 +887,15 @@
 #ifndef SPI_CHANNEL_4_MOSI_PULLUP_MODE
     #error "SPI_CHANNEL_4_MOSI_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_4_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_4_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_4_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_4_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_4_MOSI_PULLUP_MODE configuration value is not valid!"
 #endif
 
 //-------------------------------------------- MISO ------------------------------------------------
-#if   (SPI_CHANNEL_4_MISO_PORT == SPI_PORT_D && SPI_CHANNEL_4_MISO_PIN == SPI_PIN_15)
+#if   (SPI_CHANNEL_4_MISO_PORT == SPI_PORT_D && SPI_CHANNEL_4_MISO_PIN == SPI_PIN_7 )
     #define SPI_CHANNEL_4_MISO_ALT_FUNC (4U)
-#elif (SPI_CHANNEL_4_MISO_PORT == SPI_PORT_C && SPI_CHANNEL_4_MISO_PIN == SPI_PIN_7 )
+#elif (SPI_CHANNEL_4_MISO_PORT == SPI_PORT_C && SPI_CHANNEL_4_MISO_PIN == SPI_PIN_15)
     #define SPI_CHANNEL_4_MISO_ALT_FUNC (5U)
 #else
     #error "SPI_CHANNEL_4_MISO_PORT configuration value is not valid!"
@@ -912,8 +912,8 @@
 #ifndef SPI_CHANNEL_4_MISO_PULLUP_MODE
     #error "SPI_CHANNEL_4_MISO_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_4_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_4_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_4_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_4_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_4_MISO_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -937,8 +937,8 @@
 #ifndef SPI_CHANNEL_4_SCLK_PULLUP_MODE
     #error "SPI_CHANNEL_4_SCLK_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_4_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_4_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_4_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_4_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_4_SCLK_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -963,8 +963,8 @@
     #ifndef SPI_CHANNEL_4_CS_0_PULLUP_MODE
         #error "SPI_CHANNEL_4_CS_0_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_4_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_4_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_4_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_4_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_4_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -992,8 +992,8 @@
     #ifndef SPI_CHANNEL_4_CS_1_PULLUP_MODE
         #error "SPI_CHANNEL_4_CS_1_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_4_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_4_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_4_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_4_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_4_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -1010,13 +1010,13 @@
 
 #if (ON == SPI_CHANNEL_5_IN_USE)
 
-#if (SPI_CHANNEL_5_MODE != SPI_MODE_MASTER && \
-     SPI_CHANNEL_5_MODE != SPI_MODE_SLAVE)
+#if ((SPI_CHANNEL_5_MODE != SPI_MODE_MASTER) && \
+     (SPI_CHANNEL_5_MODE != SPI_MODE_SLAVE))
     #error "SPI_CHANNEL_5_MODE configuration value is not valid!"
 #endif
 
-#if (SPI_CHANNEL_5_BAUDRATE < SPI_MIN_BAUDRATE || \
-     SPI_CHANNEL_5_BAUDRATE > SPI_MAX_BAUDRATE)
+#if ((SPI_CHANNEL_5_BAUDRATE < SPI_MIN_BAUDRATE) || \
+     (SPI_CHANNEL_5_BAUDRATE > SPI_MAX_BAUDRATE))
     #error "SPI_CHANNEL_5_BAUDRATE configuration value is not valid!"
 #endif
 
@@ -1040,8 +1040,8 @@
 #ifndef SPI_CHANNEL_5_MOSI_PULLUP_MODE
     #error "SPI_CHANNEL_5_MOSI_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_5_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_5_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_5_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_5_MOSI_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_5_MOSI_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -1065,8 +1065,8 @@
 #ifndef SPI_CHANNEL_5_MISO_PULLUP_MODE
     #error "SPI_CHANNEL_5_MISO_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_5_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_5_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_5_MISO_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_5_MISO_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_5_MISO_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -1090,8 +1090,8 @@
 #ifndef SPI_CHANNEL_5_SCLK_PULLUP_MODE
     #error "SPI_CHANNEL_5_SCLK_PULLUP_MODE not defined!"
 #endif
-#if (!( SPI_CHANNEL_5_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-        SPI_CHANNEL_5_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+#if (!( (SPI_CHANNEL_5_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+        (SPI_CHANNEL_5_SCLK_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
     #error "SPI_CHANNEL_5_SCLK_PULLUP_MODE configuration value is not valid!"
 #endif
 
@@ -1114,8 +1114,8 @@
     #ifndef SPI_CHANNEL_5_CS_0_PULLUP_MODE
         #error "SPI_CHANNEL_5_CS_0_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_5_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_5_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_5_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_5_CS_0_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_5_CS_0_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -1141,8 +1141,8 @@
     #ifndef SPI_CHANNEL_5_CS_1_PULLUP_MODE
         #error "SPI_CHANNEL_5_CS_1_PULLUP_MODE not defined!"
     #endif
-    #if (!( SPI_CHANNEL_5_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE || \
-            SPI_CHANNEL_5_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE ) )
+    #if (!( (SPI_CHANNEL_5_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_DISABLE) || \
+            (SPI_CHANNEL_5_CS_1_PULLUP_MODE == SPI_PULLUP_MODE_ENABLE) ) )
         #error "SPI_CHANNEL_5_CS_1_PULLUP_MODE configuration value is not valid!"
     #endif
 #else
@@ -1154,7 +1154,7 @@
 
 
 //**************************************************************************************************
-// Definitions of global (public) variables
+// Declarations of global (public) data types
 //**************************************************************************************************
 
 // None.
@@ -1162,15 +1162,7 @@
 
 
 //**************************************************************************************************
-// Declarations of local (private) data types
-//**************************************************************************************************
-
-// None.
-
- 
-
-//**************************************************************************************************
-// Definitions of local (private) constants
+// Definitions of global (public) constants
 //**************************************************************************************************
 
 // None.
@@ -1178,15 +1170,7 @@
 
 
 //**************************************************************************************************
-// Definitions of static global (private) variables
-//**************************************************************************************************
-
-// None
-
-
-
-//**************************************************************************************************
-// Declarations of local (private) functions
+// Declarations of global (public) variables
 //**************************************************************************************************
 
 // None.
@@ -1194,25 +1178,13 @@
 
 
 //**************************************************************************************************
-//==================================================================================================
-// Definitions of global (public) functions
-//==================================================================================================
+// Declarations of global (public) functions
 //**************************************************************************************************
 
 // None.
 
 
 
-//**************************************************************************************************
-//==================================================================================================
-// Definitions of local (private) functions
-//==================================================================================================
-//**************************************************************************************************
-
-// None.
-
-
-
-#endif  // SPI_DRV_CFG_VERIF_H
+#endif  // #ifndef SPI_DRV_CFG_VERIF_H
 
 //****************************************** end of file *******************************************

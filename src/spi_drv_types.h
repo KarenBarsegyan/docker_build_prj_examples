@@ -141,6 +141,21 @@ typedef struct
 
 
 
+//! \name MCU clock primal divider
+//! @{
+#define SPI_MCU_PRIMAL_DIVIDER          (2U)
+//! @}
+
+
+
+//! \name SLP clock divider coefficients
+//! @{
+#define SPI_CLK_COEFF_1                 (2U)
+#define SPI_CLK_COEFF_2                 (2U)
+//! @}
+
+
+
 //! \name All possible pin names
 //! @{
 #define SPI_PIN_0                       (0U)
@@ -232,7 +247,7 @@ typedef struct
 
 
 
-//! \name IPC spi control indexes
+//! \name IPC SPI control indexes
 //! @{
 #define SPI_IPC_SPI0_INDEX              (42U)
 #define SPI_IPC_SPI1_INDEX              (43U)
@@ -246,7 +261,7 @@ typedef struct
 //! @}
 
 
-//! \name IPC gpio port control indexes
+//! \name IPC GPIO port control indexes
 //! @{
 #define SPI_IPC_PCTRL_GPIO_INDEX        (17U)
 #define SPI_IPC_PCTRLA_INDEX            (18U)
@@ -331,6 +346,22 @@ typedef struct
 #define SPI_CFG_BIT_ORDER_LSB_FIRST     (1U)
 #define SPI_CFG_BIT_ORDER_MSB_FIRST     (0U)
 //! @}
+
+
+
+//**************************************************************************************************
+// Declarations of global (public) variables
+//**************************************************************************************************
+
+// None.
+
+
+
+//**************************************************************************************************
+// Declarations of global (public) functions
+//**************************************************************************************************
+
+// None.
 
 
 

@@ -23,8 +23,8 @@
 //! \brief      Implements work with SPI interface
 //! \addtogroup SPI_DRV
 //! @{
-//! \file spi_drv.h
 //! \file spi_drv.c
+//! \file spi_drv.h
 //! \file spi_drv_cfg.h.tmpl
 //! \file spi_drv_types.h
 //! \file spi_drv_irq.c
@@ -61,6 +61,14 @@
 // Get error tracer functions
 #include "error_tracer.h"
 #endif
+
+
+
+//**************************************************************************************************
+// Verification of the imported configuration parameters
+//**************************************************************************************************
+
+// None.
 
 
 
@@ -108,24 +116,24 @@ static const U8 SPI_moduleID[] = "SPI_DRV";
 //! Program module ID size
 static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_moduleID) - 1U;
 
-//! Dev error function
+//! Development error function
 #define SPI_REPORT_DEV_ERROR(SPI_nAPIID, nErrorID)         \
     ET_ReportDevelopmentError(SPI_moduleID,                \
                               SPI_nModuleIDSize,           \
                               0U,                          \
                               SPI_nAPIID,                  \
-                              nErrorID);
+                              nErrorID)
+#else
+#define SPI_REPORT_DEV_ERROR(SPI_nAPIID, nErrorID)                 
+#endif
+
 //! Runtime error function
 #define SPI_REPORT_RT_ERROR(SPI_nAPIID, nErrorID)          \
     ET_ReportRuntimeError(SPI_moduleID,                    \
                           SPI_nModuleIDSize,               \
                           0U,                              \
                           SPI_nAPIID,                      \
-                          nErrorID);
-#else
-#define SPI_REPORT_DEV_ERROR(SPI_nAPIID, nErrorID)         
-#define SPI_REPORT_RT_ERROR(SPI_nAPIID, nErrorID)          
-#endif
+                          nErrorID)
 
 #if (OFF == SPI_CHANNEL_0_IN_USE && \
      OFF == SPI_CHANNEL_1_IN_USE && \
@@ -231,12 +239,14 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_moduleID) - 1U;
 #define SPI_DIVIDER_OVERFLOW_VALUE (128U)
 #define SPI_DIVIDER_COEFF_VALUE    (8U)
 
+
+
 //**************************************************************************************************
 // Definitions of static global (private) variables
 //**************************************************************************************************
 
 //! SPI Initialized Flag
-static BOOLEAN SPI_bInitialized;
+static BOOLEAN SPI_bInitialized = FALSE;
 
 #ifndef SPI_NO_ONE_IN_USE
 //! Port control registers array
@@ -261,13 +271,13 @@ static SPI_tag* SPI_pChannels[SPI_CHANNEL_QTY] =
     &SPI5
 };
 
-//! RX circ buffer structure
-static stCIRCBUF SPI_stCircBufferRX [SPI_CHANNEL_QTY];
-//! RX data buffer for Circ Buf module
+//! RX circular buffer structure
+static stCIRCBUF SPI_stCircBufferRX[SPI_CHANNEL_QTY];
+//! RX data buffer for circular buffer module
 static U32       SPI_pCircBuffDataRX[SPI_CHANNEL_QTY][SPI_CHANNEL_RX_FIFO_SIZE];
-//! TX circ buffer structure
-static stCIRCBUF SPI_stCircBufferTX [SPI_CHANNEL_QTY];
-//! TX data buffer for Circ Buf module
+//! TX circular buffer structure
+static stCIRCBUF SPI_stCircBufferTX[SPI_CHANNEL_QTY];
+//! TX data buffer for circular buffer module
 static U32       SPI_pCircBuffDataTX[SPI_CHANNEL_QTY][SPI_CHANNEL_TX_FIFO_SIZE];
 
 //! Static and dynamic params of all channels
@@ -282,20 +292,42 @@ static SPI_CALLBACK SPI_callbacks[SPI_CHANNEL_QTY];
 // Declarations of local (private) functions
 //**************************************************************************************************
 
+//! \brief Initializes channels params struct
 static void SPI_InitParams(void);
+
+//! \brief Initializes buffers and another software modules for SPI
 static void SPI_InitSW(void);
+
+//! \brief Initializes all SPI channels registers
 static void SPI_InitHW(void);
+
+//! \brief DeInitializes all buffers and another software modules for SPI
 static void SPI_DeInitSW(void);
+
+//! \brief DeInitializes all SPI channels registers
 static void SPI_DeInitHW(void);
+
+//! \brief Starts SPI transfer
 static BOOLEAN SPI_StartTransfer(const U8 nChannelNum);
-static void SPI_SetupChannelClk(U8 nChannelNum);
-static void SPI_SetupChannelParams(U8 nChannelNum);
+
+//! \brief Setups all dividers and clock parameters
+static void SPI_SetupChannelClk(const U8 nChannelNum);
+
+//! \brief Setups all transmit\receive params
+static void SPI_SetupChannelParams(const U8 nChannelNum);
 
 #ifndef SPI_NO_ONE_IN_USE
-static void SPI_ConfigureChannel(U8 nChannelNum);
-static void SPI_TakeOnPortClk(U8 nPortNum);
-static void SPI_DisableChannel(U8 nChannelNum);
+//! \brief Takes on clock for specific port
+static void SPI_TakeOnPortClk(const U8 nPortNum);
+
+//! \brief Configures channel
+static void SPI_ConfigureChannel(const U8 nChannelNum);
+
+//! \brief Takes off channel
+static void SPI_DisableChannel(const U8 nChannelNum);
 #endif // end of SPI_NO_ONE_IN_USE 
+
+
 
 //**************************************************************************************************
 //==================================================================================================
@@ -308,9 +340,9 @@ static void SPI_DisableChannel(U8 nChannelNum);
 //**************************************************************************************************
 //! Initializes SW and HW SPI driver resources
 //!
-//! \note None
+//! \note   None
 //!
-//! \param None
+//! \param  None
 //!
 //! \return RESULT_OK     - initialization is completed successfully \n
 //!         RESULT_NOT_OK - initialization is not completed
@@ -341,9 +373,9 @@ STD_RESULT SPI_Init(void)
 //**************************************************************************************************
 //! Deinitializes SW and HW SPI driver resources
 //!
-//! \note None.
+//! \note   None.
 //!
-//! \param None.
+//! \param  None.
 //!
 //! \return RESULT_OK     - deinitialization is completed successfully \n
 //!         RESULT_NOT_OK - deinitialization is not completed
@@ -397,9 +429,9 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CHANNEL_MIN > nChannelNum ||
-             SPI_CHANNEL_MAX < nChannelNum ||
-             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if ((SPI_CHANNEL_MIN > nChannelNum) ||
+             (SPI_CHANNEL_MAX < nChannelNum) ||
+             (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_PARAM_0);
     }
@@ -407,46 +439,55 @@ STD_RESULT SPI_Read(const U8    nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_PARAM_1);
     }
-    else if (0U                       > nDataFrameQty ||
-             SPI_CHANNEL_RX_FIFO_SIZE < nDataFrameQty)
+    else if (SPI_CHANNEL_RX_FIFO_SIZE < nDataFrameQty)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_READ, DEV_ERROR_PARAM_2);
     }
     else
     {
-        if (nDataFrameQty <= CIRCBUF_GetNumberOfItems(&SPI_stCircBufferRX[nChannelNum]) &&
-            nDataFrameQty > 0U)
+        if ((nDataFrameQty <= CIRCBUF_GetNumberOfItems(&SPI_stCircBufferRX[nChannelNum])) &&
+            (nDataFrameQty > 0U))
         {
             for (U8 nDataCnt = 0U; nDataCnt < nDataFrameQty; nDataCnt++)
             {
-                CIRCBUF_GetData((U32*)&nLocalData,
-                                &SPI_stCircBufferRX[nChannelNum]);
-                
-                U8 nDataSize = SPI_stChannelsParams[nChannelNum].nDataFrameSize;
+                if (CIRCBUF_NO_ERR == CIRCBUF_GetData((U32*)&nLocalData,
+                                                      &SPI_stCircBufferRX[nChannelNum]))
+                {
+                    U8 nDataSize = SPI_stChannelsParams[nChannelNum].nDataFrameSize;
 
-                if ((SPI_DATA_SIZE_8 >= nDataSize) && 
-                    (0U < nDataSize))
-                {
-                    pDataBufferU8[nDataCnt] = (U8)nLocalData;
+                    if ((SPI_DATA_SIZE_8 >= nDataSize) && 
+                        (0U < nDataSize))
+                    {
+                        pDataBufferU8[nDataCnt] = (U8)nLocalData;
+                    }
+                    else if ((SPI_DATA_SIZE_16 >= nDataSize) &&
+                            (SPI_DATA_SIZE_8 < nDataSize))
+                    {
+                        pDataBufferU16[nDataCnt] = (U16)nLocalData;
+                    }
+                    else if ((SPI_DATA_SIZE_32 >= nDataSize) && 
+                            (SPI_DATA_SIZE_16 < nDataSize))
+                    {
+                        pDataBufferU32[nDataCnt] = nLocalData;
+                    }
+                    else
+                    {
+                        DoNothing();
+                    }
+
+                    nFuncResult = RESULT_OK;
                 }
-                else if ((SPI_DATA_SIZE_16 >= nDataSize) &&
-                         (SPI_DATA_SIZE_8 < nDataSize))
+                else
                 {
-                    pDataBufferU16[nDataCnt] = (U16)nLocalData;
-                }
-                else if ((SPI_DATA_SIZE_32 >= nDataSize) && 
-                         (SPI_DATA_SIZE_16 < nDataSize))
-                {
-                    pDataBufferU32[nDataCnt] = (U32)nLocalData;
+                    DoNothing();
                 }
             }
             
-            nFuncResult = RESULT_OK;
         }
         else
         {
             // Report runtime error
-            SPI_REPORT_RT_ERROR(SPI_API_ID_WRITE, RT_ERROR_RX_OVERRUN);
+            SPI_REPORT_RT_ERROR(SPI_API_ID_READ, RT_ERROR_RX_OVERRUN);
         }
     }
 
@@ -482,9 +523,9 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CHANNEL_MIN > nChannelNum ||
-             SPI_CHANNEL_MAX < nChannelNum ||
-             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if ((SPI_CHANNEL_MIN > nChannelNum) ||
+             (SPI_CHANNEL_MAX < nChannelNum) ||
+             (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_PARAM_0);
     }
@@ -492,15 +533,14 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_PARAM_1);
     }
-    else if (0U                       > nDataFrameQty ||
-             SPI_CHANNEL_TX_FIFO_SIZE < nDataFrameQty)
+    else if (SPI_CHANNEL_TX_FIFO_SIZE < nDataFrameQty)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_WRITE, DEV_ERROR_PARAM_2);
     }
     else
     {
-        if (nDataFrameQty <= CIRCBUF_GetFreeSize(&SPI_stCircBufferTX[nChannelNum]) && 
-            nDataFrameQty > 0U)
+        if ((nDataFrameQty <= CIRCBUF_GetFreeSize(&SPI_stCircBufferTX[nChannelNum])) && 
+            (nDataFrameQty > 0U))
         {
             // Put all data in FIFO
             for (U8 nDataCnt = 0U; nDataCnt < nDataFrameQty; nDataCnt++)
@@ -522,14 +562,23 @@ STD_RESULT SPI_Write(const U8          nChannelNum,
                 {
                     nLocalData = (U32)pDataBufferU32[nDataCnt];
                 }
+                else
+                {
+                    DoNothing();
+                }
 
-                CIRCBUF_PutData((U32*)&nLocalData,
-                                &SPI_stCircBufferTX[nChannelNum]);
+                if (CIRCBUF_NO_ERR == CIRCBUF_PutData((U32*)&nLocalData,
+                                                      &SPI_stCircBufferTX[nChannelNum]))
+                {
+                    nFuncResult = RESULT_OK;
+                }
+                else
+                {
+                    DoNothing();
+                }
             }
 
-            SPI_StartTransfer(nChannelNum);
-
-            nFuncResult = RESULT_OK;
+            (void) SPI_StartTransfer(nChannelNum);
         }
         else
         {
@@ -565,17 +614,26 @@ STD_RESULT SPI_Purge(const U8      nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_PURGE, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CHANNEL_MIN > nChannelNum ||
-             SPI_CHANNEL_MAX < nChannelNum ||
-             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if ((SPI_CHANNEL_MIN > nChannelNum) ||
+             (SPI_CHANNEL_MAX < nChannelNum) ||
+             (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_PURGE, DEV_ERROR_PARAM_0);
     }
     else
     {
+        nFuncResult = RESULT_OK;
         if (TRUE == bPurgeRX)
         {
-            CIRCBUF_Purge(&SPI_stCircBufferRX[nChannelNum]);
+            if (CIRCBUF_NO_ERR != CIRCBUF_Purge(&SPI_stCircBufferRX[nChannelNum]))
+            {
+                nFuncResult = RESULT_NOT_OK;
+            }
+            else
+            {
+                DoNothing();
+            }
+
             SPI_pChannels[nChannelNum]->RXFIFO.B.RESET = ON;
         }
         else
@@ -585,7 +643,15 @@ STD_RESULT SPI_Purge(const U8      nChannelNum,
 
         if (TRUE == bPurgeTX)
         {
-            CIRCBUF_Purge(&SPI_stCircBufferTX[nChannelNum]);
+            if (CIRCBUF_NO_ERR != CIRCBUF_Purge(&SPI_stCircBufferTX[nChannelNum]))
+            {
+                nFuncResult = RESULT_NOT_OK;
+            }
+            else
+            {
+                DoNothing();
+            }
+            
             SPI_pChannels[nChannelNum]->TXFIFO.B.RESET = ON;
         }
         else
@@ -619,9 +685,9 @@ STD_RESULT SPI_GetRXItemsCount(const U8   nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_GETRXITEMSCOUNT, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CHANNEL_MIN > nChannelNum ||
-             SPI_CHANNEL_MAX < nChannelNum ||
-             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if ((SPI_CHANNEL_MIN > nChannelNum) ||
+             (SPI_CHANNEL_MAX < nChannelNum) ||
+             (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_GETRXITEMSCOUNT, DEV_ERROR_PARAM_0);
     }
@@ -629,7 +695,7 @@ STD_RESULT SPI_GetRXItemsCount(const U8   nChannelNum,
     {
         if (NULL_PTR != pBytesCount)
         {
-            *pBytesCount =(U16)(CIRCBUF_GetNumberOfItems(&SPI_stCircBufferRX[nChannelNum]));
+            *pBytesCount = (U16)(CIRCBUF_GetNumberOfItems(&SPI_stCircBufferRX[nChannelNum]));
             
             nFuncResult = RESULT_OK;
         }
@@ -665,14 +731,14 @@ STD_RESULT SPI_SetBaudrate(const U8  nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CHANNEL_MIN > nChannelNum ||
-             SPI_CHANNEL_MAX < nChannelNum ||
-             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if ((SPI_CHANNEL_MIN > nChannelNum) ||
+             (SPI_CHANNEL_MAX < nChannelNum) ||
+             (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_PARAM_0);
     }
-    else if (SPI_MIN_BAUDRATE > nBaudrate ||
-             SPI_MAX_BAUDRATE < nBaudrate)
+    else if ((SPI_MIN_BAUDRATE > nBaudrate) ||
+             (SPI_MAX_BAUDRATE < nBaudrate))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETBAUDRATE, DEV_ERROR_PARAM_1);
     }
@@ -723,9 +789,9 @@ STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CHANNEL_MIN > nChannelNum ||
-             SPI_CHANNEL_MAX < nChannelNum ||
-             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if ((SPI_CHANNEL_MIN > nChannelNum) ||
+             (SPI_CHANNEL_MAX < nChannelNum) ||
+             (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_SETTRANSFERFORMAT, DEV_ERROR_PARAM_0);
     }
@@ -734,13 +800,13 @@ STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
         nFuncResult = RESULT_OK;
 
         // Setup clock polarity
-        if (SPI_CLOCK_POL_LOW == bActiveClockPolarity ||
-            SPI_CPOL_0        == bActiveClockPolarity)
+        if ((SPI_CLOCK_POL_LOW == bActiveClockPolarity) ||
+            (SPI_CPOL_0        == bActiveClockPolarity))
         {
             SPI_stChannelsParams[nChannelNum].bActiveClockPolarity = SPI_CFG_CPOL_0;
         }
-        else if (SPI_CLOCK_POL_HIGH == bActiveClockPolarity ||
-                 SPI_CPOL_1         == bActiveClockPolarity)
+        else if ((SPI_CLOCK_POL_HIGH == bActiveClockPolarity) ||
+                 (SPI_CPOL_1         == bActiveClockPolarity))
         {
             SPI_stChannelsParams[nChannelNum].bActiveClockPolarity = SPI_CFG_CPOL_1;
         }
@@ -751,13 +817,13 @@ STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
         }
 
         // Setup clock phase
-        if (SPI_PHASE_RISING == bClockPhase ||
-            SPI_CPHA_0       == bClockPhase)
+        if ((SPI_PHASE_RISING == bClockPhase) ||
+            (SPI_CPHA_0       == bClockPhase))
         {
             SPI_stChannelsParams[nChannelNum].bClockPhase = SPI_CFG_CPHA_0;
         }
-        else if (SPI_PHASE_FALLING == bClockPhase ||
-                 SPI_CPHA_1        == bClockPhase)
+        else if ((SPI_PHASE_FALLING == bClockPhase) ||
+                 (SPI_CPHA_1        == bClockPhase))
         {
             SPI_stChannelsParams[nChannelNum].bClockPhase = SPI_CFG_CPHA_1;
         }
@@ -795,9 +861,9 @@ STD_RESULT SPI_SetTransferFormat(const U8      nChannelNum,
         }
         
         // Setup CS num
-        if (SPI_CS_NUM_MIN <= nCSNum &&
-            SPI_CS_NUM_MAX >= nCSNum &&
-            SPI_CS_AVAILABLE == SPI_stChannelsParams[nChannelNum].nCSAvailble[nCSNum])
+        if ((SPI_CS_NUM_MIN <= nCSNum) &&
+            (SPI_CS_NUM_MAX >= nCSNum) &&
+            (SPI_CS_AVAILABLE == SPI_stChannelsParams[nChannelNum].nCSAvailble[nCSNum]))
         {
             SPI_stChannelsParams[nChannelNum].nCSNum = nCSNum;
         }
@@ -895,13 +961,20 @@ void SPI_HighLevel_RX_ISR(const U8 nChannelNum)
         // Put input frame to RX FIFO
         if (CIRCBUF_GetFreeSize(&SPI_stCircBufferRX[nChannelNum]) >= 1U)
         {
-                CIRCBUF_PutData((U32*)&nRxData,
-                                &SPI_stCircBufferRX[nChannelNum]);
+            if (CIRCBUF_NO_ERR != CIRCBUF_PutData((U32*)&nRxData,
+                                  &SPI_stCircBufferRX[nChannelNum]))
+            {
+                SPI_REPORT_RT_ERROR(SPI_API_ID_RX_ISR, RT_ERROR_RX_FIFO_OVERFLOW);
+            }
+            else
+            {
+                DoNothing();
+            }
         }
         else
         {
             // Report RX FIFO overflow.
-            SPI_REPORT_RT_ERROR(SPI_API_ID_TX_ISR, RT_ERROR_RX_FIFO_OVERFLOW);
+            SPI_REPORT_RT_ERROR(SPI_API_ID_RX_ISR, RT_ERROR_RX_FIFO_OVERFLOW);
         }
 
         SPI_pChannels[nChannelNum]->STS.B.FCIF = OFF;
@@ -925,9 +998,9 @@ void SPI_HighLevel_TX_ISR(const U8 nChannelNum)
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_TX_ISR, DEV_ERROR_NOT_INIT);
     }
-    else if (SPI_CHANNEL_MIN > nChannelNum ||
-             SPI_CHANNEL_MAX < nChannelNum ||
-             FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled)
+    else if ((SPI_CHANNEL_MIN > nChannelNum) ||
+             (SPI_CHANNEL_MAX < nChannelNum) ||
+             (FALSE == SPI_stChannelsParams[nChannelNum].bChannelEnabled))
     {
         SPI_REPORT_DEV_ERROR(SPI_API_ID_TX_ISR, DEV_ERROR_PARAM_0);
     }
@@ -953,10 +1026,15 @@ void SPI_HighLevel_TX_ISR(const U8 nChannelNum)
 //==================================================================================================
 //**************************************************************************************************
 
+
+
 //**************************************************************************************************
-//! Initialize channels params struct
+//! Initializes channels params struct
+//!
 //! \note       None.
-//! \param[in]  None.
+//!
+//! \param      None.
+//!
 //! \return     None.
 //**************************************************************************************************
 static void SPI_InitParams(void)
@@ -1242,15 +1320,17 @@ static void SPI_InitParams(void)
     #else
         SPI_stChannelsParams[SPI_CHANNEL_5].bChannelEnabled = FALSE; 
     #endif
-   
 } // end of SPI_InitParams()
 
 
 
 //**************************************************************************************************
-//! Initializes bufers and another software modules for SPI
+//! Initializes buffers and another software modules for SPI
+//!
 //! \note       None.
-//! \param[in]  None.
+//!
+//! \param      None.
+//!
 //! \return     None.
 //**************************************************************************************************
 static void SPI_InitSW(void)
@@ -1260,26 +1340,44 @@ static void SPI_InitSW(void)
         SPI_stCircBufferRX[nChannelNum].itemSize = sizeof(U32);
         SPI_stCircBufferTX[nChannelNum].itemSize = sizeof(U32);
 
-        CIRCBUF_Init(&SPI_stCircBufferRX[nChannelNum],
-                     SPI_pCircBuffDataRX[nChannelNum],
-                     SIZE_OF_ARRAY(SPI_pCircBuffDataRX[nChannelNum]));
+        if (CIRCBUF_NO_ERR != CIRCBUF_Init(&SPI_stCircBufferRX[nChannelNum],
+                                           SPI_pCircBuffDataRX[nChannelNum],
+                                           SIZE_OF_ARRAY(SPI_pCircBuffDataRX[nChannelNum])))
+        {
+            SPI_REPORT_RT_ERROR(SPI_API_ID_INIT, RT_ERROR_BUSY);
+        }
 
-        CIRCBUF_Init(&SPI_stCircBufferTX[nChannelNum],
-                     SPI_pCircBuffDataTX[nChannelNum],
-                     SIZE_OF_ARRAY(SPI_pCircBuffDataTX[nChannelNum]));
+        if (CIRCBUF_NO_ERR != CIRCBUF_Init(&SPI_stCircBufferTX[nChannelNum],
+                                           SPI_pCircBuffDataTX[nChannelNum],
+                                           SIZE_OF_ARRAY(SPI_pCircBuffDataTX[nChannelNum])))
+        {
+            SPI_REPORT_RT_ERROR(SPI_API_ID_INIT, RT_ERROR_BUSY);
+        }
 
-        CIRCBUF_Purge(&SPI_stCircBufferRX[nChannelNum]);
-        CIRCBUF_Purge(&SPI_stCircBufferTX[nChannelNum]);
+        if (CIRCBUF_NO_ERR != CIRCBUF_Purge(&SPI_stCircBufferRX[nChannelNum]))
+        {
+            SPI_REPORT_RT_ERROR(SPI_API_ID_INIT, RT_ERROR_BUSY);
+        }
+
+        if (CIRCBUF_NO_ERR != CIRCBUF_Purge(&SPI_stCircBufferTX[nChannelNum]))
+        {
+            SPI_REPORT_RT_ERROR(SPI_API_ID_INIT, RT_ERROR_BUSY);
+        }
+
+        SPI_callbacks[nChannelNum] = NULL_PTR;
+
     }
-
 } // end of SPI_InitSW()
 
 
 
 //**************************************************************************************************
 //! Initializes all SPI channels registers
+//!
 //! \note       None.
-//! \param[in]  None.
+//!
+//! \param      None.
+//!
 //! \return     None.
 //**************************************************************************************************
 static void SPI_InitHW(void)
@@ -1343,24 +1441,29 @@ static void SPI_InitHW(void)
         SPI_CHANNEL_PCTRL_FILL(SPI_CHANNEL_5);
         SPI_ConfigureChannel(SPI_CHANNEL_5);
     #endif
-
 } // end of SPI_InitHW()
 
 
 
 //**************************************************************************************************
-//! DeInitializes all bufers and another software modules for SPI
+//! DeInitializes all buffers and another software modules for SPI
+//! 
 //! \note       None.
-//! \param[in]  None.
+//!
+//! \param      None.
+//!
 //! \return     None.
 //**************************************************************************************************
 static void SPI_DeInitSW(void)
 {   
-    for (U8 nChannelNum = 0U; nChannelNum < SPI_CHANNEL_QTY; ++nChannelNum)
+    for (U8 nChannelNum = 0U; nChannelNum < SPI_CHANNEL_QTY; nChannelNum++)
     {
-        SPI_Purge(nChannelNum,
-                  TRUE,
-                  TRUE);
+         if (RESULT_NOT_OK == SPI_Purge(nChannelNum,
+                                        TRUE,
+                                        TRUE))
+        {
+            SPI_REPORT_RT_ERROR(SPI_API_ID_DEINIT, RT_ERROR_BUSY);
+        }
     }
 } // end of SPI_DeInitSW()
 
@@ -1368,8 +1471,11 @@ static void SPI_DeInitSW(void)
 
 //**************************************************************************************************
 //! DeInitializes all SPI channels registers
+//!
 //! \note       None.
-//! \param[in]  None.
+//!
+//! \param      None.
+//!
 //! \return     None.
 //**************************************************************************************************
 static void SPI_DeInitHW(void)
@@ -1398,16 +1504,18 @@ static void SPI_DeInitHW(void)
 
     #if (ON == SPI_CHANNEL_5_IN_USE)
         SPI_DisableChannel(SPI_CHANNEL_5);
-    #endif
-      
+    #endif  
 } // end of SPI_DeInitHW()
 
 
 
 //**************************************************************************************************
-//! Start SPI transfer
+//! Starts SPI transfer
+//!
 //! \note       None.
+//!
 //! \param[in]  nChannelNum  - SPI channel number
+//!
 //! \return     TRUE  - Transaction is start successfully
 //! \return     FALSE - All transactions is done
 //**************************************************************************************************
@@ -1417,7 +1525,7 @@ static BOOLEAN SPI_StartTransfer(const U8 nChannelNum)
     U32 nTxData = 0U;
 
     // Get number of items in the SPI FIFO
-    U8 nTxFifoNumberOfItems = CIRCBUF_GetNumberOfItems(&SPI_stCircBufferTX[nChannelNum]);
+    CIRCBUF_SZ nTxFifoNumberOfItems = CIRCBUF_GetNumberOfItems(&SPI_stCircBufferTX[nChannelNum]);
 
     if (0U != nTxFifoNumberOfItems)
     {
@@ -1452,12 +1560,15 @@ static BOOLEAN SPI_StartTransfer(const U8 nChannelNum)
 
 #ifndef SPI_NO_ONE_IN_USE 
 //**************************************************************************************************
-//! Take on clock for specific port
+//! Takes on clock for specific port
+//!
 //! \note       None.
+//!
 //! \param[in]  nPortNum  - IPC port number
+//!
 //! \return     None.
 //**************************************************************************************************
-static void SPI_TakeOnPortClk(U8 nPortNum)
+static void SPI_TakeOnPortClk(const U8 nPortNum)
 {
     if (ON != IPC.CTRL[nPortNum].B.CLKEN)
     {
@@ -1469,45 +1580,57 @@ static void SPI_TakeOnPortClk(U8 nPortNum)
 
 
 //**************************************************************************************************
-//! Setup all dividers and clock parameters
+//! Setups all dividers and clock parameters
+//!
 //! \note       None.
+//!
 //! \param[in]  nChannelNum  - SPI channel number
+//!
 //! \return     None.
 //**************************************************************************************************
-static void SPI_SetupChannelClk(U8 nChannelNum)
+static void SPI_SetupChannelClk(const U8 nChannelNum)
 { 
-    U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / 2) / 
-                    (SPI_IPC_CTRL_DIV_5 + 1U)    /                        
-                    SPI_TXCFG_DIV_VALUE_2        /                        
-                    SPI_stChannelsParams[nChannelNum].nBaudRate;           
-                                                                      
-    U8 nTxcfgPrescaler = SPI_TXCFG_DIV_2;                               
-                                                                      
-    if (nDivider > SPI_DIVIDER_OVERFLOW_VALUE)                                              
-    {                                                                 
-        nDivider = nDivider / SPI_DIVIDER_COEFF_VALUE;                                        
-        nTxcfgPrescaler = SPI_TXCFG_DIV_16;                             
-    }                                                                 
-    if (nDivider > SPI_DIVIDER_OVERFLOW_VALUE)                                              
-    {                                                                 
-        nDivider = nDivider / SPI_DIVIDER_COEFF_VALUE;                                        
-        nTxcfgPrescaler = SPI_TXCFG_DIV_128;                            
-    }                                                                 
+    if (0U != SPI_stChannelsParams[nChannelNum].nBaudRate)
+    {
+        U32 nDivider = (MCU_GetBusFrequency(MCU_CLOCK_SOURCE_BUS0) / SPI_MCU_PRIMAL_DIVIDER) / 
+                        (SPI_IPC_CTRL_DIV_5 + 1U)    /                        
+                        SPI_TXCFG_DIV_VALUE_2        /                        
+                        SPI_stChannelsParams[nChannelNum].nBaudRate;           
+                                                                        
+        U8 nTxcfgPrescaler = SPI_TXCFG_DIV_2;                               
+                                                                        
+        if (nDivider > SPI_DIVIDER_OVERFLOW_VALUE)                                              
+        {                                                                 
+            nDivider = nDivider / SPI_DIVIDER_COEFF_VALUE;                                        
+            nTxcfgPrescaler = SPI_TXCFG_DIV_16;                             
+        }                                                                 
+        if (nDivider > SPI_DIVIDER_OVERFLOW_VALUE)                                              
+        {                                                                 
+            nDivider = nDivider / SPI_DIVIDER_COEFF_VALUE;                                        
+            nTxcfgPrescaler = SPI_TXCFG_DIV_128;                            
+        }                                                                 
 
-    SPI_pChannels[nChannelNum]->TXCFG.B.PRESCALE = nTxcfgPrescaler;                
-    SPI_pChannels[nChannelNum]->CLK.B.DIV = (U8)(nDivider * 2U - 2U); 
-
+        SPI_pChannels[nChannelNum]->TXCFG.B.PRESCALE = nTxcfgPrescaler;                
+        SPI_pChannels[nChannelNum]->CLK.B.DIV = (U8)(nDivider * SPI_CLK_COEFF_1 - SPI_CLK_COEFF_2); 
+    }
+    else
+    {
+        SPI_REPORT_RT_ERROR(SPI_API_ID_INNER_FUNC, RT_ERROR_NULL_PTR);
+    }
 } // end of SPI_SetupChannelClk()
 
 
 
 //**************************************************************************************************
-//! Setup all transmit\receive params
+//! Setups all transmit\receive params
+//!
 //! \note       None.
+//!
 //! \param[in]  nChannelNum  - SPI channel number
+//!
 //! \return     None.
 //**************************************************************************************************
-static void SPI_SetupChannelParams(U8 nChannelNum)
+static void SPI_SetupChannelParams(const U8 nChannelNum)
 {
     SPI_pChannels[nChannelNum]->TXCFG.B.CPOL = 
             SPI_stChannelsParams[nChannelNum].bActiveClockPolarity;
@@ -1523,19 +1646,21 @@ static void SPI_SetupChannelParams(U8 nChannelNum)
             
     SPI_pChannels[nChannelNum]->TXCFG.B.PCS = 
             SPI_stChannelsParams[nChannelNum].nCSNum;
-
 } // end of SPI_SetupChannelParams()
 
 
 
 #ifndef SPI_NO_ONE_IN_USE 
 //**************************************************************************************************
-//! Configure channel
+//! Configures channel
+//!
 //! \note       None.
+//!
 //! \param[in]  nChannelNum  - SPI channel number
+//!
 //! \return     None.
 //**************************************************************************************************
-static void SPI_ConfigureChannel(U8 nChannelNum)
+static void SPI_ConfigureChannel(const U8 nChannelNum)
 {
     static U8 SPI_IpcSpiIndexes[] = {SPI_IPC_SPI0_INDEX, SPI_IPC_SPI1_INDEX, 
                                      SPI_IPC_SPI2_INDEX, SPI_IPC_SPI3_INDEX, 
@@ -1567,7 +1692,6 @@ static void SPI_ConfigureChannel(U8 nChannelNum)
 
     SPI_pChannels[nChannelNum]->INTE.B.RXIE = ON;
     SPI_pChannels[nChannelNum]->INTE.B.TCIE = ON;
-
 } // end of SPI_ConfigureChannel()
 #endif // end of SPI_NO_ONE_IN_USE 
 
@@ -1575,12 +1699,15 @@ static void SPI_ConfigureChannel(U8 nChannelNum)
 
 #ifndef SPI_NO_ONE_IN_USE 
 //**************************************************************************************************
-//! Take off channel
+//! Takes off channel
+//!
 //! \note       None.
+//!
 //! \param[in]  nChannelNum  - SPI channel number
+//!
 //! \return     None.
 //**************************************************************************************************
-static void SPI_DisableChannel(U8 nChannelNum)
+static void SPI_DisableChannel(const U8 nChannelNum)
 {
     SPI_pChannels[nChannelNum]->INTE.B.RXIE = OFF;
     SPI_pChannels[nChannelNum]->INTE.B.TCIE = OFF;
