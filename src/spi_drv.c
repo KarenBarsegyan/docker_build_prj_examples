@@ -1196,19 +1196,8 @@ static void SPI_InitParams(void)
         SPI_stChannelsParams[SPI_CHANNEL_3].nDataFrameSize       = SPI_DATA_SIZE_MAX;
         SPI_stChannelsParams[SPI_CHANNEL_3].nBaudRate            = SPI_CHANNEL_3_BAUDRATE;
         
-        #if (ON == SPI_CHANNEL_3_CS_3_IN_USE)
-            SPI_stChannelsParams[SPI_CHANNEL_3].nCSNum = SPI_CS_NUM_3;
-            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
-        #else
-            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
-        #endif
-
-        #if (ON == SPI_CHANNEL_3_CS_2_IN_USE)
-            SPI_stChannelsParams[SPI_CHANNEL_3].nCSNum = SPI_CS_NUM_2;
-            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
-        #else
-            SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
-        #endif
+        SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        SPI_stChannelsParams[SPI_CHANNEL_3].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
 
         #if (ON == SPI_CHANNEL_3_CS_1_IN_USE)
             SPI_stChannelsParams[SPI_CHANNEL_3].nCSNum = SPI_CS_NUM_1;
@@ -1242,20 +1231,9 @@ static void SPI_InitParams(void)
         SPI_stChannelsParams[SPI_CHANNEL_4].bBitOrder            = FALSE;
         SPI_stChannelsParams[SPI_CHANNEL_4].nDataFrameSize       = SPI_DATA_SIZE_MAX;
         SPI_stChannelsParams[SPI_CHANNEL_4].nBaudRate            = SPI_CHANNEL_4_BAUDRATE;
-        
-        #if (ON == SPI_CHANNEL_4_CS_3_IN_USE)
-            SPI_stChannelsParams[SPI_CHANNEL_4].nCSNum = SPI_CS_NUM_3;
-            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
-        #else
-            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
-        #endif
 
-        #if (ON == SPI_CHANNEL_4_CS_2_IN_USE)
-            SPI_stChannelsParams[SPI_CHANNEL_4].nCSNum = SPI_CS_NUM_2;
-            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
-        #else
-            SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
-        #endif
+        SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        SPI_stChannelsParams[SPI_CHANNEL_4].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
 
         #if (ON == SPI_CHANNEL_4_CS_1_IN_USE)
             SPI_stChannelsParams[SPI_CHANNEL_4].nCSNum = SPI_CS_NUM_1;
@@ -1290,19 +1268,8 @@ static void SPI_InitParams(void)
         SPI_stChannelsParams[SPI_CHANNEL_5].nDataFrameSize       = SPI_DATA_SIZE_MAX;
         SPI_stChannelsParams[SPI_CHANNEL_5].nBaudRate            = SPI_CHANNEL_5_BAUDRATE;
         
-        #if (ON == SPI_CHANNEL_5_CS_3_IN_USE)
-            SPI_stChannelsParams[SPI_CHANNEL_5].nCSNum = SPI_CS_NUM_3;
-            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_AVAILABLE;
-        #else
-            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
-        #endif
-
-        #if (ON == SPI_CHANNEL_5_CS_2_IN_USE)
-            SPI_stChannelsParams[SPI_CHANNEL_5].nCSNum = SPI_CS_NUM_2;
-            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_AVAILABLE;
-        #else
-            SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
-        #endif
+        SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_3] = SPI_CS_NOT_AVAILABLE;
+        SPI_stChannelsParams[SPI_CHANNEL_5].nCSAvailble[SPI_CS_NUM_2] = SPI_CS_NOT_AVAILABLE;
 
         #if (ON == SPI_CHANNEL_5_CS_1_IN_USE)
             SPI_stChannelsParams[SPI_CHANNEL_5].nCSNum = SPI_CS_NUM_1;
