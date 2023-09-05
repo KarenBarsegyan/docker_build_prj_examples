@@ -12,7 +12,7 @@ add_compile_options(-O0 -ffunction-sections -fdata-sections)
 # Warnings options
 add_compile_options(-Wall -Wno-pragmas)
 # Stop build on warnings
-# add_compile_options(-Werror)
+add_compile_options(-Werror)
 
 
 #=== Set linker options ===#
