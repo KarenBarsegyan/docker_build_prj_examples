@@ -76,7 +76,7 @@ BuildProject() {
 CleanProject() {
     echo -e "${G} --- Start Cleaning --- ${N}"
 
-    if ${RUN_CMD} "rm -f -r build";
+    if ${RUN_CMD} "rm -f -r build && rm -f -r doxy_docs";
     then
         echo -e "${G} --- Cleaning OK --- ${N}"
     else

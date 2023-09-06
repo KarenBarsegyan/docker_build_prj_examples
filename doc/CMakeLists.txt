@@ -46,7 +46,7 @@ if(DOXYGEN_FOUND)
     set(DOC_DESTINATION_DIR ${CMAKE_SOURCE_DIR}/doxy_docs/)
     add_custom_target(CopyDocs ALL
                       COMMAND mkdir -p ${DOC_DESTINATION_DIR} && cp -r ${CMAKE_CURRENT_BINARY_DIR}/doxygen/html ${DOC_DESTINATION_DIR} &&
-                      cp -r ${CMAKE_CURRENT_BINARY_DIR}/sphinx ${CMAKE_SOURCE_DIR}/doxy_docs/sphinx
+                                                                 cp -r ${CMAKE_CURRENT_BINARY_DIR}/sphinx ${DOC_DESTINATION_DIR}
                       COMMENT "Copy Documentation")
 
 else()
