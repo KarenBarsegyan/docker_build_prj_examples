@@ -1,4 +1,4 @@
-@addtogroup SPI_DRV
+<!-- @addtogroup SPI_DRV -->
 
 # 1. Аббревиатуры и сокращения
 

@@ -22,7 +22,7 @@ N='\033[0;0m'    #'0;34' is no color
 SPLIT_MSG="${B} ######################################################################## ${N}"
 SMALL_SPLIT_MSG="${DGR} ------------------------------------------------------------------ ${N}"
 
-DOCKER_CONTAINER_NAME="gcc-arm-none-eabi"
+DOCKER_CONTAINER_NAME="gcc-arm-none-eabi-sphinx"
 
 # Run command incide docker
 RUN_CMD="docker exec -i ${DOCKER_CONTAINER_NAME} bash -c"
@@ -76,7 +76,7 @@ BuildProject() {
 CleanProject() {
     echo -e "${G} --- Start Cleaning --- ${N}"
 
-    if ${RUN_CMD} "rm -f -r doxy_docs && rm -f -r build";
+    if ${RUN_CMD} "rm -f -r build";
     then
         echo -e "${G} --- Cleaning OK --- ${N}"
     else
