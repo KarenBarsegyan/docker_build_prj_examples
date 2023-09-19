@@ -34,15 +34,8 @@ BUILD_TARGET='all'
 
 StarDocker() {
     export MSYS_NO_PATHCONV=1
-    # If ghs container is alive: kill it
-    # docker rm --force ${DOCKER_CONTAINER_NAME} &> /dev/null
-    
-    # Start Docker
-    # if [ ! "$(docker ps -aq -f name=${DOCKER_CONTAINER_NAME})" ]; then
-    #     if [ "$(docker ps -aq -f status=exited -f name=${DOCKER_CONTAINER_NAME})" ]; then
-    #         # cleanup
-    #         docker rm --force ${DOCKER_CONTAINER_NAME} &> /dev/null
-    #     fi
+
+    # Check if container exists and is running
     if [ ! $( docker ps -a -f status=running -f name="${DOCKER_CONTAINER_NAME}" | wc -l ) -eq 2 ]; then
         # If container is alive: kill it
         docker rm --force ${DOCKER_CONTAINER_NAME} &> /dev/null
