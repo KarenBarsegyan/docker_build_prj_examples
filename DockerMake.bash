@@ -22,8 +22,8 @@ N='\033[0;0m'    #'0;34' is no color
 SPLIT_MSG="${B} ######################################################################## ${N}"
 SMALL_SPLIT_MSG="${DGR} ------------------------------------------------------------------ ${N}"
 
-DOCKER_HUB_CONTAINER_NAME="karenbarsegyan/gcc-arm-none-eabi"
-DOCKER_CONTAINER_NAME="gcc-arm-none-eabi"
+DOCKER_HUB_CONTAINER_NAME="karenbarsegyan/gcc-arm-none-eabi-sphinx"
+DOCKER_CONTAINER_NAME="gcc-arm-none-eabi-sphinx"
 
 # Run command incide docker
 RUN_CMD="docker exec -i ${DOCKER_CONTAINER_NAME} bash -c"
