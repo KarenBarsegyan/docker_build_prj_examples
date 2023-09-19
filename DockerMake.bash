@@ -22,7 +22,8 @@ N='\033[0;0m'    #'0;34' is no color
 SPLIT_MSG="${B} ######################################################################## ${N}"
 SMALL_SPLIT_MSG="${DGR} ------------------------------------------------------------------ ${N}"
 
-DOCKER_CONTAINER_NAME="gcc-arm-none-eabi-sphinx"
+DOCKER_HUB_CONTAINER_NAME="karenbarsegyan/gcc-arm-none-eabi"
+DOCKER_CONTAINER_NAME="gcc-arm-none-eabi"
 
 # Run command incide docker
 RUN_CMD="docker exec -i ${DOCKER_CONTAINER_NAME} bash -c"
@@ -34,26 +35,29 @@ BUILD_TARGET='all'
 StarDocker() {
     export MSYS_NO_PATHCONV=1
     # If ghs container is alive: kill it
-    docker rm --force ${DOCKER_CONTAINER_NAME} &> /dev/null
+    # docker rm --force ${DOCKER_CONTAINER_NAME} &> /dev/null
     
     # Start Docker
-    if docker run -w /work -v "$(pwd):/work" -idt --name ${DOCKER_CONTAINER_NAME} ${DOCKER_CONTAINER_NAME} bash >> /dev/null;
-    then
-        echo -e "${G} --- Start Docker OK--- ${N}"
-    else
-        echo -e "${R} --- Start Docker ERROR --- ${N}"
-    fi
-}
+    # if [ ! "$(docker ps -aq -f name=${DOCKER_CONTAINER_NAME})" ]; then
+    #     if [ "$(docker ps -aq -f status=exited -f name=${DOCKER_CONTAINER_NAME})" ]; then
+    #         # cleanup
+    #         docker rm --force ${DOCKER_CONTAINER_NAME} &> /dev/null
+    #     fi
+    if [ ! $( docker ps -a -f status=running -f name="${DOCKER_CONTAINER_NAME}" | wc -l ) -eq 2 ]; then
+        # If container is alive: kill it
+        docker rm --force ${DOCKER_CONTAINER_NAME} &> /dev/null
 
-EndDocker() {
-    if docker rm --force ${DOCKER_CONTAINER_NAME} >> /dev/null;
-    then
-        echo -e "${G} --- Docker killed succesfully --- ${N}"
+        # Run container
+        if docker run -w /work -v "$(pwd):/work" -idt --name ${DOCKER_CONTAINER_NAME} ${DOCKER_HUB_CONTAINER_NAME} bash >> /dev/null; then
+            echo -e "${G} --- Start Docker OK--- ${N}"
+        else
+            echo -e "${R} --- Start Docker ERROR --- ${N}"
+            exit 1
+        fi
     else
-        echo -e "${R} --- Kill Docker ERROR --- ${N}"
+        echo -e "${G} --- Docker Already Started --- ${N}"
     fi
 
-    echo -e "${G} --- End of Compilation --- ${N}\n"
 }
 
 BuildProject() {
@@ -70,6 +74,7 @@ BuildProject() {
         echo -e "${G} --- Compilation OK --- ${N}"
     else
         echo -e "${R} --- Compilation ERROR --- ${N}"
+        exit 1
     fi
 }
 
@@ -81,6 +86,7 @@ CleanProject() {
         echo -e "${G} --- Cleaning OK --- ${N}"
     else
         echo -e "${R} --- Cleaning ERROR --- ${N}"
+        exit 1
     fi
 }
 
@@ -92,6 +98,7 @@ ConfugureProject() {
         echo -e "${G} --- Configuring Cmake OK --- ${N}"
     else
         echo -e "${R} --- Configuring Cmake ERROR --- ${N}"
+        exit 1
     fi
 }
 
@@ -100,7 +107,7 @@ Build() {
     echo -e ${SPLIT_MSG}"\n"
     BuildProject
     echo -e "\n"${SPLIT_MSG}
-    EndDocker
+    echo -e "${G} --- End of Compilation --- ${N}\n"
 }
 
 Rebuild() {
@@ -112,7 +119,7 @@ Rebuild() {
     echo -e "\n"${SMALL_SPLIT_MSG}"\n"
     BuildProject
     echo -e "\n"${SPLIT_MSG}
-    EndDocker
+    echo -e "${G} --- End of Compilation --- ${N}\n"
 }
 
 Clean(){
@@ -120,7 +127,7 @@ Clean(){
     echo -e ${SPLIT_MSG}"\n"
     CleanProject
     echo -e "\n"${SPLIT_MSG}
-    EndDocker
+    echo -e "${G} --- End of Compilation --- ${N}\n"
 }
 
 Help() {

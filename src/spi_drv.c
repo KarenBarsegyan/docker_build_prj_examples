@@ -23,20 +23,13 @@
 //! \brief      Implements work with SPI interface
 //! \addtogroup SPI_DRV
 //! @{
-//! \file spi_drv.c
-//! \file spi_drv.h
-//! \file spi_drv_cfg.h.tmpl
-//! \file spi_drv_types.h
-//! \file spi_drv_irq.c
-//! \file spi_drv_irq.h
-//! \file spi_drv_cfg_verif.h
-//! @}
 //**************************************************************************************************
 
 
 
 //**************************************************************************************************
-// Project Includes
+//! \defgroup   prj_includes Project Includes
+//! @{
 //**************************************************************************************************
 
 // Get Native header
@@ -61,6 +54,7 @@
 // Get error tracer functions
 #include "error_tracer.h"
 #endif
+//! @}
 
 
 
@@ -81,7 +75,8 @@
 
 
 //**************************************************************************************************
-// Declarations of local (private) data types
+//! \defgroup   local_data_types Declarations of local (private) data types
+//! @{
 //**************************************************************************************************
 
 //! \name Program module API IDs
@@ -104,10 +99,13 @@ typedef enum
 } SPI_API_ID;
 //! @}
 
- 
+//! @}
+
+
 
 //**************************************************************************************************
-// Definitions of local (private) constants
+//! \defgroup   local_constants Declarations of local (private) data types
+//! @{
 //**************************************************************************************************
 
 #if (ON == SPI_DEVELOPMENT_ERROR_DETECTION)
@@ -239,10 +237,13 @@ static const U8 SPI_nModuleIDSize = SIZE_OF_ARRAY(SPI_moduleID) - 1U;
 #define SPI_DIVIDER_OVERFLOW_VALUE (128U)
 #define SPI_DIVIDER_COEFF_VALUE    (8U)
 
+//! @}
+
 
 
 //**************************************************************************************************
-// Definitions of static global (private) variables
+//! \defgroup   def_glob_var Definitions of static global (private) variables
+//! @{
 //**************************************************************************************************
 
 //! SPI Initialized Flag
@@ -285,11 +286,13 @@ static SPI_CHANNEL_PARAMS SPI_stChannelsParams[SPI_CHANNEL_QTY];
 
 //! Links to callback functions
 static SPI_CALLBACK SPI_callbacks[SPI_CHANNEL_QTY];
+//! @}
 
 
 
 //**************************************************************************************************
-// Declarations of local (private) functions
+//! \defgroup   dec_loc_func Declarations of local (private) functions
+//! @{
 //**************************************************************************************************
 
 //! \brief Initializes channels params struct
@@ -326,12 +329,14 @@ static void SPI_ConfigureChannel(const U8 nChannelNum);
 //! \brief Takes off channel
 static void SPI_DisableChannel(const U8 nChannelNum);
 #endif // end of SPI_NO_ONE_IN_USE 
+//! @}
 
 
 
 //**************************************************************************************************
 //==================================================================================================
-// Definitions of global (public) functions
+//! \defgroup def_glob_func Definitions of global (public) functions
+//! @{
 //==================================================================================================
 //**************************************************************************************************
 
@@ -1017,12 +1022,14 @@ void SPI_HighLevel_TX_ISR(const U8 nChannelNum)
         }
     }
 } // end of SPI_HighLevel_TX_ISR()
+//! @}
 
 
 
 //**************************************************************************************************
 //==================================================================================================
-// Definitions of local (private) functions
+//! \defgroup def_loc_func Definitions of local (private) functions
+//! @{
 //==================================================================================================
 //**************************************************************************************************
 
@@ -1687,6 +1694,10 @@ static void SPI_DisableChannel(const U8 nChannelNum)
     }   
 } // end of SPI_DisableChannel()
 #endif // end of SPI_NO_ONE_IN_USE 
+
+//! @}
+
+//! @}
 
 
 

@@ -19,7 +19,7 @@ release = '0.0.1'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['doxyrest', 'cpplexer', 'sphinx.ext.autodoc']
+extensions = ['doxyrest', 'cpplexer', 'sphinx.ext.autodoc', 'sphinx.ext.graphviz']
 
 primary_domain = 'c'
 highlight_language = 'c'
@@ -28,7 +28,7 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 exclude_patterns += ['page_index.rst']
 
-
+graphviz_output_format = 'svg'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
